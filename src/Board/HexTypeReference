@@ -1,3 +1,18 @@
+
+Positions:
+- upper left: (601, 19)
+- upper middle: (925, 19)
+- upper right: (1247, 19)
+
+- middle left: (601, 340)
+- middle middle: (925, 340)
+- middle right: (1247, 340)
+
+- lower left: (601, 666)
+- lower middle: (925, 666)
+- lower right: (1247, 666)
+
+Board location corresponding letters:
 1. Desert 
 2. Grass 
 3. Flower 

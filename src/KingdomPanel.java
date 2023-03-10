@@ -9,11 +9,13 @@ import java.awt.event.MouseEvent;
 
 public class KingdomPanel extends JPanel implements MouseListener, MouseMotionListener{
 	private BufferedImage Hermit;
+	private BufferedImage board4;
 
 	public KingdomPanel() {
 
 		try {       
-            
+			board4 = ImageIO.read(getClass().getResourceAsStream("/Board/Images/Asset 4.png"));
+
             Hermit = ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/HermitsObjective.png"));
 		} catch (Exception E) {
 			System.out.println("Exception Error");
@@ -24,12 +26,15 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(Hermit, 0,0, 100, 200, null);
+		g.drawImage(board4, 580,19, getWidth()/4+45, getHeight()/2-10, null);
+		g.drawImage(board4, 927,19, getWidth()/4+45, getHeight()/2-10, null);
+		g.drawImage(board4, 580,340, getWidth()/4+45, getHeight()/2-10, null);
+		g.drawImage(board4, 927,340, getWidth()/4+45, getHeight()/2-10, null);
+
+		
+		
 		//board
-		g.drawRect(600, 20, 325, 325);
-		g.drawRect(600+325, 20, 325, 325);
-		g.drawRect(600, 20+325, 325, 325);
-		g.drawRect(600+325, 20+325, 325, 325);
+		
 		//tokens and settlements
 		g.drawRect(10, 500, 500, 180);
 		//g.drawRect(600, 20, 650, 650);
