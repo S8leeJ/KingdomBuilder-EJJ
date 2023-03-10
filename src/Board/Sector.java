@@ -22,6 +22,15 @@ public class Sector {
                              {2, 2, 2, 5, 5, 7, 2, 2, 5, 5},
                               {2, 2, 2, 5, 7, 2, 2, 5, 5, 5}
                              };
+            returnToHex(types);
+        }
+    }
+    public void returnToHex(int arr[][]){
+        int [][] types = arr;
+        for(int i = 0; i<10; i++){
+            for(int j = 0; j<10; j++){
+                Sector[i][j] = new Hex(types[i][j]);
+            }
         }
     }
 }
