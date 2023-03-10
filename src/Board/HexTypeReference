@@ -3,5 +3,17 @@
 3. Flower 
 4. Canyon
 5. Forest
-6. Castle
-7. Farm (Location Tile)
+6. Mountain
+7. Water
+8. Castle
+9. Farm (Location Tile)
+
+
+
+ int types[][] = {{4, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
+                              {4, 4, 4, 1, 1, 1, 1, 1, 4, 1},
+                             {6, 6, 6, 1, 6, 6, 8, 1, 1, 4},
+                              {4, 6, 6, 6, 6, 6, 3, 3, 4, 4},
+                             {4, 4, 4, 6, 6, 7, 3, 3, 3, 4},
+                              {2, 4, 4, 4, 6, 3, 3, 7, 3, 5},
+                             {}
