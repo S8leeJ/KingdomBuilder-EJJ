@@ -1,4 +1,4 @@
-package BoardTesting;
+package Board;
 import java.util.*;
 public class Hex {
     int type;

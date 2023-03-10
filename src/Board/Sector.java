@@ -1,7 +1,7 @@
-package BoardTesting;
+package Board;
 
 public class Sector {
-   Hex [][] Sector;
+    Hex [][] Sector;
     int id;
 
     public Sector(int id){

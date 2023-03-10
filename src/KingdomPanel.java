@@ -4,9 +4,10 @@ import java.awt.image.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 
-public class KingdomPanel extends JPanel implements MouseListener {
+public class KingdomPanel extends JPanel implements MouseListener, MouseMotionListener{
 	private BufferedImage Hermit;
 
 	public KingdomPanel() {
@@ -45,5 +46,15 @@ public class KingdomPanel extends JPanel implements MouseListener {
 		System.out.println("loc is (" + x + "," + y + ")");
 		
 		repaint();
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override //use this for mouse motion
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
 	}
 }
