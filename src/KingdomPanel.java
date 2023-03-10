@@ -14,7 +14,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 		try {       
             
-            Hermit = ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/HermitsObjective.png"));
+            Hermit = ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/HermitsObjective.png"));
 		} catch (Exception E) {
 			System.out.println("Exception Error");
 			return;
