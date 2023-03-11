@@ -7,15 +7,18 @@ public class GraphicConstruct extends JFrame {
 
 	public GraphicConstruct (String title) {
 		super(title);
-		//setSize(WIDTH, HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		add(new KingdomPanel());
+		setSize(WIDTH, HEIGHT);
+
 		//setResizable(false);
 		//setVisible(true);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setResizable(false);
-		pack();
+		//pack();
+		add(new KingdomPanel());
+
 		setVisible(true);
+
 	}
 
 }

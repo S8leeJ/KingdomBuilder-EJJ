@@ -9,13 +9,14 @@ import java.awt.event.MouseEvent;
 
 public class KingdomPanel extends JPanel implements MouseListener, MouseMotionListener{
 	private BufferedImage Hermit;
-	private BufferedImage board4;
-
+	private BufferedImage sector1, hexagon;
+	public int sectwidth = 381, sectheight = 322;
+	public int hexwidth = 37, hexlength = 43;
 	public KingdomPanel() {
 
 		try {       
-			board4 = ImageIO.read(getClass().getResourceAsStream("/Board/Images/Asset 4.png"));
-
+			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/Images/sector1.png"));
+			hexagon = ImageIO.read(getClass().getResourceAsStream("/Board/Images/hexagon.png"));
             Hermit = ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/HermitsObjective.png"));
 		} catch (Exception E) {
 			System.out.println("Exception Error");
@@ -25,12 +26,23 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		addMouseListener(this);
 		
 	}
-
+	public void drawHex(Graphics g){
+		for(int c = 0; c < 20; c++){
+			for(int d = 0; d < 20; d++){
+				if(c%2 == 0)g.drawImage(hexagon, 517 + d * (hexwidth -1), 20 + c * (hexlength - 12), hexwidth, hexlength, null);
+				else g.drawImage(hexagon, 535 + d * (hexwidth -1), 20 + c * (hexlength-12), hexwidth, hexlength, null);
+				
+			}
+		}
+	}
 	public void paint(Graphics g) {
-		g.drawImage(board4, 550,19, getWidth()/4+45, getHeight()/2-10, null);
-		g.drawImage(board4, 888,19, getWidth()/4+45, getHeight()/2-10, null);
-		g.drawImage(board4, 550,335, getWidth()/4+45, getHeight()/2-10, null);
-		g.drawImage(board4, 888,335, getWidth()/4+45, getHeight()/2-10, null);
+		g.drawImage(sector1, 515,19, sectwidth, sectheight, null);
+		g.drawImage(sector1, 515 + 361,19, sectwidth, sectheight, null);
+		g.drawImage(sector1, 515,19 + 310, sectwidth, sectheight, null);
+		g.drawImage(sector1, 515 + 361,19 + 310, sectwidth, sectheight, null);
+
+		drawHex(g);
+		
 
 		
 		
