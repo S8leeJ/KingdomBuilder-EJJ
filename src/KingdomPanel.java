@@ -23,6 +23,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 	
 		addMouseListener(this);
+		
 	}
 
 	public void paint(Graphics g) {

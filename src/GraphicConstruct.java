@@ -12,6 +12,11 @@ public class GraphicConstruct extends JFrame {
 		add(new KingdomPanel());
 		setResizable(false);
 		setVisible(true);
+		JFrame frame = new JFrame();
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setResizable(false);
+		frame.pack();
+		frame.setVisible(true);
 	}
 
 }
