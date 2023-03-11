@@ -26,10 +26,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(board4, 580,19, getWidth()/4+45, getHeight()/2-10, null);
-		g.drawImage(board4, 927,19, getWidth()/4+45, getHeight()/2-10, null);
-		g.drawImage(board4, 580,340, getWidth()/4+45, getHeight()/2-10, null);
-		g.drawImage(board4, 927,340, getWidth()/4+45, getHeight()/2-10, null);
+		g.drawImage(board4, 550,19, getWidth()/4+45, getHeight()/2-10, null);
+		g.drawImage(board4, 888,19, getWidth()/4+45, getHeight()/2-10, null);
+		g.drawImage(board4, 550,335, getWidth()/4+45, getHeight()/2-10, null);
+		g.drawImage(board4, 888,335, getWidth()/4+45, getHeight()/2-10, null);
 
 		
 		

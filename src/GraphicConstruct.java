@@ -2,7 +2,7 @@ import javax.swing.JFrame;
 
 public class GraphicConstruct extends JFrame {
 
-	private static final int WIDTH = 1320;
+	private static final int WIDTH = 1280;
 	private static final int HEIGHT = 720;
 
 	public GraphicConstruct (String title) {
