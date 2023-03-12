@@ -3,18 +3,28 @@ import java.awt.image.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import Game.Game;
+
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 
 public class KingdomPanel extends JPanel implements MouseListener, MouseMotionListener{
+	Game game;
+	
 	private BufferedImage Hermit;
-	private BufferedImage sector1, hexagon;
+	int xpos, ypos;
+	private BufferedImage sector1, hexagon, background;
 	public int sectwidth = 381, sectheight = 322;
 	public int hexwidth = 37, hexlength = 43;
-	public KingdomPanel() {
+	int index = 0;
+	String fonts[] = new String [] {"Baskerville Old Face", "Berlin Sans FB", "Bernard MT Condensed", "Blackadder ITC", "Bodoni MT Black","Britannic Bold", "Broadway", "Castellar", "Colonna MT", "Cooper Black", "Engravers MT"};
 
-		try {       
+	public KingdomPanel() {
+		game = new Game();
+		try {     
+			background =   ImageIO.read(getClass().getResourceAsStream("/Board/Images/background.jpg"));
 			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/Images/sector1.png"));
 			hexagon = ImageIO.read(getClass().getResourceAsStream("/Board/Images/hexagon.png"));
             Hermit = ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/HermitsObjective.png"));
@@ -26,9 +36,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		addMouseListener(this);
 		
 	}
-	public void drawHex(Graphics g){
+	public void drawGray(Graphics g){
 		for(int c = 0; c < 20; c++){
 			for(int d = 0; d < 20; d++){
+				//if(board[c/10][d/10][])
 				if(c%2 == 0)g.drawImage(hexagon, 517 + d * (hexwidth -1), 20 + c * (hexlength - 12), hexwidth, hexlength, null);
 				else g.drawImage(hexagon, 535 + d * (hexwidth -1), 20 + c * (hexlength-12), hexwidth, hexlength, null);
 				
@@ -36,12 +47,15 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 	}
 	public void paint(Graphics g) {
+		index = (index + 1) % fonts.length;
+		super.paintComponent(g);
+		g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
 		g.drawImage(sector1, 515,19, sectwidth, sectheight, null);
 		g.drawImage(sector1, 515 + 361,19, sectwidth, sectheight, null);
 		g.drawImage(sector1, 515,19 + 310, sectwidth, sectheight, null);
 		g.drawImage(sector1, 515 + 361,19 + 310, sectwidth, sectheight, null);
 
-		drawHex(g);
+		drawGray(g);
 		
 
 		
@@ -49,9 +63,22 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		//board
 		
 		//tokens and settlements
-		g.drawRect(10, 500, 500, 180);
-		//g.drawRect(600, 20, 650, 650);
+		g.setColor(Color.white);
+		g.drawRect(24, 500, 457, 156);
+		g.drawRect(75, 313, 348, 149);
+		g.drawRect(12, 13, 280, 150);
+		g.drawLine(105, 13, 105, 163);
+		g.drawLine(199, 13, 199, 163);
+		g.drawRect(312, 13, 182, 150);
+		g.setFont(new Font(fonts[index], 1, 40));
+		System.out.println(fonts[index]);
+		g.drawString("View Cards", 55, 195);
+		g.setFont(new Font(fonts[index], 1, 60));
 
+		g.drawString("Player 1", 140, 290);
+		//g.setFont(new Font("Times New Roman"))
+		//g.drawRect(600, 20, 650, 650);
+		//Baskerville Old Face, Berlin Sans FB, Bernard MT Condensed, Blackadder ITC, Bodoni MT Black, Britannic Bold, Broadway, Castellar, Colonna MT, Cooper Black, Engravers MT
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -70,7 +97,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		int x = e.getX();
 		int y = e.getY();
 		System.out.println("loc is (" + x + "," + y + ")");
-		
+		xpos = x; ypos = y;
 		repaint();
 	}
 
