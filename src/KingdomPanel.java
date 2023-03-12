@@ -18,6 +18,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	private BufferedImage sector1, hexagon, background;
 	public int sectwidth = 381, sectheight = 322;
 	public int hexwidth = 37, hexlength = 43;
+	double  gridHeight = 31.25, gridWidth = 36.25;
 	int index = 0;
 	String fonts[] = new String [] {"Baskerville Old Face", "Berlin Sans FB", "Bernard MT Condensed", "Blackadder ITC", "Bodoni MT Black","Britannic Bold", "Broadway", "Castellar", "Colonna MT", "Cooper Black", "Engravers MT"};
 
@@ -39,9 +40,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	public void drawGray(Graphics g){
 		for(int c = 0; c < 20; c++){
 			for(int d = 0; d < 20; d++){
-				//if(board[c/10][d/10][])
-				if(c%2 == 0)g.drawImage(hexagon, 517 + d * (hexwidth -1), 20 + c * (hexlength - 12), hexwidth, hexlength, null);
-				else g.drawImage(hexagon, 535 + d * (hexwidth -1), 20 + c * (hexlength-12), hexwidth, hexlength, null);
+				if(game.getBoard().getHexes()[c][d].gray){
+					if(c%2 == 0)g.drawImage(hexagon, 517 + d * (hexwidth -1), 20 + c * (hexlength - 12), hexwidth, hexlength, null);
+					else g.drawImage(hexagon, 535 + d * (hexwidth -1), 20 + c * (hexlength-12), hexwidth, hexlength, null);
+				}
 				
 			}
 		}
@@ -52,10 +54,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
 		g.drawImage(sector1, 515,19, sectwidth, sectheight, null);
 		g.drawImage(sector1, 515 + 361,19, sectwidth, sectheight, null);
-		g.drawImage(sector1, 515,19 + 310, sectwidth, sectheight, null);
-		g.drawImage(sector1, 515 + 361,19 + 310, sectwidth, sectheight, null);
+		g.drawImage(sector1, 515,19 + 313, sectwidth, sectheight, null);
+		g.drawImage(sector1, 515 + 361,19 + 313, sectwidth, sectheight, null);
 
-		drawGray(g);
+		//drawGray(g);
 		
 
 		
@@ -98,6 +100,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		int y = e.getY();
 		System.out.println("loc is (" + x + "," + y + ")");
 		xpos = x; ypos = y;
+		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652){
+			System.out.println("AJSDFK;");
+			System.out.println(game.getBoard().getHexes()[0][0].gray);
+			game.getBoard().getHex(x, y, gridHeight, gridWidth).setGray(false);
+		}
 		repaint();
 	}
 
