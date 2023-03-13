@@ -37,6 +37,36 @@ public class Board {
         }
     }
 
+    public boolean[][] combineAvailable(int id){
+        boolean[][] boolOne = one.getAvailable(id);
+        boolean[][] boolTwo = two.getAvailable(id);
+        boolean[][] boolThree  = three.getAvailable(id);
+        boolean[][] boolFour = four.getAvailable(id);
+ 
+        boolean combined[][] = new boolean[20][20];
+        for(int c = 0; c < 20; c++){
+            for(int d = 0; d < 20; d++){
+                if(c < 10){
+                    if(d < 10){
+                        combined[c][d] = boolOne[c][d];
+                    }
+                    if(d >= 10){
+                        combined[c][d] = boolTwo[c][d%10];
+                    }
+                }
+                else if (c >= 10){
+                    if(d < 10){
+                        combined[c][d] = boolThree[c%10][d];
+                    }
+                    if(d >= 10){
+                        combined[c][d] = boolFour[c%10][d%10];
+                    }
+                }
+            }
+        }
+        return combined;
+    }
+
     public Hex getHex(int x, int y, double gridHeight, double gridWidth){
         y -=19;
         x-=515;

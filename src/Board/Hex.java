@@ -6,12 +6,12 @@ public class Hex {
     private String color;
     int x;
     int y;
+    
 
     public Hex(int type){
         gray = true;
         this.type = type;
         color = "";
-        
     }
     public void setGray(boolean bool){
         gray = bool;

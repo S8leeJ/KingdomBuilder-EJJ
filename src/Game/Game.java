@@ -10,12 +10,11 @@ import ObjectiveCards.ObjectiveCard;
 
 public class Game {
     public int oneid, twoid, threeid, fourid;
-    private Board board;
+    public Board board;
     private Player one, two, three, four;
     private ArrayList<Player> players;
     public int curPlayer;
     public TerrainDeck deck;
-    public TerrainCard currTerrain;
     public Game(){
         //creates sectors 
         ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8));
@@ -40,11 +39,9 @@ public class Game {
         
         //System.out.println(ran+"A RAn");
     }
-    public TerrainCard getCurrTerrain(){
-        return currTerrain;
-    }
-    public void setCurrTerrain(TerrainCard card){
-        currTerrain = card;
+    public void drawCard(){
+        TerrainCard card = deck.getNext();
+        curPlayer().setType(card);
     }
     public Board getBoard(){
         return board;

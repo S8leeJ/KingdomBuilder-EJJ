@@ -1,9 +1,11 @@
 package Game;
 
+import Card.TerrainCard;
+
 public class Player {
     String color; 
     int settlements;
-    int cardType;
+    TerrainCard card;
     int num;
     int curSettlements;
 
@@ -14,26 +16,22 @@ public class Player {
     }
     
 
-    public void setType(int x){
-        cardType = x;
+    public void setType(TerrainCard car){
+       card = car;
     }
     
-    public int getType(){
-        return cardType;
+    public TerrainCard getTerrainCard(){
+        return card;
     }
     public String getColor(){
         return color;
     }
-    public boolean hasSettlements(){
-        return settlements > 0;
-    
+    public int curSettlements(){
+        return curSettlements;
     }
-
     public void useSettlement(){
-        if(curSettlements<4){
         curSettlements++;
         settlements--;
-        }
     }
 }
    

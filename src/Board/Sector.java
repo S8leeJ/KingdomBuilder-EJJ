@@ -17,7 +17,7 @@ public class Sector {
                              {6, 6, 6, 1, 6, 6, 8, 1, 1, 4},
                               {4, 6, 6, 6, 6, 6, 3, 3, 4, 4},
                              {4, 4, 4, 6, 6, 7, 3, 3, 3, 4},
-                              {2, 4, 4, 4, 6, 3, 3, 7, 3, 5},
+                              {2, 4, 4, 4, 6, 3, 3, 7, 5, 4},
                              {2, 2, 9, 5, 3, 3, 7, 3, 3, 5},
                               {2, 2, 5, 5, 3, 3, 2, 8, 5, 5},
                              {2, 2, 2, 5, 5, 7, 2, 2, 5, 5},
@@ -36,5 +36,16 @@ public class Sector {
     }
     public Hex getHex(int x, int y){
         return sector[x][y];
+    }
+    public boolean[][] getAvailable(int x){
+        boolean[][] avail = new boolean[10][10];
+        for(int i = 0; i<10; i++){
+            for(int j = 0; j<10; j++){
+                if(sector[i][j].getType() == x){
+                    avail[i][j] = true;
+                }
+            }
+        } 
+        return avail;
     }
 }
