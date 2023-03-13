@@ -22,6 +22,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	public int hexwidth = 38, hexlength = 44;
 	double  gridHeight = 31.25, gridWidth = 36.25;
 	ObjectiveCard objC;
+	int player = 1;
 	ArrayList<BufferedImage> objCard;
 	public KingdomPanel() {
 		game = new Game();
@@ -113,7 +114,25 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.setFont(new Font("Castellar", 1, 20));
 		g.drawString("View Cards", 100, 195);
 		g.setFont(new Font("Castellar", 1, 60));
-		g.drawString("Player 1" , 75, 290);
+
+		String color = game.curPlayer().getColor();
+		
+		g.setColor(new Color(0, 0, 139));
+		g.fillRect(66, 226, 403, 100);
+
+		if(color == "orange"){
+			g.setColor(new Color(139, 64, 0));
+		}
+		else if(color == "black"){
+			g.setColor(Color.black);
+		}
+		else if(color == "blue"){
+			g.setColor(Color.blue);
+		}
+		else{
+			g.setColor(Color.white);
+		}
+		g.drawString("Player: " + player, 75, 290);
 
 
 		//objective cards:
@@ -154,6 +173,15 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 					game.curPlayer().useSettlement();
 				}	
 			}
+		}
+
+		if(gameState == 2 && x >= 312 && y >= 12 && x <= 494 && y <= 163){
+			player++;
+			if(player == 5) player = 1;
+			
+			game.curPlayer().resetSettlements();
+			game.changePlayer();
+			gameState = 0;
 		}
 		repaint();
 	}

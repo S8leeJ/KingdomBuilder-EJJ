@@ -53,7 +53,7 @@ public class Game {
         return curPlayer;
     }
     public void changePlayer(){
-        curPlayer++;
+        curPlayer = (curPlayer+1)%4;
     }
     public ArrayList<Player> getPlayers(){
         return players;

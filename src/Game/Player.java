@@ -16,6 +16,9 @@ public class Player {
     }
     
 
+    public int getNum(){
+        return num;
+    }
     public void setType(TerrainCard car){
        card = car;
     }
@@ -28,6 +31,9 @@ public class Player {
     }
     public int curSettlements(){
         return curSettlements;
+    }
+    public void resetSettlements(){
+        curSettlements = 0;
     }
     public void useSettlement(){
         curSettlements++;
