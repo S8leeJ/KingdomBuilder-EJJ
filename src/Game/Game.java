@@ -11,6 +11,7 @@ public class Game {
     private Board board;
     private Player one, two, three, four;
     private ArrayList<Player> players;
+    public int curPlayer;
 
     public terrainDeck TerrainDecks;
     public Game(){
@@ -38,18 +39,20 @@ public class Game {
     }
     public Player getFirst(){
         int ran = (int)(Math.random()*4);
-        reorder(players.get(ran), ran);
-        for(int i = 0; i<4; i++){
-            System.out.print(players.get(i).getType());
-        }
-        System.out.println();
+        Player curP = players.get(ran);
+        curPlayer = ran;
+        System.out.println(ran+"A RAn");
+        // for(int i = 0; i<4; i++){
+        //     System.out.print(players.get(i).getType());
+        // }
+        // System.out.println();
         return players.get(ran);
     }
-    public void reorder(Player player, int ran){
-        players.set(0, player);
-        players.set(1, getNext(ran));
-        players.set(2, getNext(ran+1));
-        players.set(3, getNext(ran+2));
+    public int getCurPlayer(){
+        return curPlayer;
+    }
+    public void changePlayer(){
+        curPlayer++;
     }
     public Player getNext(int i){
        i = (i+1)%4;
