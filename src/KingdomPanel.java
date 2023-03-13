@@ -117,7 +117,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			terrain curCard = game.TerrainDecks.getNext();
 			game.getFirst().setType(curCard.getType());
 			System.out.println("type"+ " " + curCard.getType());
-			System.out.println("AOWDUHAWODHIAWLIDHOAIWdh");
 			gameState++;
 		}
 		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652 && gameState == 1){
