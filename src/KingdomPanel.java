@@ -1,12 +1,13 @@
 import java.awt.*;
 import java.awt.image.*;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
 import Board.Hex;
 import Card.terrain;
 import Game.Game;
+import ObjectiveCards.ObjectiveCard;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -15,7 +16,6 @@ import java.awt.event.MouseEvent;
 public class KingdomPanel extends JPanel implements MouseListener, MouseMotionListener{
 	Game game;
 	int gameState;
-	private BufferedImage Hermit;
 	int xpos, ypos;
 	private static BufferedImage sector1, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse;
 	public int sectwidth = 381, sectheight = 322;
@@ -23,38 +23,35 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	double  gridHeight = 31.25, gridWidth = 36.25;
 	int index = 0;
 	String fonts[] = new String [] {"Baskerville Old Face", "Berlin Sans FB", "Bernard MT Condensed", "Blackadder ITC", "Bodoni MT Black","Britannic Bold", "Broadway", "Castellar", "Colonna MT", "Cooper Black", "Engravers MT"};
-
+	ObjectiveCard objC;
+	ArrayList<BufferedImage> objCard;
 	public KingdomPanel() {
 		game = new Game();
 		gameState = 0;
+		objC = new ObjectiveCard();
+	    objCard = objC.get3();
 		try {     
-			 blackhouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/blackhouse.png"));
-			 bluehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/bluehouse.png"));
-			 orangehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/orangehouse.png"));
+			blackhouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/blackhouse.png"));
+			bluehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/bluehouse.png"));
+			orangehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/orangehouse.png"));
 			whitehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/whitehouse.png"));
 			background =   ImageIO.read(getClass().getResourceAsStream("/Board/Images/background.jpg"));
 			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/Images/sector1.png"));
 			hexagon = ImageIO.read(getClass().getResourceAsStream("/Board/Images/hexagon.png"));
-            Hermit = ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/HermitsObjective.png"));
-			
 		} catch (Exception E) {
 			System.out.println("Exception Error");
 			return;
 		}
-	
 		addMouseListener(this);
-		
 	}
 	public void drawSettlements(Graphics g){
 		for(int c = 0; c < 20; c++){
 			for(int d = 0; d < 20; d++){
-				Hex hex = game.getBoard().getHexes()[c][d];
-				
+				Hex hex = game.getBoard().getHexes()[c][d];	
 				if(hex.getColor().length() > 0){
 					if(c%2 == 0)g.drawImage(settlementColor(hex.getColor()), 517 + d * (hexwidth -1), 20 + c * (hexlength - 12), hexwidth - 10, hexlength - 10, null);
 					else g.drawImage(settlementColor(hex.getColor()), 535 + d * (hexwidth -1), 20 + c * (hexlength-12), hexwidth - 10, hexlength - 10, null);				
-				}
-				
+				}		
 			}
 		}
 	}
@@ -65,9 +62,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 				if(hex.gray){
 					if(c%2 == 0)g.drawImage(hexagon, 517 + d * (hexwidth -1), 20 + c * (hexlength - 12), hexwidth, hexlength, null);
 					else g.drawImage(hexagon, 535 + d * (hexwidth -1), 20 + c * (hexlength-12), hexwidth, hexlength, null);
-				}
-				
-				
+				}		
 			}
 		}
 	}
@@ -81,26 +76,31 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(sector1, 515 + 361,19 + 313, sectwidth, sectheight, null);
 		drawSettlements(g);
 		drawGray(g);
-		
-
-		
-		
 		//board
-		
 		//tokens and settlements
 		g.setColor(Color.white);
 		g.drawRect(24, 500, 457, 156);
 		g.drawRect(75, 313, 348, 149);
-		g.drawRect(12, 13, 280, 150);
-		g.drawLine(105, 13, 105, 163);
-		g.drawLine(199, 13, 199, 163);
+		//objective cards
+		g.drawImage(objCard.get(0), 12, 13, 94, 150, null);
+		g.drawImage(objCard.get(1), 105, 13, 92, 150, null);
+		g.drawImage(objCard.get(2), 196, 13, 92, 150, null);
+
+		//draw blank card
+		g.drawImage(objCard.get(0), 12, 13, 94, 150, null);
+
 		g.drawRect(312, 13, 182, 150);
+
 		g.setFont(new Font(fonts[index], 1, 40));
 		System.out.println(fonts[index]);
 		g.drawString("View Cards", 55, 195);
 		g.setFont(new Font(fonts[index], 1, 60));
-
 		g.drawString("Player 1", 140, 290);
+
+
+		//objective cards:
+
+
 		//g.setFont(new Font("Times New Roman"))
 		//g.drawRect(600, 20, 650, 650);
 		//Baskerville Old Face, Berlin Sans FB, Bernard MT Condensed, Blackadder ITC, Bodoni MT Black, Britannic Bold, Broadway, Castellar, Colonna MT, Cooper Black, Engravers MT
@@ -108,25 +108,26 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 	public void mousePressed(MouseEvent e) {
 	}
-
 	public void mouseReleased(MouseEvent e) {
 	}
-
 	public void mouseEntered(MouseEvent e) {
 	}
-
 	public void mouseExited(MouseEvent e) {
 	}
-
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
 		System.out.println("loc is (" + x + "," + y + ")");
 		xpos = x; ypos = y;
 		if(gameState == 0){
+
+			
+			//draw terrain card and set it to player
 			terrain curCard = game.TerrainDecks.getNext();
 			game.getFirst().setType(curCard.getType());
 			System.out.println("type"+ " " + curCard.getType());
+			//draw blank card
+
 			gameState++;
 		}
 		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652 && gameState == 1){

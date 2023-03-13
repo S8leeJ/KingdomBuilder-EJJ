@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.*;
 import Board.Board;
 import Card.terrainDeck;
+import ObjectiveCards.ObjectiveCard;
 
 public class Game {
     public int oneid, twoid, threeid, fourid;
@@ -12,7 +13,6 @@ public class Game {
     private Player one, two, three, four;
     private ArrayList<Player> players;
     public int curPlayer;
-
     public terrainDeck TerrainDecks;
     public Game(){
         //creates sectors 

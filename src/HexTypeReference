@@ -31,7 +31,6 @@ settlement colors:
  black 4
          
 game states:
-
 0- player draws card
 1- highlight available hex
 2- display options: settlment/location
@@ -39,7 +38,22 @@ game states:
 4- settlement * required!!
 5- end turn + go to next player
 
+Objective cards:
+1. Citizens
+2. Disc
+3. Farm
+4. Fish
+5. Herm
+6. Knight
+7. Lord
+8. Mech
+9. Min
+10. Work
+
 
 To do:
 - allow the player to "draw a card" and set that in their player class
 - then exercise placing settlement on that card + figure out how to find available spots to highlight
+
+Comments/notes:
+- We dont need an objective deck because of the set 3 we only need every game
