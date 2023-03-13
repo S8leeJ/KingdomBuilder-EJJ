@@ -4,33 +4,28 @@ public class Player {
     String color; 
     int settlements;
     int cardType;
-    int num;
+    private int avSettles;
 
-    public Player(int num){
-        this.num = num; 
+    public Player(String color){
+        this.color = color;
+        settlements = 40;
+        cardType = -1;
+        avSettles = 0;
+
     }
+    
+
     public void setType(int x){
         cardType = x;
     }
-    public void setColor(){
-        if(num==1){
-            color = "blue";
-        }
-        else if(num==2){
-            color = "orange";
-        }
-        else if(num==3){
-            color = "black";
-        }
-        else{
-            color = "white";
-        }
-    }
+    
     public int getType(){
         return cardType;
     }
     public String getColor(){
         return color;
     }
-   
+    public boolean hasSettlements(){
+        return settlements > 0;
+    }
 }

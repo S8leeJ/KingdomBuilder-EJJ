@@ -10,7 +10,7 @@ public class Hex {
     public Hex(int type){
         gray = true;
         this.type = type;
-        color = "hij";
+        color = "";
         
     }
     public void setGray(boolean bool){
