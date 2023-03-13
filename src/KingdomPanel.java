@@ -57,7 +57,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(sector1, 515,19 + 313, sectwidth, sectheight, null);
 		g.drawImage(sector1, 515 + 361,19 + 313, sectwidth, sectheight, null);
 
-		//drawGray(g);
+		drawGray(g);
 		
 
 		

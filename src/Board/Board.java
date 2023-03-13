@@ -25,12 +25,12 @@ public class Board {
                         board[c][d] = two.getHex(c, d%10);
                     }
                 }
-                else{
+                else if (c >= 10){
                     if(d < 10){
-                        board[c][d] = one.getHex(c % 10, d);
+                        board[c][d] = three.getHex(c % 10, d);
                     }
                     if(d >= 10){
-                        board[c][d] = two.getHex(c % 10, d%10);
+                        board[c][d] = four.getHex(c % 10, d%10);
                     }
                 }
             }
@@ -76,7 +76,7 @@ public class Board {
         if(row < 0) row = 0;
         if(column < 0) column = 0;
         System.out.println(row + " " + column);
-        return board[column][row];
+        return board[row][column];
     }   
     
 }
