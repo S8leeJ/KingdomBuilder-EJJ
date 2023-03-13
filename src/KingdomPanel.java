@@ -17,7 +17,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	Game game;
 	int gameState;
 	int xpos, ypos;
-	private static BufferedImage sector1, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse;
+	private static BufferedImage sector1, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain;
 	public int sectwidth = 381, sectheight = 322;
 	public int hexwidth = 37, hexlength = 43;
 	double  gridHeight = 31.25, gridWidth = 36.25;
@@ -25,6 +25,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	String fonts[] = new String [] {"Baskerville Old Face", "Berlin Sans FB", "Bernard MT Condensed", "Blackadder ITC", "Bodoni MT Black","Britannic Bold", "Broadway", "Castellar", "Colonna MT", "Cooper Black", "Engravers MT"};
 	ObjectiveCard objC;
 	ArrayList<BufferedImage> objCard;
+	terrain curCard;
 	public KingdomPanel() {
 		game = new Game();
 		gameState = 0;
@@ -38,6 +39,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			background =   ImageIO.read(getClass().getResourceAsStream("/Board/Images/background.jpg"));
 			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/Images/sector1.png"));
 			hexagon = ImageIO.read(getClass().getResourceAsStream("/Board/Images/hexagon.png"));
+			backTerrain =  ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Back.png"));
+
 		} catch (Exception E) {
 			System.out.println("Exception Error");
 			return;
@@ -66,6 +69,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			}
 		}
 	}
+	
 	public void paint(Graphics g) {
 		index = (index + 1) % fonts.length;
 		super.paintComponent(g);
@@ -87,8 +91,13 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(objCard.get(2), 196, 13, 92, 150, null);
 
 		//draw blank card
-		g.drawImage(objCard.get(0), 12, 13, 94, 150, null);
+		g.drawImage(backTerrain, 27, 503, 94, 150, null);
 
+		//draw Chosen IF chosen
+		if(gameState == 1){
+			g.drawImage(curCard.getImage(), 121, 503, 94, 150, null);
+
+		}
 		g.drawRect(312, 13, 182, 150);
 
 		g.setFont(new Font(fonts[index], 1, 40));
@@ -119,16 +128,12 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		int y = e.getY();
 		System.out.println("loc is (" + x + "," + y + ")");
 		xpos = x; ypos = y;
-		if(gameState == 0){
-
-			
-			//draw terrain card and set it to player
-			terrain curCard = game.TerrainDecks.getNext();
-			game.getFirst().setType(curCard.getType());
-			System.out.println("type"+ " " + curCard.getType());
-			//draw blank card
-
-			gameState++;
+		if(gameState == 0 && x >= 27 && x <= 121 && y >= 503 && y <= 653){
+				curCard = game.TerrainDecks.getNext();
+				game.getFirst().setType(curCard.getType());
+				System.out.println("type"+ " " + curCard.getType());
+		
+				gameState++;
 		}
 		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652 && gameState == 1){
 			game.getBoard().getHex(x, y, gridHeight, gridWidth).setGray(false);
