@@ -17,11 +17,15 @@ public class ObjectiveCard{
         Citizens =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/CitizensObjective.png"));
         Discoverers =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/DiscoverersObjective.png"));
         Farmers =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/FarmersObjective.png"));
-
-        objectives.add(Citizens);
-        objectives.add(Discoverers);
-        objectives.add(Farmers);
-        //im lazy to put in ALL of the cards rn so heeheeteehee
+        Fishermen =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/FishermenObjective.png"));
+        Hermits =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/HermitsObjective.png"));
+        Knights =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/KnightsObjective.png"));
+        Lords =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/LordsObjective.png"));
+        Merchants  =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/MerchantsObjective.png"));
+        Miners =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/MinersObjective.png"));
+        Workers =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/WorkersObjective.png"));
+       
+        Collections.addAll(objectives, Citizens, Discoverers, Farmers, Fishermen, Hermits, Knights, Lords, Merchants, Miners, Workers);
         //add method to turn from buff image to actual numbered card.
     } catch (Exception e) {
         return;

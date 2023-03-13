@@ -5,9 +5,12 @@ public class Player {
     int settlements;
     int cardType;
     int num;
+    int curSettlements;
 
     public Player(int num){
         this.num = num; 
+        settlements = 40;
+        curSettlements = 0;
     }
     public void setType(int x){
         cardType = x;
@@ -32,5 +35,13 @@ public class Player {
     public String getColor(){
         return color;
     }
-   
+
+    public void useSettlement(){
+        if(curSettlements<4){
+        curSettlements++;
+        settlements--;
+        }
+    }
 }
+   
+

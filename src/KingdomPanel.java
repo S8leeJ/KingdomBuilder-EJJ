@@ -79,6 +79,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(sector1, 515,19 + 313, sectwidth, sectheight, null);
 		g.drawImage(sector1, 515 + 361,19 + 313, sectwidth, sectheight, null);
 		drawSettlements(g);
+		//if player is placing 
+		if(gameState == 1)
 		drawGray(g);
 		//board
 		//tokens and settlements
@@ -99,6 +101,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 		}
 		g.drawRect(312, 13, 182, 150);
+		g.setFont(new Font(fonts[index], 1, 15));
+
+		g.drawString("Tokens", 245, 525);
+		g.drawString("Settlements", 355, 610);
 
 		g.setFont(new Font(fonts[index], 1, 40));
 		System.out.println(fonts[index]);
@@ -137,6 +143,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652 && gameState == 1){
 			game.getBoard().getHex(x, y, gridHeight, gridWidth).setGray(false);
+			//get current player + check if their curSettlem < 4if so, then check if hex matches their current card
+			// place settlement of their color on the hex
 			game.getBoard().getHex(x, y, gridHeight, gridWidth).setColor("orange");
 		}
 		repaint();
