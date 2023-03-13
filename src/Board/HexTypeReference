@@ -30,3 +30,11 @@ settlement colors:
  orange 3
  black 4
          
+game states:
+
+0- player draws card
+1- highlight available hex
+2- display options: settlment/location
+3- location
+4- settlement * required!!
+5- end turn + go to next player

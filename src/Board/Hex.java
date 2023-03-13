@@ -3,14 +3,14 @@ import java.util.*;
 public class Hex {
     public boolean gray;
     int type;
-    private int color;
+    private String color;
     int x;
     int y;
 
     public Hex(int type){
         gray = true;
         this.type = type;
-        color = -1;
+        color = "hij";
         
     }
     public void setGray(boolean bool){
@@ -23,10 +23,10 @@ public class Hex {
         this.x = x;
         this.y = y;
     }
-    public void setColor(int color){
+    public void setColor(String color){
         this.color = color;
     }
-    public int getColor(){
+    public String getColor(){
         return color;
     }
 }
