@@ -17,7 +17,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	int gameState;
 	private BufferedImage Hermit;
 	int xpos, ypos;
-	private BufferedImage sector1, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse;
+	private static BufferedImage sector1, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse;
 	public int sectwidth = 381, sectheight = 322;
 	public int hexwidth = 37, hexlength = 43;
 	double  gridHeight = 31.25, gridWidth = 36.25;

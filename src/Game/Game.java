@@ -40,8 +40,9 @@ public class Game {
         int ran = (int)(Math.random()*4);
         reorder(players.get(ran), ran);
         for(int i = 0; i<4; i++){
-            System.out.println(players.get(i).getType());
+            System.out.print(players.get(i).getType());
         }
+        System.out.println();
         return players.get(ran);
     }
     public void reorder(Player player, int ran){
