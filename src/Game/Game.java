@@ -53,7 +53,7 @@ public class Game {
     }
     public Player getNext(int i){
        i = (i+1)%4;
-        return players.get(i+1);
+        return players.get(i);
     }
     
 }

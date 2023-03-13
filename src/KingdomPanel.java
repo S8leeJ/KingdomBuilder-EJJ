@@ -28,9 +28,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		game = new Game();
 		gameState = 0;
 		try {     
-			blackhouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/blackhouse.png"));
-			bluehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/bluehouse.png"));
-			orangehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/orangehouse.png"));
+			 blackhouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/blackhouse.png"));
+			 bluehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/bluehouse.png"));
+			 orangehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/orangehouse.png"));
 			whitehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/whitehouse.png"));
 			background =   ImageIO.read(getClass().getResourceAsStream("/Board/Images/background.jpg"));
 			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/Images/sector1.png"));
@@ -45,6 +45,19 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		addMouseListener(this);
 		
 	}
+	public void drawSettlements(Graphics g){
+		for(int c = 0; c < 20; c++){
+			for(int d = 0; d < 20; d++){
+				Hex hex = game.getBoard().getHexes()[c][d];
+				
+				if(hex.getColor().length() > 0){
+					if(c%2 == 0)g.drawImage(settlementColor(hex.getColor()), 517 + d * (hexwidth -1), 20 + c * (hexlength - 12), hexwidth - 10, hexlength - 10, null);
+					else g.drawImage(settlementColor(hex.getColor()), 535 + d * (hexwidth -1), 20 + c * (hexlength-12), hexwidth - 10, hexlength - 10, null);				
+				}
+				
+			}
+		}
+	}
 	public void drawGray(Graphics g){
 		for(int c = 0; c < 20; c++){
 			for(int d = 0; d < 20; d++){
@@ -53,10 +66,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 					if(c%2 == 0)g.drawImage(hexagon, 517 + d * (hexwidth -1), 20 + c * (hexlength - 12), hexwidth, hexlength, null);
 					else g.drawImage(hexagon, 535 + d * (hexwidth -1), 20 + c * (hexlength-12), hexwidth, hexlength, null);
 				}
-				if(hex.getColor().length() > 0){
-					if(c%2 == 0)g.drawImage(settlementColor(hex.getColor()), 517 + d * (hexwidth -1), 20 + c * (hexlength - 12), hexwidth, hexlength, null);
-					else g.drawImage(settlementColor(hex.getColor()), 535 + d * (hexwidth -1), 20 + c * (hexlength-12), hexwidth, hexlength, null);				
-				}
+				
 				
 			}
 		}
@@ -69,7 +79,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(sector1, 515 + 361,19, sectwidth, sectheight, null);
 		g.drawImage(sector1, 515,19 + 313, sectwidth, sectheight, null);
 		g.drawImage(sector1, 515 + 361,19 + 313, sectwidth, sectheight, null);
-
+		drawSettlements(g);
 		drawGray(g);
 		
 
