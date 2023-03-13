@@ -37,6 +37,7 @@ public class Game {
         players.add(four);
         int ran = (int)(Math.random()*4);
         curPlayer = ran;
+        
         //System.out.println(ran+"A RAn");
     }
     public TerrainCard getCurrTerrain(){

@@ -7,8 +7,8 @@ public class Player {
     int num;
     int curSettlements;
 
-    public Player(int num){
-        this.num = num; 
+    public Player(String col){
+        color = col;
         settlements = 40;
         curSettlements = 0;
     }

@@ -78,8 +78,12 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(sector1, 515 + 361,19 + 313, sectwidth, sectheight, null);
 		drawSettlements(g);
 		//if player is placing 
-		if(gameState == 1)
-		drawGray(g);
+		if(gameState == 1){
+			drawGray(g);
+			g.drawImage(game.getCurrTerrain().getImage(), 121, 503, 94, 150, null);
+
+		}
+		
 		//board
 		//tokens and settlements
 		g.setColor(Color.white);
@@ -94,10 +98,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(backTerrain, 27, 503, 94, 150, null);
 
 		//draw Chosen IF chosen
-		if(gameState == 1){
-			g.drawImage(terrainCard(game.getCurrTerrain().getType()), 121, 503, 94, 150, null);
 
-		}
+		
 		g.drawRect(312, 13, 182, 150);
 
 		g.drawString("Tokens", 245, 525);
