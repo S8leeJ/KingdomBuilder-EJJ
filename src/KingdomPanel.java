@@ -77,6 +77,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(sector1, 515,19 + 313, sectwidth, sectheight, null);
 		g.drawImage(sector1, 515 + 361,19 + 313, sectwidth, sectheight, null);
 		drawSettlements(g);
+		//if player is placing 
+		if(gameState == 1)
 		drawGray(g);
 		//board
 		//tokens and settlements
@@ -97,6 +99,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 		}
 		g.drawRect(312, 13, 182, 150);
+
+		g.drawString("Tokens", 245, 525);
+		g.drawString("Settlements", 355, 610);
 
 		g.setFont(new Font("Castellar", 1, 40));
 		g.drawString("View Cards", 55, 195);

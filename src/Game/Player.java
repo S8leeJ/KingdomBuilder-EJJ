@@ -4,14 +4,13 @@ public class Player {
     String color; 
     int settlements;
     int cardType;
-    private int avSettles;
+    int num;
+    int curSettlements;
 
-    public Player(String color){
-        this.color = color;
+    public Player(int num){
+        this.num = num; 
         settlements = 40;
-        cardType = -1;
-        avSettles = 0;
-
+        curSettlements = 0;
     }
     
 
@@ -27,5 +26,15 @@ public class Player {
     }
     public boolean hasSettlements(){
         return settlements > 0;
+    
+    }
+
+    public void useSettlement(){
+        if(curSettlements<4){
+        curSettlements++;
+        settlements--;
+        }
     }
 }
+   
+
