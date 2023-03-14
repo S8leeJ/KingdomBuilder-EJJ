@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.*;
 import Board.Board;
+import Board.LocationTiles;
 import Card.TerrainCard;
 import Card.TerrainDeck;
 import ObjectiveCards.ObjectiveCard;
@@ -15,8 +16,10 @@ public class Game {
     private ArrayList<Player> players;
     public int curPlayer;
     public TerrainDeck deck;
+    public LocationTiles locTile;
     public Game(){
         //creates sectors 
+        locTile = new LocationTiles();
         ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8));
         oneid = nums.remove((int)(Math.random()*nums.size()));
         twoid = nums.remove((int)(Math.random()*nums.size()));
@@ -61,5 +64,7 @@ public class Game {
     public void setNext(int i){
        i = (i+1)%4;
     }
-    
+    public void updateLocTiles(){
+        
+    }
 }

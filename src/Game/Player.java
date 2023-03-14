@@ -1,5 +1,8 @@
 package Game;
 
+import java.util.Locale;
+
+import Board.LocationTiles;
 import Card.TerrainCard;
 
 public class Player {
@@ -8,6 +11,7 @@ public class Player {
     TerrainCard card;
     int num;
     int curSettlements;
+    LocationTiles locTile;
 
     public Player(String col){
         color = col;
@@ -41,6 +45,13 @@ public class Player {
     }
     public int getSettlement(){
         return settlements;
+    }
+
+    public LocationTiles getLoc(){
+        return locTile;
+    }
+    public void setLocation(LocationTiles loc){
+        locTile = loc;
     }
 }
    
