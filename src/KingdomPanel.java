@@ -87,7 +87,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			g.drawImage(game.curPlayer().getTerrainCard().getImage(), 121, 503, 94, 150, null);
 		}
 		if(gameState == 2){
-			g.fillRect(312, 13, 182, 150);
+			g.fillRect(312, 13, 182, 75);
+			g.setFont(new Font("Castellar", 1, 25));
+			g.setColor(Color.white);
+			g.drawString("End Turn", 325, 58);
 		}
 		
 		//board
@@ -99,29 +102,28 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(objCard.get(0), 12, 13, 94, 150, null);
 		g.drawImage(objCard.get(1), 105, 13, 92, 150, null);
 		g.drawImage(objCard.get(2), 196, 13, 92, 150, null);
-
 		//draw blank card
 		g.drawImage(backTerrain, 27, 503, 94, 150, null);
 
 		//draw Chosen IF chosen
 
-		
-		g.drawRect(312, 13, 182, 150);
+		g.setFont(new Font("Castellar", 1, 15));
+
 
 		g.drawString("Tokens", 245, 525);
-		g.drawString("Settlements", 355, 610);
+		g.drawString("Settlements", 350, 610);
 
 		g.setFont(new Font("Castellar", 1, 20));
-		g.drawString("View Cards", 100, 195);
+		g.drawString("View Cards", 80 , 195);
 		g.setFont(new Font("Castellar", 1, 60));
 
 		String color = game.curPlayer().getColor();
 		
-		g.setColor(new Color(0, 0, 139));
-		g.fillRect(66, 226, 403, 100);
+		g.setColor(new Color(211, 211, 211));
+		g.fillRect(45, 225, 403, 75);
 
 		if(color == "orange"){
-			g.setColor(new Color(139, 64, 0));
+			g.setColor(new Color(255, 165, 0));
 		}
 		else if(color == "black"){
 			g.setColor(Color.black);
