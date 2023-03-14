@@ -65,6 +65,10 @@ public class Game {
        i = (i+1)%4;
     }
     public void updateLocTiles(){
+        //take the array of current settlements
+        // compare it to see if the trues match the location adj hex
+        // if it does, + tile is not taken 
+        // add tile to player, + draw tiles 
         
     }
 }
