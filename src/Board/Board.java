@@ -105,7 +105,7 @@ public class Board {
         }
         if(row < 0) row = 0;
         if(column < 0) column = 0;
-     //   System.out.println(row + " " + column);
+        System.out.println(row + " " + column);
         return board[row][column];
     }   
     

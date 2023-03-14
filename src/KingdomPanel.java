@@ -17,7 +17,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	Game game;
 	int gameState;
 	int xpos, ypos;
-	private static BufferedImage sector1, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain;
+	private static BufferedImage sector1,sector2, sector3, sector4, sector5, sector6, sector7, sector8, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain;
 	public int sectwidth = 381, sectheight = 322;
 	public int hexwidth = 38, hexlength = 44;
 	double  gridHeight = 31.25, gridWidth = 36.25;
@@ -30,13 +30,19 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		objC = new ObjectiveCard();
 	    objCard = objC.get3();
 		try {     
-			
+			sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector2.png"));
+			sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector3.png"));
+			sector4 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector4.png"));
+			sector5 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector5.png"));
+			sector6 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector6.png"));
+			sector7 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector7.png"));
+			sector8 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector8.png"));
 			blackhouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/blackhouse.png"));
 			bluehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/bluehouse.png"));
 			orangehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/orangehouse.png"));
 			whitehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/whitehouse.png"));
 			background =   ImageIO.read(getClass().getResourceAsStream("/Board/Images/background.jpg"));
-			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/Images/sector1.png"));
+			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector1.png"));
 			hexagon = ImageIO.read(getClass().getResourceAsStream("/Board/Images/hexagon.png"));
 			backTerrain =  ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Back.png"));
 
@@ -148,6 +154,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
+		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652){
+			game.getBoard().getHex(x, y, gridHeight, gridWidth);
+		}
 	//	System.out.println("loc is (" + x + "," + y + ")");
 		xpos = x; ypos = y;
 		if(gameState == 0 && x >= 27 && x <= 121 && y >= 503 && y <= 653){
@@ -190,6 +199,18 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		if(color.equals("black")) return blackhouse;
 		if(color.equals("white")) return whitehouse;
 		else return bluehouse;
+	}
+
+	public BufferedImage getSector(int id){
+		if(id == 1) return sector1;
+		if(id == 2) return sector2;
+		if(id == 3) return sector3;
+		if(id == 4) return sector4;
+		if(id == 5) return sector5;
+		if(id == 6) return sector6;
+		if(id == 7) return sector7;
+		return sector8;
+
 	}
 
 	

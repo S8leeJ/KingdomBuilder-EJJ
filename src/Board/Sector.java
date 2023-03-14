@@ -11,7 +11,7 @@ public class Sector {
     }
 
     public void createSector(){
-        //if(id == 1){
+        if(id == 1){
             int types[][] = {{4, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
                               {4, 4, 4, 1, 1, 1, 1, 1, 4, 1},
                              {6, 6, 6, 1, 6, 6, 8, 1, 1, 4},
@@ -24,6 +24,31 @@ public class Sector {
                               {2, 2, 2, 5, 7, 2, 2, 5, 5, 5}
                              };
             returnToHex(types);
+        }
+        //1. Desert 
+        // 2. Grass 
+        // 3. Flower 
+        // 4. Canyon
+        // 5. Forest
+        // 6. Mountain
+        // 7. Water
+        // 8. Castle
+        // 9. Farm (Location Tile)
+
+        if(id ==2){
+            int types[][] = {{1, 1, 4, 7, 7, 5, 5, 5, 2, 2}
+            ,{1, 8, 4, 7, 5, 5, 5, 9, 2,2}, 
+            {4, 4, 4, 3, 3, 3, 5, 4, 3, 3}
+            , {4, 4, 3, 3, 7, 1, 1, 4, 4, 3},
+            {4, 2, 2, 7, 3, 3, 1, 1, 4, 4,}, {
+                2, 2, 9, 3, 7, 3, 7, 1, 1, 4},
+                {2, 2, 2, 5, 3, 3, 7,7, 1, 1},
+                {2, 2, 5, 5, 6, 7, 7, 7, 1, 7},
+                {2, 6, 5, 5, 7, 7, 7, 7, 7, 7},
+                {5, 5, 5, 7, 7, 7, 7, 7, 7, 7, 7}};
+            returnToHex(types);
+        }
+        
         
     }
     public void returnToHex(int arr[][]){
