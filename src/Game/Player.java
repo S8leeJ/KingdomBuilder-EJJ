@@ -39,6 +39,9 @@ public class Player {
         curSettlements++;
         settlements--;
     }
+    public int getSettlement(){
+        return settlements;
+    }
 }
    
 

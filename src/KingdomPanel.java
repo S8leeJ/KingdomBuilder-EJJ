@@ -81,7 +81,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		drawSettlements(g);
 		//if player is placing 
 		if(gameState == 1){
-			System.out.println("AWDAWD");
 			boolean arr[][] = game.getBoard().combineAvailable(game.curPlayer().getTerrainCard().getType());
 			drawGray(g, arr);
 			g.drawImage(game.curPlayer().getTerrainCard().getImage(), 121, 503, 94, 150, null);
@@ -106,44 +105,37 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(backTerrain, 27, 503, 94, 150, null);
 
 		//draw Chosen IF chosen
-
-		g.setFont(new Font("Castellar", 1, 15));
-
-
+		g.setFont(new Font("Castellar", 1, 22));
 		g.drawString("Tokens", 245, 525);
-		g.drawString("Settlements", 350, 610);
+		g.drawString("X"+game.curPlayer().getSettlement(), 415, 640);
 
 		g.setFont(new Font("Castellar", 1, 20));
 		g.drawString("View Cards", 80 , 195);
 		g.setFont(new Font("Castellar", 1, 60));
-
-		String color = game.curPlayer().getColor();
-		
+		String color = game.curPlayer().getColor();	
 		g.setColor(new Color(211, 211, 211));
 		g.fillRect(45, 225, 403, 75);
-
 		if(color == "orange"){
-			g.setColor(new Color(255, 165, 0));
+			g.setColor(new Color(255, 180, 0));
+			g.drawImage(orangehouse, 375, 615, 30,30, null);
 		}
 		else if(color == "black"){
 			g.setColor(Color.black);
+			g.drawImage(blackhouse, 375, 615, 30,30, null);
+
 		}
 		else if(color == "blue"){
-			g.setColor(Color.blue);
+			g.setColor(new Color(73, 134, 231));
+			g.drawImage(bluehouse, 375, 615, 30,30, null);
+
 		}
 		else{
 			g.setColor(Color.white);
+			g.drawImage(whitehouse, 375, 615, 30,30, null);
+
 		}
 		g.drawString("Player: " + player, 75, 290);
-
-
-		//objective cards:
-
-
-		//g.setFont(new Font("Times New Roman"))
-		//g.drawRect(600, 20, 650, 650);
-		//Baskerville Old Face, Berlin Sans FB, Bernard MT Condensed, Blackadder ITC, Bodoni MT Black, Britannic Bold, Broadway, Castellar, Colonna MT, Cooper Black, Engravers MT
-	}
+		}
 
 	public void mousePressed(MouseEvent e) {
 	}
@@ -156,16 +148,13 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
-		System.out.println("loc is (" + x + "," + y + ")");
+	//	System.out.println("loc is (" + x + "," + y + ")");
 		xpos = x; ypos = y;
 		if(gameState == 0 && x >= 27 && x <= 121 && y >= 503 && y <= 653){
 				game.drawCard();
 				gameState++;
 		}
 		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652 && gameState == 1 ){
-			//game.getBoard().getHex(x, y, gridHeight, gridWidth).setGray(false);
-			//highlight first
-			//and the coordinates are within the available terrains
 			if(game.curPlayer().curSettlements() < 3){
 
 				Hex hex = game.getBoard().getHex(x, y, gridHeight, gridWidth);
@@ -190,12 +179,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override //use this for mouse motion
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
 	}
 
 	public static BufferedImage settlementColor(String color){
