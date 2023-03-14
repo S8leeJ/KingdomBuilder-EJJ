@@ -66,9 +66,21 @@ public class Game {
     }
     public void updateLocTiles(){
         //take the array of current settlements
-        // compare it to see if the trues match the location adj hex
-        // if it does, + tile is not taken 
-        // add tile to player, + draw tiles 
+        boolean [][] playerSettles = curPlayer().getPlacedSettlements(board.getHexes());
         
+         boolean [][] adjHex = board.combineAdjLocs();
+        
+        for(int i = 0; i<20; i++){
+            for(int j = 0; j<20; j++){
+                boolean Rcur = adjHex[i][j];
+                boolean Pcur = playerSettles[i][j];
+                if(Rcur && Pcur){
+                    System.out.println("TOKEN WOKEN" + i+" " + j);
+                    // assign player token + draw the tokens in panel
+                    //dolnt forget to store loc so you cant get it from this location again: maybe use hashmap to store 
+                    // key as pos, and value as loc value
+                }
+            }
+        }     
     }
 }

@@ -3,7 +3,9 @@ package Board;
 public class Board {
     Sector one, two, three, four;
     Hex[][] board;
+    LocationTiles locTile;
     public Board(int id1, int id2, int id3, int id4){
+        locTile = new LocationTiles();
         one = new Sector(id1);
         two = new Sector(id2);
         three = new Sector(id3);
@@ -66,7 +68,35 @@ public class Board {
         }
         return combined;
     }
-
+    public boolean[][] combineAdjLocs(){
+        boolean[][] boolOne = locTile.getLocAdj(one.getSector());
+        boolean[][] boolTwo = locTile.getLocAdj(two.getSector());
+        boolean[][] boolThree  =locTile.getLocAdj(three.getSector());
+        boolean[][] boolFour = locTile.getLocAdj(four.getSector());
+ 
+        boolean combined[][] = new boolean[20][20];
+        for(int c = 0; c < 20; c++){
+            for(int d = 0; d < 20; d++){
+                if(c < 10){
+                    if(d < 10){
+                        combined[c][d] = boolOne[c][d];
+                    }
+                    if(d >= 10){
+                        combined[c][d] = boolTwo[c][d%10];
+                    }
+                }
+                else if (c >= 10){
+                    if(d < 10){
+                        combined[c][d] = boolThree[c%10][d];
+                    }
+                    if(d >= 10){
+                        combined[c][d] = boolFour[c%10][d%10];
+                    }
+                }
+            }
+        }
+        return combined;
+    }
     public Hex getHex(int x, int y, double gridHeight, double gridWidth){
         y -=19;
         x-=515;

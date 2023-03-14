@@ -55,7 +55,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	public void drawSettlements(Graphics g){
 		for(int c = 0; c < 20; c++){
 			for(int d = 0; d < 20; d++){
-				Hex hex = game.getBoard().getHexes()[c][d];	
+				Hex board[][] = game.getBoard().getHexes();
+				Hex hex = board[c][d];	
 				if(hex.getColor().length() > 0){
 					if(c%2 == 0)g.drawImage(settlementColor(hex.getColor()), 520 + d * (hexwidth -2), 24 + c * (hexlength - 13), hexwidth - 15, hexlength - 15, null);
 					else g.drawImage(settlementColor(hex.getColor()), 538 + d * (hexwidth -2), 24 + c * (hexlength-13), hexwidth - 15, hexlength - 15, null);				
@@ -173,6 +174,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 					game.curPlayer().useSettlement();
 				}	
 			}
+			game.updateLocTiles();
+
 		}
 
 		if(gameState == 2 && x >= 312 && y >= 12 && x <= 494 && y <= 163){
