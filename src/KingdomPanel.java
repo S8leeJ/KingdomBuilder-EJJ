@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import Board.Hex;
+import Board.LocationTiles;
 import Card.TerrainCard;
 import Game.Game;
 import ObjectiveCards.ObjectiveCard;
@@ -55,7 +56,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	public void drawSettlements(Graphics g){
 		for(int c = 0; c < 20; c++){
 			for(int d = 0; d < 20; d++){
-				Hex hex = game.getBoard().getHexes()[c][d];	
+				Hex board[][] = game.getBoard().getHexes();
+				Hex hex = board[c][d];	
 				if(hex.getColor().length() > 0){
 					if(c%2 == 0)g.drawImage(settlementColor(hex.getColor()), 520 + d * (hexwidth -2), 24 + c * (hexlength - 13), hexwidth - 15, hexlength - 15, null);
 					else g.drawImage(settlementColor(hex.getColor()), 538 + d * (hexwidth -2), 24 + c * (hexlength-13), hexwidth - 15, hexlength - 15, null);				
@@ -121,6 +123,15 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		String color = game.curPlayer().getColor();	
 		g.setColor(new Color(211, 211, 211));
 		g.fillRect(45, 225, 403, 75);
+
+		//draw tokesn
+		ArrayList<Integer> curLocs = new ArrayList<>();
+		curLocs = game.curPlayer().getLoc();
+		if(curLocs.size() > 0){
+			for(int i = 0; i<curLocs.size(); i++){
+				g.drawImage(LocationTiles.getLoc(curLocs.get(i)), 250 + i*40, 540, 40, 40, null);
+			}
+		}
 		if(color == "orange"){
 			g.setColor(new Color(255, 180, 0));
 			g.drawImage(orangehouse, 375, 615, 30,30, null);
@@ -128,17 +139,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		else if(color == "black"){
 			g.setColor(Color.black);
 			g.drawImage(blackhouse, 375, 615, 30,30, null);
-
 		}
 		else if(color == "blue"){
 			g.setColor(new Color(73, 134, 231));
 			g.drawImage(bluehouse, 375, 615, 30,30, null);
-
 		}
 		else{
 			g.setColor(Color.white);
 			g.drawImage(whitehouse, 375, 615, 30,30, null);
-
 		}
 		g.drawString("Player: " + player, 75, 290);
 		}
@@ -173,6 +181,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 					game.curPlayer().useSettlement();
 				}	
 			}
+			game.updateLocTiles();
+
 		}
 
 		if(gameState == 2 && x >= 312 && y >= 12 && x <= 494 && y <= 163){

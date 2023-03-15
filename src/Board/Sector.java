@@ -3,18 +3,22 @@ package Board;
 public class Sector {
     Hex[][] sector;
     int id;
-
+    int types[][];
+    int locType;
     public Sector(int id){
         this.id = id;
         sector = new Hex[10][10];
         createSector();
+        types = new int [10][10];
     }
-
+    public int getLocType(){
+        return locType;
+    }
     public void createSector(){
-        if(id == 1){
-            int types[][] = {{4, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
+     //   if(id == 1){
+            int temp[][] = {{4, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
                               {4, 4, 4, 1, 1, 1, 1, 1, 4, 1},
-                             {6, 6, 6, 1, 6, 6, 8, 1, 1, 4},
+                             {6, 6, 6, 1, 6, 6, 9, 1, 1, 4},
                               {4, 6, 6, 6, 6, 6, 3, 3, 4, 4},
                              {4, 4, 4, 6, 6, 7, 3, 3, 3, 4},
                               {2, 4, 4, 4, 6, 3, 3, 7, 5, 4},
@@ -23,8 +27,11 @@ public class Sector {
                              {2, 2, 2, 5, 5, 7, 2, 2, 5, 5},
                               {2, 2, 2, 5, 7, 2, 2, 5, 5, 5}
                              };
+            types = temp;
+            
             returnToHex(types);
-        }
+            setLocType();
+       // }
         //1. Desert 
         // 2. Grass 
         // 3. Flower 
@@ -76,6 +83,20 @@ public class Sector {
             returnToHex(types);
         }
        
+        // if(id ==2){
+        //     int types[][] = {{1, 1, 4, 7, 7, 5, 5, 5, 2, 2}
+        //     ,{1, 8, 4, 7, 5, 5, 5, 9, 2,2}, 
+        //     {4, 4, 4, 3, 3, 3, 5, 4, 3, 3}
+        //     , {4, 4, 3, 3, 7, 1, 1, 4, 4, 3},
+        //     {4, 2, 2, 7, 3, 3, 1, 1, 4, 4,}, {
+        //         2, 2, 9, 3, 7, 3, 7, 1, 1, 4},
+        //         {2, 2, 2, 5, 3, 3, 7,7, 1, 1},
+        //         {2, 2, 5, 5, 6, 7, 7, 7, 1, 7},
+        //         {2, 6, 5, 5, 7, 7, 7, 7, 7, 7},
+        //         {5, 5, 5, 7, 7, 7, 7, 7, 7, 7, 7}};
+        //     returnToHex(types);
+        // }
+        
         
     }
     public void returnToHex(int arr[][]){
@@ -99,5 +120,17 @@ public class Sector {
             }
         } 
         return avail;
+    }
+    public Hex[][] getSector(){
+        return sector;
+    }
+    public void setLocType(){
+        for(int i = 0; i<10; i++){
+            for(int j = 0; j<10; j++){
+                if(sector[i][j].getType() > 8){
+                    locType = sector[i][j].getType();
+                }
+            }
+        }
     }
 }
