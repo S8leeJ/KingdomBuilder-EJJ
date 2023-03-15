@@ -31,17 +31,7 @@ public class Sector {
             
             returnToHex(types);
             setLocType();
-       // }
-        //1. Desert 
-        // 2. Grass 
-        // 3. Flower 
-        // 4. Canyon
-        // 5. Forest
-        // 6. Mountain
-        // 7. Water
-        // 8. Castle
-        // 9. Farm (Location Tile)
-
+            
         if(id ==2){
             int types[][] = {{1, 1, 4, 7, 7, 5, 5, 5, 2, 2}
             ,{1, 8, 4, 7, 5, 5, 5, 9, 2,2}, 
