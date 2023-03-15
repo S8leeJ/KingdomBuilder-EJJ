@@ -4,14 +4,16 @@ public class Sector {
     Hex[][] sector;
     int id;
     int types[][];
-
+    int locType;
     public Sector(int id){
         this.id = id;
         sector = new Hex[10][10];
         createSector();
         types = new int [10][10];
     }
-
+    public int getLocType(){
+        return locType;
+    }
     public void createSector(){
      //   if(id == 1){
             int temp[][] = {{4, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
@@ -28,6 +30,7 @@ public class Sector {
             types = temp;
             
             returnToHex(types);
+            setLocType();
        // }
         //1. Desert 
         // 2. Grass 
@@ -79,5 +82,14 @@ public class Sector {
     }
     public Hex[][] getSector(){
         return sector;
+    }
+    public void setLocType(){
+        for(int i = 0; i<10; i++){
+            for(int j = 0; j<10; j++){
+                if(sector[i][j].getType() > 8){
+                    locType = sector[i][j].getType();
+                }
+            }
+        }
     }
 }

@@ -1,7 +1,7 @@
 package Board;
 
 public class Board {
-    Sector one, two, three, four;
+    public Sector one, two, three, four;
     Hex[][] board;
     LocationTiles locTile;
     public Board(int id1, int id2, int id3, int id4){

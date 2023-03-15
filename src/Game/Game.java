@@ -74,9 +74,21 @@ public class Game {
             for(int j = 0; j<20; j++){
                 boolean Rcur = adjHex[i][j];
                 boolean Pcur = playerSettles[i][j];
-                if(Rcur && Pcur){
+                if(Rcur && Pcur && curPlayer().doesContainCood(i, j)){
+                    //AND if that exact location hasnt been counted yet 
                     System.out.println("TOKEN WOKEN" + i+" " + j);
-                    // assign player token + draw the tokens in panel
+                    curPlayer().addCoord(i, j);
+                    if(i<10 && j<10)
+                    curPlayer().addLocTile(board.one.getLocType());
+                    else if(i>=10 && j<10){
+                        curPlayer().addLocTile(board.two.getLocType());
+                    }
+                    else if(i<10 && j>=10){
+                        curPlayer().addLocTile(board.three.getLocType());
+                    }
+                    else 
+                        curPlayer().addLocTile(board.four.getLocType());
+                    System.out.println(curPlayer().getLoc());
                     //dolnt forget to store loc so you cant get it from this location again: maybe use hashmap to store 
                     // key as pos, and value as loc value
                 }

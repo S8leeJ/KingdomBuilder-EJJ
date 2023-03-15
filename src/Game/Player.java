@@ -12,9 +12,11 @@ public class Player {
     TerrainCard card;
     int num;
     int curSettlements;
-    ArrayList<LocationTiles> locTile;
+    ArrayList<Integer> locTile;
+    ArrayList<int []> locCoods;
 
     public Player(String col){
+        locCoods = new ArrayList<>();
         locTile = new ArrayList<>();
         color = col;
         settlements = 40;
@@ -22,7 +24,7 @@ public class Player {
     }
     
 
-    public void addLocTile(LocationTiles x){
+    public void addLocTile(int x){
         locTile.add(x);
     }
     public int getNum(){
@@ -52,7 +54,7 @@ public class Player {
         return settlements;
     }
 
-    public ArrayList<LocationTiles> getLoc(){
+    public ArrayList<Integer> getLoc(){
         return locTile;
     }
    
@@ -68,6 +70,21 @@ public class Player {
             }
         }
         return placedSettlements;
+    }
+    public void addCoord(int x, int y){
+        int cood[] = new int [2];
+        cood[0] = x;
+        cood[1] = y;
+        locCoods.add( cood );
+    }
+    boolean doesContainCood(int x, int y){
+        for(int i = 0; i<locCoods.size(); i++){
+            int cood[] = locCoods.get(i);
+            if(x == cood[0] && y == cood[1]){
+                return false;
+            }
+        }
+        return true;
     }
 }
    

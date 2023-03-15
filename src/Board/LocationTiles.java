@@ -5,9 +5,11 @@ import java.awt.image.*;
 import javax.imageio.ImageIO;
 
 public class LocationTiles {
-    public BufferedImage Boat, Estate, Farm, Horse, Oasis, Oracle, Tower, House;
+    public static BufferedImage Boat, Estate, Farm, Horse, Oasis, Oracle, Tower, House;
+    public int Location;
    public LocationTiles(){
     try {     
+    
         Boat =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/Boat2.png"));
         Estate =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/Estate2.png"));
         Farm =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/Farm2.png"));
@@ -46,13 +48,16 @@ public class LocationTiles {
                 }
             }
         }
-        // for(int i = 0; i<10; i++){
-        //     for(int j = 0; j<10; j++){
-        //         System.out.print(adj[i][j]+" ");
-        //     }
-        //     System.out.println();
-        // }
+ 
         return adj;
+    }
+
+    public static BufferedImage getLoc(int x){
+        if(x == 9){
+            return Farm;
+        }
+        return Farm;
+        //add more
     }
 }
 

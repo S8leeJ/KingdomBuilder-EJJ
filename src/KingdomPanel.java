@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import Board.Hex;
+import Board.LocationTiles;
 import Card.TerrainCard;
 import Game.Game;
 import ObjectiveCards.ObjectiveCard;
@@ -122,6 +123,15 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		String color = game.curPlayer().getColor();	
 		g.setColor(new Color(211, 211, 211));
 		g.fillRect(45, 225, 403, 75);
+
+		//draw tokesn
+		ArrayList<Integer> curLocs = new ArrayList<>();
+		curLocs = game.curPlayer().getLoc();
+		if(curLocs.size() > 0){
+			for(int i = 0; i<curLocs.size(); i++){
+				g.drawImage(LocationTiles.getLoc(curLocs.get(i)), 250 + i*40, 540, 40, 40, null);
+			}
+		}
 		if(color == "orange"){
 			g.setColor(new Color(255, 180, 0));
 			g.drawImage(orangehouse, 375, 615, 30,30, null);
@@ -129,17 +139,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		else if(color == "black"){
 			g.setColor(Color.black);
 			g.drawImage(blackhouse, 375, 615, 30,30, null);
-
 		}
 		else if(color == "blue"){
 			g.setColor(new Color(73, 134, 231));
 			g.drawImage(bluehouse, 375, 615, 30,30, null);
-
 		}
 		else{
 			g.setColor(Color.white);
 			g.drawImage(whitehouse, 375, 615, 30,30, null);
-
 		}
 		g.drawString("Player: " + player, 75, 290);
 		}
