@@ -33,16 +33,24 @@ public class LocationTiles {
           
 
                 if(sector[i][j].getType()> 8){
+                    ////
                     adj[i-1][j] = true;
+                    ////
                     adj[i][j-1] = true;
+                    ////
                     adj[i+1][j] = true;
+                    ////
                     adj[i][j+1] = true;
-                    if(i%2 == 0){
+                    if(j%2 == 0){
+                //
                         adj[i-1][j-1] = true;
-                        adj[i+1][j+1] = true;
+    
+                        adj[i+1][j-1] = true;
                     }
                     else{
-                        adj[i+1][j-1] = true;
+                        //
+                        adj[i+1][j+1] = true;
+                        //
                         adj[i-1][j+1] = true;
                     }
                 }
@@ -50,6 +58,10 @@ public class LocationTiles {
         }
  
         return adj;
+    }
+
+    public boolean isLocationTile(){
+        return false;
     }
 
     public static BufferedImage getLoc(int x){

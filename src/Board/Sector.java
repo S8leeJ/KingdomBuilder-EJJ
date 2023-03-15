@@ -28,9 +28,7 @@ public class Sector {
                               {2, 2, 2, 5, 7, 2, 2, 5, 5, 5}
                              };
             types = temp;
-            
             returnToHex(types);
-            setLocType();
             
         if(id ==2){
             int types[][] = {{1, 1, 4, 7, 7, 5, 5, 5, 2, 2}
@@ -72,7 +70,8 @@ public class Sector {
                             {7, 7, 7, 7, 7, 7, 7, 7, 7, 7}};
             returnToHex(types);
         }
-       
+        setLocType();
+
         // if(id ==2){
         //     int types[][] = {{1, 1, 4, 7, 7, 5, 5, 5, 2, 2}
         //     ,{1, 8, 4, 7, 5, 5, 5, 9, 2,2}, 
@@ -119,6 +118,7 @@ public class Sector {
             for(int j = 0; j<10; j++){
                 if(sector[i][j].getType() > 8){
                     locType = sector[i][j].getType();
+                    System.out.println("locTYpe" + locType);
                 }
             }
         }

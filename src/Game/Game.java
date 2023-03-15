@@ -65,10 +65,13 @@ public class Game {
        i = (i+1)%4;
     }
     public void updateLocTiles(){
-        //take the array of current settlements
+        //find hex around currentSettlement, if there is a location tile, then 
+        //iterate through the location tile, and see if it has only one
+        // hex of the color of the player
+        // if so, then the player gets that location tile
         boolean [][] playerSettles = curPlayer().getPlacedSettlements(board.getHexes());
         
-         boolean [][] adjHex = board.combineAdjLocs();
+        boolean [][] adjHex = board.combineAdjLocs();
         
         for(int i = 0; i<20; i++){
             for(int j = 0; j<20; j++){
@@ -94,5 +97,16 @@ public class Game {
                 }
             }
         }     
+    }
+//we need perameters of int x, int y, and return a boolean if there is a 
+// location tile
+    public void updateLocTiles2(){
+        //get currentSettlement (already inn paenl as hex)
+        //find hex around currentSettlement, if there is a location tile, then 
+        //iterate through the location tile, and see if it has only one
+        // hex of the color of the player
+        // if so, then the player gets that location tile
+
+        
     }
 }

@@ -176,6 +176,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 				Hex hex = game.getBoard().getHex(x, y, gridHeight, gridWidth);
 				if(hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0){
+					//this is cuurent hex, so now j iterate through the other six, and see if there is a location tile
+					//use the hex.getX && Y to get the cooredinates of it
 					if(game.curPlayer().curSettlements() == 2) gameState++;			
 					hex.setColor(game.curPlayer().getColor());
 					game.curPlayer().useSettlement();
