@@ -20,7 +20,7 @@ public class Game {
     public Game(){
         //creates sectors 
         locTile = new LocationTiles();
-        ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8));
+        ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(1,2,3,4));
         oneid = nums.remove((int)(Math.random()*nums.size()));
         twoid = nums.remove((int)(Math.random()*nums.size()));
         threeid = nums.remove((int)(Math.random()*nums.size()));

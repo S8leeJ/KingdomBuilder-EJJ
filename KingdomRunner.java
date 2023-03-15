@@ -5,5 +5,6 @@ public class KingdomRunner {
 		GraphicConstruct image = new GraphicConstruct("Kingdom Builder");
 		
 	}
+	
 
 }

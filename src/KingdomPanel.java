@@ -82,10 +82,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
-		g.drawImage(sector1, 515,19, sectwidth, sectheight, null);
-		g.drawImage(sector1, 515 + 361,19, sectwidth, sectheight, null);
-		g.drawImage(sector1, 515,19 + 313, sectwidth, sectheight, null);
-		g.drawImage(sector1, 515 + 361,19 + 313, sectwidth, sectheight, null);
+		g.drawImage(getSector(game.oneid), 515,19, sectwidth, sectheight, null);
+		g.drawImage(getSector(game.twoid), 515 + 361,19, sectwidth, sectheight, null);
+		g.drawImage(getSector(game.threeid), 515,19 + 313, sectwidth, sectheight, null);
+		g.drawImage(getSector(game.fourid), 515 + 361,19 + 313, sectwidth, sectheight, null);
 		drawSettlements(g);
 		//if player is placing 
 		if(gameState == 1){
