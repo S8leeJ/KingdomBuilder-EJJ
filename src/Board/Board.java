@@ -39,34 +39,119 @@ public class Board {
         }
     }
 
-    public boolean[][] combineAvailable(int id){
-        boolean[][] boolOne = one.getAvailable(id);
-        boolean[][] boolTwo = two.getAvailable(id);
-        boolean[][] boolThree  = three.getAvailable(id);
-        boolean[][] boolFour = four.getAvailable(id);
- 
-        boolean combined[][] = new boolean[20][20];
+    public boolean[][] combineAvailable(int x, String color){
+        // boolean[][] boolOne = one.getAvailable(id);
+        // boolean[][] boolTwo = two.getAvailable(id);
+        // boolean[][] boolThree  = three.getAvailable(id);
+        // boolean[][] boolFour = four.getAvailable(id);
+
+        int[][] combined = new int[20][20]; 
+        int[][] t1 = one.getTypes();
+        int[][] t2 = two.getTypes();
+        int[][] t3 = three.getTypes();
+        int[][] t4 = four.getTypes();
+
+        //lets combine ^ into one big [][] array
+        // then pass it through the method
+     //   boolean combined[][] = new boolean[20][20];
         for(int c = 0; c < 20; c++){
             for(int d = 0; d < 20; d++){
                 if(c < 10){
                     if(d < 10){
-                        combined[c][d] = boolOne[c][d];
+                        combined[c][d] = t1[c][d];
                     }
                     if(d >= 10){
-                        combined[c][d] = boolTwo[c][d%10];
+                        combined[c][d] = t2[c][d%10];
                     }
                 }
                 else if (c >= 10){
                     if(d < 10){
-                        combined[c][d] = boolThree[c%10][d];
+                        combined[c][d] = t3[c%10][d];
                     }
                     if(d >= 10){
-                        combined[c][d] = boolFour[c%10][d%10];
+                        combined[c][d] = t4[c%10][d%10];
                     }
                 }
             }
         }
-        return combined;
+        return getAvailable(combined, x, color);
+    }
+    public boolean[][] getAvailable(int[][] combined, int x, String color){
+        boolean [][] avail = new boolean[20][20];
+        boolean hasSettle = false;
+        for(int i = 0; i<20; i++){
+            for(int j = 0; j<20; j++){
+                Hex curHex = board[i][j];
+                if(curHex.getColor().equals(color)){
+                    hasSettle = true;
+                    //go around
+                    if(i>=1){
+                        if(valid(i-1, j, x)){
+                            avail[i-1][j] = true;
+                        }
+                    }
+                    if(j>=1){
+                        if(valid(i, j-1, x)){
+                            avail[i][j-1] = true;
+                        }
+                    }
+                    if(i<19){
+                        if(valid(i+1, j, x)){
+                            avail[i+1][j] = true;
+                        }
+                    }
+                    if(j<19){
+                        if(valid(i, j+1, x)){
+                            avail[i][j+1] = true;
+                        }
+                    }
+            
+                    if(i%2 == 0){
+                        if(i>=1 && j>=1){
+                            if(valid(i-1, j-1, x)){
+                                avail[i-1][j-1] = true;
+                            }
+                        }
+                        if(i<19 && j>=1){
+                            if(valid(i+1, j-1, x)){
+                                avail[i+1][j-1] = true;
+                            }
+                        }
+                    }
+                    else{
+                        if(i<19 && j<19){
+                            if(valid(i+1, j+1, x)){
+                                avail[i+1][j+1] = true;
+                            } 
+                    }
+                        if(i>=1 && j<19){
+                            if(valid(i-1, j+1, x)){
+                                avail[i-1][j+1] = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //if player has no settlements
+        if(!hasSettle){
+            for(int i = 0; i<20; i++){
+                for(int j = 0; j<20; j++){
+                    Hex curHex = board[i][j];
+                    if(curHex.getType() == x && curHex.getColor().length() == 0){
+                        avail[i][j] = true;
+                    }
+                }
+            } 
+        }
+        return avail;
+    }
+    public boolean valid(int x, int y, int type){
+        Hex curHex = board[x][y];
+        if(curHex.getColor().length()==0 && curHex.getType() == type){
+            return true;
+        }
+        return false;
     }
     public boolean[][] combineAdjLocs(){
         boolean[][] boolOne = locTile.getLocAdj(one.getSector());

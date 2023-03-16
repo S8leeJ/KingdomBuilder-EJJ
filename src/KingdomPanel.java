@@ -88,7 +88,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(getSector(game.fourid), 515 + 361,19 + 313, sectwidth, sectheight, null);
 		//if player is placing 
 		if(gameState == 1){
-			boolean arr[][] = game.getBoard().combineAvailable(game.curPlayer().getTerrainCard().getType());
+			String color = game.curPlayer().getColor();
+			boolean arr[][] = game.getBoard().combineAvailable(game.curPlayer().getTerrainCard().getType(), color);
 			drawGray(g, arr);
 			g.drawImage(game.curPlayer().getTerrainCard().getImage(), 121, 503, 94, 150, null);
 		}
@@ -188,7 +189,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 					//if the settlement touches location tiles
 					System.out.println(game.CheckLocTiles(boardX, boardY));
 					if(game.CheckLocTiles(boardX, boardY)){
-						//System.out.println("HEREHRE" + game.getCurLocX() + " " + game.getCurLocY());
 					    // if that settlement is the only one touching it, 
 						int checkIfAvailable = game.checkAround(game.getCurLocX(), game.getCurLocY());
 						if(checkIfAvailable == 1){
@@ -201,10 +201,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 								}
 								System.out.println();
 							}
-							System.out.println("LOCATION TYPE: " + locType);
+							//System.out.println("LOCATION TYPE: " + locType);
 							game.curPlayer().addLocTile(locType);
 						}
-						System.out.println("AVAIL: "+checkIfAvailable);
+						//System.out.println("AVAIL: "+checkIfAvailable);
 					}
 				}	
 			}
