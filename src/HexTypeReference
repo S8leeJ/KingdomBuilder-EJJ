@@ -22,6 +22,7 @@ Board location corresponding letters:
 7. Water
 8. Castle
 9. Farm (Location Tile)
+10.
 
 settlement colors:
  not settled -1
@@ -92,3 +93,6 @@ Odd: 6, 8
 6- (i+1, j+1) bottom right
 7- (i+1, j-1) top left
 8- (i-1, j+1) top right
+
+
+Even:

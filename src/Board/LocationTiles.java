@@ -37,25 +37,50 @@ public class LocationTiles {
                     adj[i][j-1] = true;
                     adj[i+1][j] = true;
                     adj[i][j+1] = true;
-                    if(i%2 == 0){
+                    if(j%2 == 0){
                         adj[i-1][j-1] = true;
-                        adj[i+1][j+1] = true;
+                        adj[i+1][j-1] = true;
                     }
                     else{
-                        adj[i+1][j-1] = true;
+                        adj[i+1][j+1] = true;
                         adj[i-1][j+1] = true;
                     }
                 }
             }
         }
- 
         return adj;
+    }
+
+    public boolean isLocationTile(){
+        return false;
     }
 
     public static BufferedImage getLoc(int x){
         if(x == 9){
             return Farm;
         }
+        else if (x == 10){
+            return Boat;
+        }
+        else if (x == 11){
+            return Estate;
+        }
+        else if (x == 12){
+            return Horse;
+        }
+        else if (x == 13){
+            return Oasis;
+        }
+        else if (x == 14){
+            return Oracle;
+        }
+        else if (x == 15){
+            return Tower;
+        }
+        else if (x == 16){
+            return House;
+        }
+
         return Farm;
         //add more
     }

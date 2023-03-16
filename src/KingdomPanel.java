@@ -128,6 +128,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		//draw tokesn
 		ArrayList<Integer> curLocs = new ArrayList<>();
 		curLocs = game.curPlayer().getLoc();
+		System.out.println(curLocs);
 		if(curLocs.size() > 0){
 			for(int i = 0; i<curLocs.size(); i++){
 				g.drawImage(LocationTiles.getLoc(curLocs.get(i)), 250 + i*40, 540, 40, 40, null);
@@ -176,13 +177,39 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			if(game.curPlayer().curSettlements() < 3){
 
 				Hex hex = game.getBoard().getHex(x, y, gridHeight, gridWidth);
-				if(validHex(hex)){
+				if(hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0){
+					
 					if(game.curPlayer().curSettlements() == 2) gameState++;			
 					hex.setColor(game.curPlayer().getColor());
 					game.curPlayer().useSettlement();
-				}
+					//get coord of the actual hex
+					int boardX = hex.getX();
+					int boardY = hex.getY();
+					//if the settlement touches location tiles
+					System.out.println(game.CheckLocTiles(boardX, boardY));
+					if(game.CheckLocTiles(boardX, boardY)){
+						//System.out.println("HEREHRE" + game.getCurLocX() + " " + game.getCurLocY());
+					    // if that settlement is the only one touching it, 
+						int checkIfAvailable = game.checkAround(game.getCurLocX(), game.getCurLocY());
+						if(checkIfAvailable == 1){
+							//set player a token
+							int locType = game.getTypeLoc();
+							Hex[][] cur = game.getBoard().getHexes();
+							for(int i = 0; i<20; i++){
+								for(int j = 0; j<20; j++){
+									System.out.print(cur[i][j].getType() +" " );
+								}
+								System.out.println();
+							}
+							System.out.println("LOCATION TYPE: " + locType);
+							game.curPlayer().addLocTile(locType);
+						}
+						System.out.println("AVAIL: "+checkIfAvailable);
+					}
+				}	
 			}
-			game.updateLocTiles();
+			//game.updateLocTiles();
+
 		}
 
 		if(gameState == 2 && x >= 312 && y >= 12 && x <= 494 && y <= 163){
