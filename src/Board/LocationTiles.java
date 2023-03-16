@@ -25,13 +25,10 @@ public class LocationTiles {
     }
 
     public boolean[][] getLocAdj(Hex[][] sector){
-        //find the location tiles first, then u get the available 
-        boolean adj[][] = new boolean[10][10];
 
+        boolean adj[][] = new boolean[10][10];
         for(int i = 0; i<10; i++){
             for(int j = 0; j<10; j++){
-          
-
                 if(sector[i][j].getType()> 8){
                     adj[i-1][j] = true;
                     adj[i][j-1] = true;
@@ -80,9 +77,7 @@ public class LocationTiles {
         else if (x == 16){
             return House;
         }
-
         return Farm;
-        //add more
     }
 }
 

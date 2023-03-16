@@ -21,7 +21,6 @@ public class Game {
     int curLocX;
     int curLocY;
     public Game(){
-        //creates sectors 
         locTile = new LocationTiles();
         ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(1,2,3,4, 5, 6, 7, 8));
         oneid = nums.remove((int)(Math.random()*nums.size()));
@@ -42,10 +41,7 @@ public class Game {
         players.add(four);
         int ran = (int)(Math.random()*4);
         curPlayer = ran;
-      
-        
-        //System.out.println(ran+"A RAn");
-    }
+        }
     public void drawCard(){
         TerrainCard card = deck.getNext();
         curPlayer().setType(card);
@@ -82,7 +78,7 @@ public class Game {
         six = false;
         
         if(x>=1){
-            System.out.println("x-1, y " + curBoard[x-1][y].getType());
+            //System.out.println("x-1, y " + curBoard[x-1][y].getType());
             one = curBoard[x-1][y].getType()>8;
             if(one){
                 curLocX = x-1;
@@ -91,7 +87,7 @@ public class Game {
         }
         if(y>=1){
             two = curBoard[x][y-1].getType()>8;
-            System.out.println("x, y-1 " + curBoard[x][y-1].getType());
+           // System.out.println("x, y-1 " + curBoard[x][y-1].getType());
             if(two){
                 curLocX = x;
                 curLocY = y-1;
@@ -106,7 +102,7 @@ public class Game {
             }
         }
         if(y<19){
-            System.out.println("x, y+1 " + curBoard[x][y+1].getType());
+            //System.out.println("x, y+1 " + curBoard[x][y+1].getType());
             four = curBoard[x][y+1].getType()>8;
             if(four){
                 curLocX = x;
@@ -116,7 +112,7 @@ public class Game {
 
         if(x%2 == 0){
             if(x>=1 && y>=1){
-                System.out.println("x-1, y-1 " + curBoard[x-1][y-1].getType());
+                //System.out.println("x-1, y-1 " + curBoard[x-1][y-1].getType());
             five = curBoard[x-1][y-1].getType()>8;
 
                 if(five){
@@ -125,7 +121,7 @@ public class Game {
                 }
             }
             if(x<19 && y>=1){
-                System.out.println("x+1, y-1 " + curBoard[x+1][y-1].getType());
+               // System.out.println("x+1, y-1 " + curBoard[x+1][y-1].getType());
             six = curBoard[x+1][y-1].getType()>8;
                 if(six){
                     curLocX = x+1;
@@ -136,7 +132,7 @@ public class Game {
         else{
             if(x<19 && y<19){
             five = curBoard[x+1][y+1].getType()>8;
-            System.out.println("x+1, y+1 " + curBoard[x+1][y+1].getType());
+            //System.out.println("x+1, y+1 " + curBoard[x+1][y+1].getType());
 
                 if(five){
                     curLocX = x+1;
@@ -144,7 +140,7 @@ public class Game {
                 }    
         }
             if(x>=1 && y<19){
-                System.out.println("x-1, y+1 " + curBoard[x-1][y+1].getType());
+               // System.out.println("x-1, y+1 " + curBoard[x-1][y+1].getType());
 
             six = curBoard[x-1][y+1].getType()>8;
                 if(six){
@@ -153,7 +149,7 @@ public class Game {
                 }
             }
         }
-        System.out.println("CURLOC of location tile: " + curLocX + " " + curLocY);
+       // System.out.println("CURLOC of location tile: " + curLocX + " " + curLocY);
         return (one||two||three||four||five||six);
     }
 
@@ -237,8 +233,6 @@ public class Game {
             }
             }
         }
-        System.out.println(c1 + c2+ c3+c4+c5+c6);
-
         return settles;        
     }
 

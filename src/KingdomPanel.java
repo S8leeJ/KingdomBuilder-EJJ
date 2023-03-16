@@ -168,7 +168,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652){
 			game.getBoard().getHex(x, y, gridHeight, gridWidth);
 		}
-	//	System.out.println("loc is (" + x + "," + y + ")");
 		xpos = x; ypos = y;
 		if(gameState == 0 && x >= 27 && x <= 121 && y >= 503 && y <= 653){
 				game.drawCard();
@@ -194,28 +193,15 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 						if(checkIfAvailable == 1){
 							//set player a token
 							int locType = game.getTypeLoc();
-							Hex[][] cur = game.getBoard().getHexes();
-							for(int i = 0; i<20; i++){
-								for(int j = 0; j<20; j++){
-									System.out.print(cur[i][j].getType() +" " );
-								}
-								System.out.println();
-							}
-							//System.out.println("LOCATION TYPE: " + locType);
 							game.curPlayer().addLocTile(locType);
 						}
-						//System.out.println("AVAIL: "+checkIfAvailable);
 					}
 				}	
 			}
-			//game.updateLocTiles();
-
 		}
-
 		if(gameState == 2 && x >= 312 && y >= 12 && x <= 494 && y <= 163){
 			player++;
 			if(player == 5) player = 1;
-			
 			game.curPlayer().resetSettlements();
 			game.changePlayer();
 			gameState = 0;
@@ -232,14 +218,12 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	@Override //use this for mouse motion
 	public void mouseMoved(MouseEvent e) {
 	}
-
 	public static BufferedImage settlementColor(String color){
 		if(color.equals("orange")) return orangehouse;
 		if(color.equals("black")) return blackhouse;
 		if(color.equals("white")) return whitehouse;
 		else return bluehouse;
 	}
-
 	public BufferedImage getSector(int id){
 		if(id == 1) return sector1;
 		if(id == 2) return sector2;
@@ -251,6 +235,4 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		return sector8;
 
 	}
-
-	
 }

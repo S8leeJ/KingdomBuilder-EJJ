@@ -7,7 +7,6 @@ public class Hex {
     int x;
     int y;
     
-
     public Hex(int type){
         gray = true;
         this.type = type;

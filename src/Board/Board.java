@@ -40,11 +40,7 @@ public class Board {
     }
 
     public boolean[][] combineAvailable(int x, String color){
-        // boolean[][] boolOne = one.getAvailable(id);
-        // boolean[][] boolTwo = two.getAvailable(id);
-        // boolean[][] boolThree  = three.getAvailable(id);
-        // boolean[][] boolFour = four.getAvailable(id);
-
+      
         int[][] combined = new int[20][20]; 
         int[][] t1 = one.getTypes();
         int[][] t2 = two.getTypes();
@@ -52,8 +48,6 @@ public class Board {
         int[][] t4 = four.getTypes();
 
         //lets combine ^ into one big [][] array
-        // then pass it through the method
-     //   boolean combined[][] = new boolean[20][20];
         for(int c = 0; c < 20; c++){
             for(int d = 0; d < 20; d++){
                 if(c < 10){
@@ -84,7 +78,6 @@ public class Board {
                 Hex curHex = board[i][j];
                 if(curHex.getColor().equals(color)){
                     hasSettle = true;
-                    //go around
                     if(i>=1){
                         if(valid(i-1, j, x)){
                             avail[i-1][j] = true;
@@ -227,5 +220,4 @@ public class Board {
        // System.out.println("JO:AWE"+board[row][column].getX()+" " + board[row][column].getY());
         return board[row][column];
     }   
-    
 }
