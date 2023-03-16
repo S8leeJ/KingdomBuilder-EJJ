@@ -86,6 +86,9 @@ public class Player {
         }
         return true;
     }
+    public ArrayList<int[]> getLocCoord(){
+        return locCoods;
+    }
 }
    
 

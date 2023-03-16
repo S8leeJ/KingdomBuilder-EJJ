@@ -176,14 +176,25 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 				Hex hex = game.getBoard().getHex(x, y, gridHeight, gridWidth);
 				if(hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0){
-					//this is cuurent hex, so now j iterate through the other six, and see if there is a location tile
-					//use the hex.getX && Y to get the cooredinates of it
+					
 					if(game.curPlayer().curSettlements() == 2) gameState++;			
 					hex.setColor(game.curPlayer().getColor());
 					game.curPlayer().useSettlement();
+					//get coord of the actual hex
+					int boardX = hex.getX();
+					int boardY = hex.getY();
+					//if the settlement touches location tiles
+					System.out.println(game.CheckLocTiles(boardX, boardY));
+					if(game.CheckLocTiles(boardX, boardY)){
+						//System.out.println("HEREHRE" + game.getCurLocX() + " " + game.getCurLocY());
+					    // if that settlement is the only one touching it, 
+						int checkIfAvailable = game.checkAround(game.getCurLocX(), game.getCurLocY());
+
+						System.out.println("AVAIL: "+checkIfAvailable);
+					}
 				}	
 			}
-			game.updateLocTiles();
+			//game.updateLocTiles();
 
 		}
 
