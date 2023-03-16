@@ -20,13 +20,13 @@ public class Game {
     public Game(){
         //creates sectors 
         locTile = new LocationTiles();
-        ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(1,2,3,4));
+        ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(1,2,3,4, 5, 6, 7, 8));
         oneid = nums.remove((int)(Math.random()*nums.size()));
         twoid = nums.remove((int)(Math.random()*nums.size()));
         threeid = nums.remove((int)(Math.random()*nums.size()));
         fourid = nums.remove((int)(Math.random()*nums.size()));
         board = new Board(oneid, twoid, threeid, fourid);
-        
+        System.out.println("sectors" + oneid + " " + twoid + " " + threeid + " " + fourid);
         one = new Player("blue");
         two = new Player("white");
         three = new Player("orange");

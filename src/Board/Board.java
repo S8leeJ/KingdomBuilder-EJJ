@@ -97,6 +97,8 @@ public class Board {
         }
         return combined;
     }
+
+    
     public Hex getHex(int x, int y, double gridHeight, double gridWidth){
         y -=19;
         x-=515;

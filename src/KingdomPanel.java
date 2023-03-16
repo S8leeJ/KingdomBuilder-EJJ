@@ -68,7 +68,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	public void drawGray(Graphics g, boolean combined[][]){
 		for(int c = 0; c < 20; c++){
 			for(int d = 0; d < 20; d++){
-				Hex hex = game.getBoard().getHexes()[c][d];
+				//Hex hex = game.getBoard().getHexes()[c][d];
 				if(!combined[c][d]){
 					if(c%2 == 0)g.drawImage(hexagon, 515 + d * (hexwidth - 2), 19 + c * (hexlength - 13), hexwidth, hexlength, null);
 					else g.drawImage(hexagon, 533 + d * (hexwidth - 2), 19 + c * (hexlength-13), hexwidth, hexlength, null);
@@ -86,13 +86,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(getSector(game.twoid), 515 + 361,19, sectwidth, sectheight, null);
 		g.drawImage(getSector(game.threeid), 515,19 + 313, sectwidth, sectheight, null);
 		g.drawImage(getSector(game.fourid), 515 + 361,19 + 313, sectwidth, sectheight, null);
-		drawSettlements(g);
 		//if player is placing 
 		if(gameState == 1){
 			boolean arr[][] = game.getBoard().combineAvailable(game.curPlayer().getTerrainCard().getType());
 			drawGray(g, arr);
 			g.drawImage(game.curPlayer().getTerrainCard().getImage(), 121, 503, 94, 150, null);
 		}
+		drawSettlements(g);
+
 		if(gameState == 2){
 			g.fillRect(312, 13, 182, 75);
 			g.setFont(new Font("Castellar", 1, 25));
@@ -175,14 +176,13 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			if(game.curPlayer().curSettlements() < 3){
 
 				Hex hex = game.getBoard().getHex(x, y, gridHeight, gridWidth);
-				if(hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0){
+				if(validHex(hex)){
 					if(game.curPlayer().curSettlements() == 2) gameState++;			
 					hex.setColor(game.curPlayer().getColor());
 					game.curPlayer().useSettlement();
-				}	
+				}
 			}
 			game.updateLocTiles();
-
 		}
 
 		if(gameState == 2 && x >= 312 && y >= 12 && x <= 494 && y <= 163){
@@ -195,7 +195,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		repaint();
 	}
-
+	public boolean validHex(Hex hex){
+		return hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0;
+	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
 	}
