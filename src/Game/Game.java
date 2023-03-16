@@ -157,6 +157,11 @@ public class Game {
         return (one||two||three||four||five||six);
     }
 
+    public int getTypeLoc(){
+        System.out.println(curLocX + " " + curLocY);
+        Hex[][]tempBoard  = board.getHexes();
+        return tempBoard[curLocX][curLocY].getType();
+    }
     public int getCurLocX(){
         return curLocX;
     }

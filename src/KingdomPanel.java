@@ -127,6 +127,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		//draw tokesn
 		ArrayList<Integer> curLocs = new ArrayList<>();
 		curLocs = game.curPlayer().getLoc();
+		System.out.println(curLocs);
 		if(curLocs.size() > 0){
 			for(int i = 0; i<curLocs.size(); i++){
 				g.drawImage(LocationTiles.getLoc(curLocs.get(i)), 250 + i*40, 540, 40, 40, null);
@@ -189,7 +190,19 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 						//System.out.println("HEREHRE" + game.getCurLocX() + " " + game.getCurLocY());
 					    // if that settlement is the only one touching it, 
 						int checkIfAvailable = game.checkAround(game.getCurLocX(), game.getCurLocY());
-
+						if(checkIfAvailable == 1){
+							//set player a token
+							int locType = game.getTypeLoc();
+							Hex[][] cur = game.getBoard().getHexes();
+							for(int i = 0; i<20; i++){
+								for(int j = 0; j<20; j++){
+									System.out.print(cur[i][j].getType() +" " );
+								}
+								System.out.println();
+							}
+							System.out.println("LOCATION TYPE: " + locType);
+							game.curPlayer().addLocTile(locType);
+						}
 						System.out.println("AVAIL: "+checkIfAvailable);
 					}
 				}	
