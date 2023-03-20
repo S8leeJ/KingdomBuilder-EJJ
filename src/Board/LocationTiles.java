@@ -23,35 +23,6 @@ public class LocationTiles {
             return;
         }
     }
-
-    public boolean[][] getLocAdj(Hex[][] sector){
-
-        boolean adj[][] = new boolean[10][10];
-        for(int i = 0; i<10; i++){
-            for(int j = 0; j<10; j++){
-                if(sector[i][j].getType()> 8){
-                    adj[i-1][j] = true;
-                    adj[i][j-1] = true;
-                    adj[i+1][j] = true;
-                    adj[i][j+1] = true;
-                    if(j%2 == 0){
-                        adj[i-1][j-1] = true;
-                        adj[i+1][j-1] = true;
-                    }
-                    else{
-                        adj[i+1][j+1] = true;
-                        adj[i-1][j+1] = true;
-                    }
-                }
-            }
-        }
-        return adj;
-    }
-
-    public boolean isLocationTile(){
-        return false;
-    }
-
     public static BufferedImage getLoc(int x){
         if(x == 9){
             return Farm;
