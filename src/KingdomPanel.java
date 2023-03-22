@@ -110,7 +110,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(getSector(game.fourid), 515 + 361,19 + 313, sectwidth, sectheight, null);
 		//if player is placing 
 		
-		drawHexNumbers(g);
 		if(gameState == 0){
 			g.setFont(new Font("Castellar", 1, 15));
 			g.setColor(Color.white);
@@ -146,6 +145,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			boolean arr[][] = game.getBoard().combineAvailable(game.curPlayer().getTerrainCard().getType(), color);
 			drawGray(g, arr);
 		}
+		drawHexNumbers(g);
 
 		//if you click on the settlement, then draw gray 
 		//if you click on the tokens, dont draw gray
