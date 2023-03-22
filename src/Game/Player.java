@@ -13,10 +13,8 @@ public class Player {
     int num;
     int curSettlements;
     ArrayList<Integer> locTile;
-    ArrayList<int []> locCoods;
 
     public Player(String col){
-        locCoods = new ArrayList<>();
         locTile = new ArrayList<>();
         color = col;
         settlements = 40;
@@ -57,38 +55,7 @@ public class Player {
     public ArrayList<Integer> getLoc(){
         return locTile;
     }
-   
-    public boolean[][] getPlacedSettlements(Hex[][] board){
-        boolean[][] placedSettlements = new boolean[20][20];
-        for(int i = 0; i<20; i++){
-            for(int j = 0; j<20; j++){
-                Hex curHex = board[i][j];
-                String curColor = curHex.getColor();
-                if(curColor.equals(color)){
-                    placedSettlements[i][j] = true;
-                }
-            }
-        }
-        return placedSettlements;
-    }
-    public void addCoord(int x, int y){
-        int cood[] = new int [2];
-        cood[0] = x;
-        cood[1] = y;
-        locCoods.add( cood );
-    }
-    boolean doesContainCood(int x, int y){
-        for(int i = 0; i<locCoods.size(); i++){
-            int cood[] = locCoods.get(i);
-            if(x == cood[0] && y == cood[1]){
-                return false;
-            }
-        }
-        return true;
-    }
-    public ArrayList<int[]> getLocCoord(){
-        return locCoods;
-    }
+
 }
    
 
