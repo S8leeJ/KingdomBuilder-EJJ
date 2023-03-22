@@ -18,7 +18,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	Game game;
 	int gameState;
 	int xpos, ypos;
-	private static BufferedImage sector1,sector2, sector3, sector4, sector5, sector6, sector7, sector8, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain;
+	private static BufferedImage sector1,sector2, sector3, sector4, sector5, sector6, sector7, sector8, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain, locOne, locTwo;
 	public int sectwidth = 381, sectheight = 322;
 	public int hexwidth = 38, hexlength = 44;
 	double  gridHeight = 31.25, gridWidth = 36.25;
@@ -46,6 +46,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector1.png"));
 			hexagon = ImageIO.read(getClass().getResourceAsStream("/Board/Images/hexagon.png"));
 			backTerrain =  ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Back.png"));
+			locOne =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/1.png"));
+			locTwo =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/2.png"));
+
 
 		} catch (Exception E) {
 			System.out.println("Exception Error");
@@ -77,6 +80,25 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 	}
 
+	public void drawHexNumbers(Graphics g){
+		for(int c = 0; c < 20; c++){
+			for(int d = 0; d < 20; d++){
+				Hex hex = game.getBoard().getHexes()[c][d];
+				if(hex.getType()>8){
+					//check the "number" of location tiles left and then display corresponding one 
+					if(hex.getLoc() == 1){
+					if(c%2 == 0)g.drawImage(locOne, 517 + d * (hexwidth - 2), 10 + c * (hexlength - 13),33, 33, null);
+					else g.drawImage(locOne, 538 + d * (hexwidth - 2), 10 + c * (hexlength-13), 30, 30, null);
+					}
+					else if(hex.getLoc() == 2){
+						if(c%2 == 0)g.drawImage(locTwo, 517 + d * (hexwidth - 2), 10 + c * (hexlength - 13),33, 33, null);
+						else g.drawImage(locTwo, 538 + d * (hexwidth - 2), 10 + c * (hexlength-13), 30, 30, null);
+						}
+					}
+				}		
+			}
+		}
+	
 	
 	
 	public void paint(Graphics g) {
@@ -87,6 +109,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(getSector(game.threeid), 515,19 + 313, sectwidth, sectheight, null);
 		g.drawImage(getSector(game.fourid), 515 + 361,19 + 313, sectwidth, sectheight, null);
 		//if player is placing 
+		drawHexNumbers(g);
 		if(gameState == 1){
 			String color = game.curPlayer().getColor();
 			boolean arr[][] = game.getBoard().combineAvailable(game.curPlayer().getTerrainCard().getType(), color);
@@ -189,10 +212,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 					System.out.println(game.CheckLocTiles(boardX, boardY));
 					if(game.CheckLocTiles(boardX, boardY)){
 					    // if that settlement is the only one touching it, 
+						Hex temp[][] =  game.getBoard().getHexes();
+						Hex locHex = temp[game.getCurLocX()][game.getCurLocY()];
 						int checkIfAvailable = game.checkAround(game.getCurLocX(), game.getCurLocY());
-						if(checkIfAvailable == 1){
+						if(checkIfAvailable == 1 && locHex.getLoc()>0){
 							//set player a token
 							int locType = game.getTypeLoc();
+							locHex.decLoc();
+							System.out.println(locHex.getLoc());
 							game.curPlayer().addLocTile(locType);
 						}
 					}
