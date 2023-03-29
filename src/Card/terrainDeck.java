@@ -1,9 +1,9 @@
 package Card;
 import java.util.*;
-public class TerrainDeck {
+public class terrainDeck {
     private ArrayList<TerrainCard> terrains;
 
-    public TerrainDeck(){
+    public terrainDeck(){
         terrains = new ArrayList<>();
         resetTerrainDeck();
     }

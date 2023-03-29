@@ -10,7 +10,6 @@ public class Player {
     String color; 
     int settlements;
     TerrainCard card;
-    int num;
     int curSettlements;
     ArrayList<Integer> locTile;
     ArrayList<int []> locCoods;
@@ -27,9 +26,7 @@ public class Player {
     public void addLocTile(int x){
         locTile.add(x);
     }
-    public int getNum(){
-        return num;
-    }
+   
     public void setType(TerrainCard car){
        card = car;
     }
