@@ -6,12 +6,16 @@ public class Hex {
     private String color;
     int x;
     int y;
+    int numberOfLocTiles;
     
-
     public Hex(int type){
         gray = true;
         this.type = type;
         color = "";
+        if(type>8)
+            numberOfLocTiles = 2;
+        else
+            numberOfLocTiles = 0;
     }
     public void setGray(boolean bool){
         gray = bool;
@@ -34,5 +38,11 @@ public class Hex {
     }
     public int getY(){
         return y;
+    }
+    public void decLoc(){
+        numberOfLocTiles--;
+    }
+    public int getLoc(){
+        return numberOfLocTiles;
     }
 }

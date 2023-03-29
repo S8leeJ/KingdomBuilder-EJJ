@@ -14,9 +14,6 @@ public class terrainDeck {
             }
         }
         Collections.shuffle(terrains);
-        // for(TerrainCard card : terrains){
-        //     System.out.print(card.type + " ");
-        // }
     }
     public TerrainCard getNext(){
         return terrains.remove(0);
