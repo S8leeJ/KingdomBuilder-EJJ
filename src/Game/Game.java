@@ -7,7 +7,7 @@ import Board.Board;
 import Board.Hex;
 import Board.LocationTiles;
 import Card.TerrainCard;
-import Card.TerrainDeck;
+import Card.terrainDeck;
 import ObjectiveCards.ObjectiveCard;
 
 public class Game {
@@ -16,7 +16,7 @@ public class Game {
     private Player one, two, three, four;
     private ArrayList<Player> players;
     public int curPlayer;
-    public TerrainDeck deck;
+    public terrainDeck deck;
     public LocationTiles locTile;
     int curLocX;
     int curLocY;
@@ -34,7 +34,7 @@ public class Game {
         three = new Player("orange");
         four = new Player("black");
         players = new ArrayList<Player>();
-        deck = new TerrainDeck();
+        deck = new terrainDeck();
         players.add(one);
         players.add(two);
         players.add(three);
