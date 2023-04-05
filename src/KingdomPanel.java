@@ -113,8 +113,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(objCard.get(1), 77, 13, 65, 100, null);
 		g.drawImage(objCard.get(2), 142, 13, 65, 100, null);
 		g.drawImage(backTerrain, 27, 503, 94, 150, null);
-		resetFont(g, 15);
-		g.drawString("View Cards", 210 , 25);
+		resetFont(g, 20);
+		g.drawString("View Cards", 41 , 137);
 	
 	}
 	public void resetFont(Graphics g, int size){
@@ -158,8 +158,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		drawBoard(g);
 		//if player is placing 
 		if(gameState == 0){
-			resetFont(g, 15);
-			g.drawString("Draw a card", 85, 400);
+			resetFont(g, 48);
+			g.drawString("Draw a card", 41, 380);
 		}
 		if(gameState == 0.5){
 			resetFont(g, 15);
@@ -190,9 +190,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		drawSettlements(g);
 
 		if(gameState == 2){
-			g.fillRect(312, 13, 182, 75);
+			g.setColor(new Color(202, 210, 235));
+			g.fillRect(22+244, 145-56, 177, 70);
 			resetFont(g, 25);
-			g.drawString("End Turn", 325, 58);
+			g.setColor(new Color(9, 25, 77));
+			g.drawString("End Turn", 32+244, 190-56);
 		}
 		
 		//board
@@ -210,13 +212,13 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		
 		resetFont(g, 40);
 		String color = game.curPlayer().getColor();	
-		g.setColor(new Color(211, 211, 211));
-		g.fillRect(45, 145, 275, 55);
+		g.setColor(new Color(28, 35, 61));
+		g.fillRect(222, 15, 275, 55);
 
 		//draw tokesn
 		drawToken(g);
 		drawSettlement(g, color);
-		g.drawString("Player: " + player, 72, 190);
+		g.drawString("Player: " + player, 250, 58);
 		}
 
 	public void mousePressed(MouseEvent e) {
