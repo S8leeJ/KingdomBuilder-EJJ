@@ -18,7 +18,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	Game game;
 	double gameState;
 	int xpos, ypos;
-	private static BufferedImage sector1,sector2, sector3, sector4, sector5, sector6, sector7, sector8, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain, locOne, locTwo;
+	private static BufferedImage sector1,sector2, sector3, sector4, sector5, sector6, sector7, sector8, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain, locOne, locTwo, locations;
 	public int sectwidth = 381, sectheight = 322;
 	public int hexwidth = 38, hexlength = 44;
 	double  gridHeight = 31.25, gridWidth = 36.25;
@@ -48,7 +48,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			backTerrain =  ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Back.png"));
 			locOne =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/1.png"));
 			locTwo =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/2.png"));
-
+			locations = ImageIO.read(getClass().getResourceAsStream("/Board/Images/Locations.PNG"));
 
 		} catch (Exception E) {
 			System.out.println("Exception Error");
@@ -174,12 +174,30 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			}
 			else{
 				resetFont(g, 15);
-				g.drawString("TEMPORARY TOKEN STUFF MARKER", 45, 400);
-				g.drawString("restart the game now, Jenna hasnt coded this far", 45, 450);
+				g.drawImage(locations, 24, 160, 457, 320, null);
+				System.out.println("Players locationTiles: " + game.curPlayer().getLoc());
+				int arr[] =  new int [8];
+				arr = game.locTile.getNumbers(game.curPlayer().getLoc());
+				System.out.println("PLAYER DISPLAY NUMBER");
+				for(int i = 0; i<arr.length; i++){
+					if(arr[i]!=0){
+						resetFont(g, 15);
+						if(i<4)
+						g.drawString(arr[i]+"", 216, 194+i*80);
+						else
+						g.drawString(arr[i]+"", 452, 194+(i-4)*80);
+
+					}
+					System.out.print(arr[i]);
+				}
+				//216, 194
+				// +80
+				//452, 192
 				//let player choose which token to use, by 
 				//then player choose, temporarity removing, then draw dray based on that 
 				//move to mouse clicker: based on which, check the test cases for those
 			}
+			gameState+=.25;
 		}
 		if(gameState == 1){
 			String color = game.curPlayer().getColor();
@@ -201,7 +219,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		//tokens and settlements
 		
 		g.drawRect(24, 500, 457, 156);
-		g.drawRect(24, 225, 457, 260);
+		g.drawRect(24, 160, 457, 320);
 		//objective cards
 		drawObjective(g);
 		//draw Chosen IF chosen
