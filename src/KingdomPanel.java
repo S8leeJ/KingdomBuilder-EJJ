@@ -18,7 +18,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	Game game;
 	double gameState;
 	int xpos, ypos;
-	private static BufferedImage sector1,sector2, sector3, sector4, sector5, sector6, sector7, sector8, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain, locOne, locTwo, locations;
+	private static BufferedImage sector1,sector2, gray, sector3, sector4, sector5, sector6, sector7, sector8, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain, locOne, locTwo, locations;
 	public int sectwidth = 381, sectheight = 322;
 	public int hexwidth = 38, hexlength = 44;
 	double  gridHeight = 31.25, gridWidth = 36.25;
@@ -49,7 +49,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			locOne =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/1.png"));
 			locTwo =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/2.png"));
 			locations = ImageIO.read(getClass().getResourceAsStream("/Board/Images/Locations.PNG"));
-
+			gray = ImageIO.read(getClass().getResourceAsStream("/Board/Images/darkrect.png"));
 		} catch (Exception E) {
 			System.out.println("Exception Error");
 			return;
@@ -183,10 +183,17 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 					if(arr[i]!=0){
 						resetFont(g, 15);
 						if(i<4)
-						g.drawString(arr[i]+"", 216, 194+i*80);
+						g.drawString(arr[i]+"", 216, 205+i*80);
 						else
-						g.drawString(arr[i]+"", 452, 194+(i-4)*80);
+						g.drawString(arr[i]+"", 452, 205+(i-4)*80);
+					}
+					else{
+						if(i<4)
+						g.drawImage(gray, 27, 158+(80*i), 230, 80, null);
+						else{
+						g.drawImage(gray, 253, 158+(80*(i-4)), 230, 80, null);
 
+						}
 					}
 					System.out.print(arr[i]);
 				}
