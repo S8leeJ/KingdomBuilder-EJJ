@@ -66,5 +66,25 @@ public class LocationTiles {
         }
         return arr;
     }
+    public int getLocation(int x){
+        if(x == 0){
+            return 14;
+        }
+        if(x==1) return 9;
+        if(x==2) return 13;
+        if(x==3) return 15;
+        if(x==4) return 16;
+        if(x==5) return 11;
+        if(x==6) return 10;
+        if(x==7) return 12;
+        return -1;
+    }
+    public void remove(int x, ArrayList<Integer> y){
+        for(int i = 0; i<y.size(); i++){
+            if(y.get(i) == x){
+                y.remove(i);
+            }
+        }
+    }
 }
 

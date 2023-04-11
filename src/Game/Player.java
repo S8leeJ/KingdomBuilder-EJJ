@@ -12,9 +12,13 @@ public class Player {
     TerrainCard card;
     int curSettlements;
     ArrayList<Integer> locTile;
+    ArrayList<Integer> curLocTiles;
+
 
     public Player(String col){
         locTile = new ArrayList<>();
+        curLocTiles = new ArrayList<>();
+
         color = col;
         settlements = 40;
         curSettlements = 0;
@@ -23,6 +27,7 @@ public class Player {
 
     public void addLocTile(int x){
         locTile.add(x);
+        curLocTiles.add(x);
     }
    
     public void setType(TerrainCard car){
@@ -51,6 +56,9 @@ public class Player {
 
     public ArrayList<Integer> getLoc(){
         return locTile;
+    }
+    public ArrayList<Integer> getCurLoc(){
+        return curLocTiles;
     }
 
 }
