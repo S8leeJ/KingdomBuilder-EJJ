@@ -210,7 +210,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	// 	}
 	// }
 	System.out.println(game.curPlayer().curSettlements()+" AWDAD " + usedSettlements);
-		if(usedSettlements && game.curPlayer().curSettlements()>0){
+		if(gameState>=1 && usedSettlements && game.curPlayer().curSettlements()<=3){
 			String color = game.curPlayer().getColor();
 			boolean arr[][] = game.getBoard().combineAvailable(game.curPlayer().getTerrainCard().getType(), color);
 			drawGray(g, arr);
@@ -343,7 +343,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			game.changePlayer();
 			gameState = 0;
 		}
-		if(usedSettlements){
+		if(game.curPlayer().curSettlements() == 3 && usedSettlements){
 			gameState = 2;
 		}
 		repaint();

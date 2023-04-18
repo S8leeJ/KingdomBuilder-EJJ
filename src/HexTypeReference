@@ -91,3 +91,11 @@ if(x>=25 && x<=480 && y>= 158 && y<=477 && player thing){
 					}
                  }
             }
+
+
+
+
+- 0.5 draw a card
+- boolean usedSettlements
+- boolean usedLocation
+- end turn only shows up if usedSettlements == true
