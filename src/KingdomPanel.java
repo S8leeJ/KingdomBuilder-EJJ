@@ -26,12 +26,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	ObjectiveCard objC;
 	int player = 1;
 	ArrayList<BufferedImage> objCard;
+	boolean viewCards;
 
 	public KingdomPanel() {
 		game = new Game();
 		gameState = 0;
 		objC = new ObjectiveCard();
 	    objCard = objC.get3();
+		viewCards = false;
 		try {     
 			sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector2.png"));
 			sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector3.png"));
@@ -210,7 +212,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	// 	}
 	// }
 	System.out.println(game.curPlayer().curSettlements()+" AWDAD " + usedSettlements);
-		if(gameState>=1 && usedSettlements && game.curPlayer().curSettlements()<=3){
+		if(gameState>=1 && usedSettlements && game.curPlayer().curSettlements()<3){
 			String color = game.curPlayer().getColor();
 			boolean arr[][] = game.getBoard().combineAvailable(game.curPlayer().getTerrainCard().getType(), color);
 			drawGray(g, arr);
@@ -220,10 +222,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 		if(gameState == 2){
 			g.setColor(new Color(202, 210, 235));
-			g.fillRect(22+244, 145-56, 177, 70);
+			g.fillRoundRect(223, 89, 496-223, 146-89, 20, 20);
 			resetFont(g, 25);
 			g.setColor(new Color(9, 25, 77));
-			g.drawString("End Turn", 32+244, 190-56);
+			g.drawString("End Turn", 36+244, 190-65);
 		}
 		
 		//board
@@ -336,9 +338,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			}
 		}
 		
-		if(gameState == 2 && x >= 312 && y >= 12 && x <= 494 && y <= 163){
+		if(gameState == 2 && x >= 222 && y >= 87 && x <= 498 && y <= 150){
 			player++;
 			if(player == 5) player = 1;
+			usedSettlements = false;
+			usedTokens = false;
 			game.curPlayer().resetSettlements();
 			game.changePlayer();
 			gameState = 0;

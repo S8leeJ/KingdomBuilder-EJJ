@@ -44,6 +44,7 @@ public class Game {
         }
     public void drawCard(){
         TerrainCard card = deck.getNext();
+        if(deck.empty()) deck.resetTerrainDeck();
         curPlayer().setType(card);
     }
     public Board getBoard(){

@@ -18,4 +18,7 @@ public class terrainDeck {
     public TerrainCard getNext(){
         return terrains.remove(0);
     }
+    public boolean empty(){
+        return terrains.size() == 0;
+    }
 }
