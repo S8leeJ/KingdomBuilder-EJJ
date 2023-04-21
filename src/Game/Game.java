@@ -28,7 +28,7 @@ public class Game {
         threeid = nums.remove((int)(Math.random()*nums.size()));
         fourid = nums.remove((int)(Math.random()*nums.size()));
         board = new Board(oneid, twoid, threeid, fourid);
-        System.out.println("sectors" + oneid + " " + twoid + " " + threeid + " " + fourid);
+        //System.out.println("sectors" + oneid + " " + twoid + " " + threeid + " " + fourid);
         one = new Player("blue");
         two = new Player("white");
         three = new Player("orange");
@@ -95,7 +95,7 @@ public class Game {
             }
         }
         if(x<19){
-            System.out.println("x+1, y " + curBoard[x+1][y].getType());
+            //System.out.println("x+1, y " + curBoard[x+1][y].getType());
             three = curBoard[x+1][y].getType()>8;
             if(three){
                 curLocX = x+1;
@@ -155,7 +155,7 @@ public class Game {
     }
 
     public int getTypeLoc(){
-        System.out.println(curLocX + " " + curLocY);
+        //System.out.println(curLocX + " " + curLocY);
         Hex[][]tempBoard  = board.getHexes();
         return tempBoard[curLocX][curLocY].getType();
     }
@@ -168,7 +168,7 @@ public class Game {
 
     public int checkAround(int x, int y){
         String color = curPlayer().getColor();
-        System.out.println(color);
+        //System.out.println(color);
         String c1, c2,c3,c4,c5,c6;
         int settles = 0;
         Hex[][] curBoard = board.getHexes();

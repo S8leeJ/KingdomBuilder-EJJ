@@ -184,7 +184,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 
 	public void paint(Graphics g) {
-		System.out.println("GAMESTATE"+gameState);
+		//System.out.println("GAMESTATE"+gameState);
 		super.paintComponent(g);
 		drawBoard(g);
 		//if player is placing 
@@ -267,10 +267,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
-		System.out.println("("+x+" " + y+"(");
-		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652){
-			game.getBoard().getHex(x, y, gridHeight, gridWidth);
-		}
+		//System.out.println("("+x+" " + y+"(");
+		
 		xpos = x; ypos = y;
 		if(gameState == 0 && x >= 27 && x <= 121 && y >= 503 && y <= 653){
 			game.drawCard();
@@ -307,12 +305,12 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 											}
 										}
 										game.curPlayer().setCurLoc(tempLoc);
-										System.out.println("h"+ game.curPlayer().getCurLoc().size());
+										//System.out.println("h"+ game.curPlayer().getCurLoc().size());
 										// //repaint the things
 									}
 								}
 								else{
-									System.out.println("im here uhh");
+									//System.out.println("im here uhh");
 									 if(x>=251 && x<=481 && y>=158+((i-4)*80) && y<=234+((i-4)*80)){
 										int locType = game.locTile.getLocation(i);
 										ArrayList<Integer> tempLoc = game.curPlayer().getCurLoc();
@@ -322,7 +320,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 											}
 										}
 										game.curPlayer().setCurLoc(tempLoc);
-										System.out.println("h2" + game.curPlayer().getCurLoc().size());
+										//System.out.println("h2" + game.curPlayer().getCurLoc().size());
 									}
 								}
 							}
@@ -340,17 +338,19 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 					int boardX = hex.getX();
 					int boardY = hex.getY();
 					//if the settlement touches location tiles
-					System.out.println(game.CheckLocTiles(boardX, boardY));
+					//System.out.println(game.CheckLocTiles(boardX, boardY));
 					if(game.CheckLocTiles(boardX, boardY)){
 					    // if that settlement is the only one touching it, 
 						Hex temp[][] =  game.getBoard().getHexes();
 						Hex locHex = temp[game.getCurLocX()][game.getCurLocY()];
+						//System.out.println(locHex.getLoc());
 						int checkIfAvailable = game.checkAround(game.getCurLocX(), game.getCurLocY());
 						if(checkIfAvailable == 1 && locHex.getLoc()>0){
 							//set player a token
-							int locType = game.getTypeLoc();
+							int locType = locHex.getType();
+							System.out.println(locType);
 							locHex.decLoc();
-							System.out.println(locHex.getLoc());
+							//System.out.println(locHex.getLoc());
 							game.curPlayer().addLocTile(locType);
 						}
 					}

@@ -62,7 +62,7 @@ public class Player {
     }
     public void setCurLoc(ArrayList<Integer> x){
         curLocTiles = x;
-        System.out.println(curLocTiles);
+        //System.out.println(curLocTiles);
     }
 
 }
