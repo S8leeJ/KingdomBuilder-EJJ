@@ -64,6 +64,9 @@ public class Player {
         curLocTiles = x;
         System.out.println(curLocTiles);
     }
+    public void resetLocs(){
+        curLocTiles = locTile;
+    }
 
 }
    

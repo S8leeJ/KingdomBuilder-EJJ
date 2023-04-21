@@ -131,7 +131,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 	public void drawToken(Graphics g){
 		ArrayList<Integer> curLocs = new ArrayList<>();
+
 		curLocs = game.curPlayer().getLoc();
+		System.out.println(curLocs);
 		if(curLocs.size() > 0){
 			for(int i = 0; i<curLocs.size(); i++){
 				g.drawImage(LocationTiles.getLoc(curLocs.get(i)), 250 + i*40, 540, 40, 40, null);
@@ -161,6 +163,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		resetFont(g, 15);
 		g.drawImage(locations, 24, 160, 457, 320, null);
 		System.out.println("Players locationTiles: " + game.curPlayer().getLoc());
+		game.curPlayer().resetLocs();
 		int arr[] =  new int [8];
 		arr = game.locTile.getNumbers(game.curPlayer().getCurLoc());
 		for(int i = 0; i<arr.length; i++){
@@ -204,13 +207,15 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 		if(game.curPlayer().getCurLoc().size() == 0 && usedTokens){
 			resetFont(g, 15);
-			g.drawString("Done",270, 190);
+			g.drawString("Done",413, 500);
 			usedTokens = false;
 		}
 		if(usedTokens){
+			g.setColor(Color.black);			
+			g.fillRoundRect(400, 490, 20, 20, 20, 20);
 			resetFont(g, 15);
-			//draw rectangle over this 
-			g.drawString("Done",405, 500);
+
+			g.drawString("Done",413, 500);
 			displayLocs(g);
 		}
 		
@@ -312,7 +317,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 									}
 								}
 								else{
-									System.out.println("im here uhh");
 									 if(x>=251 && x<=481 && y>=158+((i-4)*80) && y<=234+((i-4)*80)){
 										int locType = game.locTile.getLocation(i);
 										ArrayList<Integer> tempLoc = game.curPlayer().getCurLoc();
