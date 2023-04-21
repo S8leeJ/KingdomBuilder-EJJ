@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.image.*;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import Board.Hex;
@@ -202,16 +201,20 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		if(gameState >=1){
 			g.drawImage(game.curPlayer().getTerrainCard().getImage(), 121, 503, 94, 150, null);
 		}
+
+		if(game.curPlayer().getCurLoc().size() == 0 && usedTokens){
+			resetFont(g, 15);
+			g.drawString("Done",270, 190);
+			usedTokens = false;
+		}
+		if(usedTokens){
+			resetFont(g, 15);
+			//draw rectangle over this 
+			g.drawString("Done",405, 500);
+			displayLocs(g);
+		}
 		
-	// 	if(gameState >= 0.75 && gameState<1){
-	// 		if(game.curPlayer().getLoc().size() == 0){
-	// 			gameState+=.25;
-	// 		}
-	// 		else{
-	// 			displayLocs(g);
-	// 	}
-	// }
-	System.out.println(game.curPlayer().curSettlements()+" AWDAD " + usedSettlements);
+	
 		if(gameState>=1 && usedSettlements && game.curPlayer().curSettlements()<3){
 			String color = game.curPlayer().getColor();
 			boolean arr[][] = game.getBoard().combineAvailable(game.curPlayer().getTerrainCard().getType(), color);
@@ -275,7 +278,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		if(usedSettlements == false && x>=371 && x<=462 && y<=639 && y>=459){
 			//settlement
-			System.out.println("WEEE");
 			usedSettlements = true;
 			
 		}
@@ -283,26 +285,44 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			//token
 			usedTokens = true;
 		}
+		//if(usedTokens && coordinates click the done button, then make usedTokens to false)
+		
+		
+		
+		
 		//choosing the actual loca 
-		if(usedSettlements && x>=25 && x<=480 && y>= 158 && y<=477 && game.curPlayer().getLoc().size()>0){
+		if(usedTokens && x>=25 && x<=480 && y>= 158 && y<=477 && game.curPlayer().getLoc().size()>0){
 			int arr[] =  new int [8];
 			arr = game.locTile.getNumbers(game.curPlayer().getCurLoc());
 			for(int i = 0; i<arr.length; i++){
 							if(arr[i]==1){
 								if(i<4){
 									if(x>=24 && x<=250 && y>=158+i*80 && y<=234+i*80){
-										System.out.println("HEREHEHRE");
 										int locType = game.locTile.getLocation(i);
 										//DO THIS LINE BELOW AFTER YOU PLACE THE TOKENS
-										game.locTile.remove(locType, game.curPlayer().getCurLoc());
+										ArrayList<Integer> tempLoc = game.curPlayer().getCurLoc();
+										for(int j = 0; j<tempLoc.size(); j++){
+											if(tempLoc.get(j) == locType){
+												tempLoc.remove(j);
+											}
+										}
+										game.curPlayer().setCurLoc(tempLoc);
+										System.out.println("h"+ game.curPlayer().getCurLoc().size());
 										// //repaint the things
 									}
 								}
 								else{
-									 if(x>=251 && x<=481 && y>=158+i*80 && y<=234+i*80){
-										System.out.println("HEREHEHRE");
+									System.out.println("im here uhh");
+									 if(x>=251 && x<=481 && y>=158+((i-4)*80) && y<=234+((i-4)*80)){
 										int locType = game.locTile.getLocation(i);
-										game.locTile.remove(locType, game.curPlayer().getCurLoc());
+										ArrayList<Integer> tempLoc = game.curPlayer().getCurLoc();
+										for(int j = 0; j<tempLoc.size(); j++){
+											if(tempLoc.get(j) == locType){
+												tempLoc.remove(j);
+											}
+										}
+										game.curPlayer().setCurLoc(tempLoc);
+										System.out.println("h2" + game.curPlayer().getCurLoc().size());
 									}
 								}
 							}
@@ -340,7 +360,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		
 		if(gameState == 2 && x >= 222 && y >= 87 && x <= 498 && y <= 150){
 			player++;
-			if(player == 5) player = 1;
+			if(player >= 5) player = 1;
 			usedSettlements = false;
 			usedTokens = false;
 			game.curPlayer().resetSettlements();

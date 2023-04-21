@@ -60,6 +60,10 @@ public class Player {
     public ArrayList<Integer> getCurLoc(){
         return curLocTiles;
     }
+    public void setCurLoc(ArrayList<Integer> x){
+        curLocTiles = x;
+        System.out.println(curLocTiles);
+    }
 
 }
    
