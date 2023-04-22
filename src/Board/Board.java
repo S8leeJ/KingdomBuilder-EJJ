@@ -68,17 +68,15 @@ public class Board {
                 }
             }
         }
-        return getAvailable(combined, x, color);
+        return getAvailable(x, color);
     }
-    public boolean[][] getAvailable(int[][] combined, int x, String color){
+    public boolean[][] getAvailable(int x, String color){
         boolean [][] avail = new boolean[20][20];
         int numAvail = 0;
-        boolean hasSettle = false;
         for(int i = 0; i<20; i++){
             for(int j = 0; j<20; j++){
                 Hex curHex = board[i][j];
                 if(curHex.getColor().equals(color)){
-                    hasSettle = true;
                     if(i>=1){
                         if(valid(i-1, j, x)){
                             avail[i-1][j] = true;

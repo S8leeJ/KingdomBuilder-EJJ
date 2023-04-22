@@ -26,6 +26,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	int player = 1;
 	ArrayList<BufferedImage> objCard;
 	ArrayList<Integer> UsedLocs;
+	ArrayList<Integer> copy;
+
 	boolean viewCards;
 
 	public KingdomPanel() {
@@ -35,6 +37,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	    objCard = objC.get3();
 		viewCards = false;
 		UsedLocs = new ArrayList<>();
+		copy = new ArrayList<>();
+
 		try {     
 			sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector2.png"));
 			sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector3.png"));
@@ -164,7 +168,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawImage(locations, 24, 160, 457, 320, null);
 		//game.curPlayer().resetLocs();
 		int arr[] =  new int [8];
-		arr = game.locTile.getNumbers(game.curPlayer().getLoc());
+		arr = game.locTile.getNumbers(copy);
 		for(int i = 0; i<arr.length; i++){
 			if(arr[i]!=0){
 				resetFont(g, 15);
@@ -276,6 +280,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		if(gameState == 0 && x >= 27 && x <= 121 && y >= 503 && y <= 653){
 			game.drawCard();
 			gameState+=1;
+		    ArrayList<Integer> curLocation = game.curPlayer().getLoc();
+			for(int i = 0; i<curLocation.size(); i++){
+				copy.add(curLocation.get(i));
+			}
+			System.out.println("copy+ " + copy);
 		}
 		if(usedSettlements == false && x>=371 && x<=462 && y<=639 && y>=459){
 			//settlement
@@ -350,11 +359,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			if(player >= 5) player = 1;
 			usedSettlements = false;
 			usedTokens = false;
-			game.curPlayer().getLoc().addAll(UsedLocs);
-			UsedLocs = new ArrayList<>();
 			game.curPlayer().resetSettlements();
 			game.changePlayer();
 			gameState = 0;
+			copy = new ArrayList<>();
 		}
 		if(game.curPlayer().curSettlements() == 3 && usedSettlements){
 			gameState = 2;
@@ -390,13 +398,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	}
 	public void removing(int i){
 		int locType = game.locTile.getLocation(i);
-		for(int j = 0; j<game.curPlayer().getLoc().size(); j++){
-			if(game.curPlayer().getLoc().get(j) == locType){
-				System.out.println("test1"+ game.curPlayer().getLoc());
-				int removing = game.curPlayer().getLoc().get(j);
-				game.curPlayer().getLoc().remove(j);
-				UsedLocs.add(removing);
-				System.out.println("test1"+ game.curPlayer().getLoc());
+		for(int j = 0; j<copy.size(); j++){
+			if(copy.get(j) == locType){
+				System.out.println(locType);
+				copy.remove(j);
 			}
 		}
 	}
