@@ -27,7 +27,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	ArrayList<BufferedImage> objCard;
 	ArrayList<Integer> UsedLocs;
 	ArrayList<Integer> copy;
-
+	locationClass locclass = new locationClass();
 	boolean viewCards;
 
 	public KingdomPanel() {
@@ -202,12 +202,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			resetFont(g, 15);
 			g.drawString("Click on the 'TOKENS' or Settlement", 65, 400);
 		}
-
+		//draws terrain card
 		if(gameState >=1){
 			g.drawImage(game.curPlayer().getTerrainCard().getImage(), 121, 503, 94, 150, null);
 		}
-
-		
 		if(usedTokens){
 			if(game.curPlayer().getLoc().size() == 0){
 				usedTokens = false;
@@ -226,6 +224,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			String color = game.curPlayer().getColor();
 			boolean arr[][] = game.getBoard().combineAvailable(game.curPlayer().getTerrainCard().getType(), color);
 			drawGray(g, arr);
+		}
+		if(gameState>=9){
 		}
 		drawHexNumbers(g);
 		drawSettlements(g);
@@ -398,6 +398,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	}
 	public void removing(int i){
 		int locType = game.locTile.getLocation(i);
+		locclass.action(i, game.curPlayer().getColor(), game.curPlayer().getTerrainCard().getType());
+		gameState = locType;
 		for(int j = 0; j<copy.size(); j++){
 			if(copy.get(j) == locType){
 				System.out.println(locType);
