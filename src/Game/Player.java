@@ -46,6 +46,9 @@ public class Player {
         curSettlements++;
         settlements--;
     }
+    public void locSettlement(){
+        curSettlements = 2;
+    }
     public int getSettlement(){
         return settlements;
     }

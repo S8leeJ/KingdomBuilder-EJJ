@@ -13,6 +13,7 @@ public class OracleFarmOasis{
 
     public void farm(String color){
         boolean[][] available = board.getAvailable(2, color);        
+        // 
     }
 
 }

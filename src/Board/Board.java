@@ -39,37 +39,7 @@ public class Board {
         }
     }
 
-    public boolean[][] combineAvailable(int x, String color){
-      
-        int[][] combined = new int[20][20]; 
-        int[][] t1 = one.getTypes();
-        int[][] t2 = two.getTypes();
-        int[][] t3 = three.getTypes();
-        int[][] t4 = four.getTypes();
-
-        //lets combine ^ into one big [][] array
-        for(int c = 0; c < 20; c++){
-            for(int d = 0; d < 20; d++){
-                if(c < 10){
-                    if(d < 10){
-                        combined[c][d] = t1[c][d];
-                    }
-                    if(d >= 10){
-                        combined[c][d] = t2[c][d%10];
-                    }
-                }
-                else if (c >= 10){
-                    if(d < 10){
-                        combined[c][d] = t3[c%10][d];
-                    }
-                    if(d >= 10){
-                        combined[c][d] = t4[c%10][d%10];
-                    }
-                }
-            }
-        }
-        return getAvailable(x, color);
-    }
+    
     public boolean[][] getAvailable(int x, String color){
         boolean [][] avail = new boolean[20][20];
         int numAvail = 0;
