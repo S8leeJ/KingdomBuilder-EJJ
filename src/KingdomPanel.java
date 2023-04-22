@@ -25,6 +25,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	ObjectiveCard objC;
 	int player = 1;
 	ArrayList<BufferedImage> objCard;
+	ArrayList<Integer> UsedLocs;
 	boolean viewCards;
 
 	public KingdomPanel() {
@@ -33,6 +34,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		objC = new ObjectiveCard();
 	    objCard = objC.get3();
 		viewCards = false;
+		UsedLocs = new ArrayList<>();
 		try {     
 			sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector2.png"));
 			sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector3.png"));
@@ -131,9 +133,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 	public void drawToken(Graphics g){
 		ArrayList<Integer> curLocs = new ArrayList<>();
-
 		curLocs = game.curPlayer().getLoc();
-		System.out.println(curLocs);
 		if(curLocs.size() > 0){
 			for(int i = 0; i<curLocs.size(); i++){
 				g.drawImage(LocationTiles.getLoc(curLocs.get(i)), 250 + i*40, 540, 40, 40, null);
@@ -162,10 +162,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	public void displayLocs(Graphics g){
 		resetFont(g, 15);
 		g.drawImage(locations, 24, 160, 457, 320, null);
-		System.out.println("Players locationTiles: " + game.curPlayer().getLoc());
-		game.curPlayer().resetLocs();
+		//game.curPlayer().resetLocs();
 		int arr[] =  new int [8];
-		arr = game.locTile.getNumbers(game.curPlayer().getCurLoc());
+		arr = game.locTile.getNumbers(game.curPlayer().getLoc());
 		for(int i = 0; i<arr.length; i++){
 			if(arr[i]!=0){
 				resetFont(g, 15);
@@ -187,7 +186,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 
 	public void paint(Graphics g) {
-		//System.out.println("GAMESTATE"+gameState);
 		super.paintComponent(g);
 		drawBoard(g);
 		//if player is placing 
@@ -205,18 +203,18 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			g.drawImage(game.curPlayer().getTerrainCard().getImage(), 121, 503, 94, 150, null);
 		}
 
-		if(game.curPlayer().getCurLoc().size() == 0 && usedTokens){
-			resetFont(g, 15);
-			g.drawString("Done",413, 500);
-			usedTokens = false;
-		}
+		
 		if(usedTokens){
+			if(game.curPlayer().getLoc().size() == 0){
+				usedTokens = false;
+			}
+			else{
 			g.setColor(Color.black);			
 			g.fillRoundRect(400, 490, 20, 20, 20, 20);
 			resetFont(g, 15);
-
 			g.drawString("Done",413, 500);
 			displayLocs(g);
+			}
 		}
 		
 	
@@ -272,7 +270,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
-		//System.out.println("("+x+" " + y+"(");
+		System.out.println("("+x+" " + y+"(");
 		
 		xpos = x; ypos = y;
 		if(gameState == 0 && x >= 27 && x <= 121 && y >= 503 && y <= 653){
@@ -296,38 +294,23 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		//choosing the actual loca 
 		if(usedTokens && x>=25 && x<=480 && y>= 158 && y<=477 && game.curPlayer().getLoc().size()>0){
 			int arr[] =  new int [8];
-			arr = game.locTile.getNumbers(game.curPlayer().getCurLoc());
+			arr = game.locTile.getNumbers(game.curPlayer().getLoc());
+			System.out.println("I1M HERE");
+
 			for(int i = 0; i<arr.length; i++){
-				if(arr[i]==1){
+				if(arr[i]>=1){
 					if(i<4){
 						if(x>=24 && x<=250 && y>=158+i*80 && y<=234+i*80){
-							int locType = game.locTile.getLocation(i);
-							//DO THIS LINE BELOW AFTER YOU PLACE THE TOKENS
-							ArrayList<Integer> tempLoc = game.curPlayer().getCurLoc();
-							for(int j = 0; j<tempLoc.size(); j++){
-								if(tempLoc.get(j) == locType){
-									tempLoc.remove(j);
-								}
-							}
-							game.curPlayer().setCurLoc(tempLoc);
-							//System.out.println("h"+ game.curPlayer().getCurLoc().size());
-							// //repaint the things
-						}
+						removing(i);
 					}
+				}
 					else{
-						//System.out.println("im here uhh");
-							if(x>=251 && x<=481 && y>=158+((i-4)*80) && y<=234+((i-4)*80)){
-							int locType = game.locTile.getLocation(i);
-							ArrayList<Integer> tempLoc = game.curPlayer().getCurLoc();
-							for(int j = 0; j<tempLoc.size(); j++){
-								if(tempLoc.get(j) == locType){
-									tempLoc.remove(j);
-								}
-							}
-							game.curPlayer().setCurLoc(tempLoc);
-							//System.out.println("h2" + game.curPlayer().getCurLoc().size());
+						System.out.println("IM HERE");
+						if(x>=251 && x<=481 && y>=158+((i-4)*80) && y<=234+((i-4)*80)){
+						removing(i);
 						}
 					}
+				  
 				}
 			}
 		}
@@ -344,12 +327,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 					int boardX = hex.getX();
 					int boardY = hex.getY();
 					//if the settlement touches location tiles
-					//System.out.println(game.CheckLocTiles(boardX, boardY));
 					if(game.CheckLocTiles(boardX, boardY)){
 					    // if that settlement is the only one touching it, 
 						Hex temp[][] =  game.getBoard().getHexes();
 						Hex locHex = temp[game.getCurLocX()][game.getCurLocY()];
-						//System.out.println(locHex.getLoc());
 						int checkIfAvailable = game.checkAround(game.getCurLocX(), game.getCurLocY());
 						if(checkIfAvailable == 1 && locHex.getLoc()>0){
 							//set player a token
@@ -369,6 +350,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			if(player >= 5) player = 1;
 			usedSettlements = false;
 			usedTokens = false;
+			game.curPlayer().getLoc().addAll(UsedLocs);
+			UsedLocs = new ArrayList<>();
 			game.curPlayer().resetSettlements();
 			game.changePlayer();
 			gameState = 0;
@@ -404,5 +387,17 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		if(id == 7) return sector7;
 		return sector8;
 
+	}
+	public void removing(int i){
+		int locType = game.locTile.getLocation(i);
+		for(int j = 0; j<game.curPlayer().getLoc().size(); j++){
+			if(game.curPlayer().getLoc().get(j) == locType){
+				System.out.println("test1"+ game.curPlayer().getLoc());
+				int removing = game.curPlayer().getLoc().get(j);
+				game.curPlayer().getLoc().remove(j);
+				UsedLocs.add(removing);
+				System.out.println("test1"+ game.curPlayer().getLoc());
+			}
+		}
 	}
 }

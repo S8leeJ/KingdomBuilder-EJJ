@@ -1,4 +1,5 @@
 To do:
+- can the player get a location tile and then use it right after? (the code rn lets them_
 
 Positions:
 - upper left: (601, 19)
@@ -70,32 +71,4 @@ main screen
 25, 158
 480, 477
 
-use a forloop
-iterate through each one to see if coord is there && the player array is 1
 
-if so, increment a little so you can drawGray based on the new card
-
-if(x>=25 && x<=480 && y>= 158 && y<=477 && player thing){
-	for(int i = 0; i<arr.length; i++){
-					if(arr[i]==1){
-						if(i<4){
-                            if(x>=24 && x<=250 && y>=158+i*80 && y<=234+i*80){
-                                gameState+=0.25;
-                            }
-                        }
-						else{
-                             if(x>=251 && x<=481 && y>=158+i*80 && y<=234+i*80){
-                                gameState+=0.25;
-                            }
-                        }
-					}
-                 }
-            }
-
-
-
-
-- 0.5 draw a card
-- boolean usedSettlements
-- boolean usedLocation
-- end turn only shows up if usedSettlements == true
