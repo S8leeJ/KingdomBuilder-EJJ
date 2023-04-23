@@ -201,15 +201,13 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		//if player picks to use tokens
 		if(usedTokens){
-			
-			
 			g.setColor(Color.black);			
 			g.fillRoundRect(400, 490, 20, 20, 20, 20);
 			resetFont(g, 20);
 			g.drawString("Done", 41 , 147);
 			displayLocs(g);
-		
 		}
+
 		if(gameState == 9){
 			usedSettlements = true;
 			game.curPlayer().locSettlement();
@@ -265,7 +263,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		int x = e.getX();
 		int y = e.getY();
 		System.out.println("("+x+" " + y+"(");
-		
+		System.out.println("GAMESTATE" + gameState);
 		xpos = x; ypos = y;
 		if(gameState == 0 && x >= 27 && x <= 121 && y >= 503 && y <= 653){
 			game.drawCard();
@@ -348,7 +346,12 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			gameState = 0;
 			copy = new ArrayList<>();
 		}
-
+		if(game.curPlayer().curSettlements() == 3 && isLoc == true){
+			gameState = 1;
+			usedSettlements = false;
+			isLoc = false;
+		    game.curPlayer().resetSettlements();
+		}
 		if(game.curPlayer().curSettlements() == 3 && usedSettlements && isLoc == false){
 			System.out.println(isLoc);
 			gameState = 2;
