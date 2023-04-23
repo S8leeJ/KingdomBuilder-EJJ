@@ -201,17 +201,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		//if player picks to use tokens
 		if(usedTokens){
-			if(game.curPlayer().getLoc().size() == 0){
-				usedTokens = false;
-				isLoc = true;
-			}
-			else{
+			
+			
 			g.setColor(Color.black);			
 			g.fillRoundRect(400, 490, 20, 20, 20, 20);
 			resetFont(g, 20);
 			g.drawString("Done", 41 , 147);
 			displayLocs(g);
-			}
+		
 		}
 		if(gameState == 9){
 			usedSettlements = true;
@@ -291,7 +288,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		//if(usedTokens && coordinates click the done button, then make usedTokens to false)
 		if(usedTokens && x>=39 && x<=108 && y>=130 && y<=146){
 			usedTokens = false;
-			isLoc = true;
+			// isLoc = true;
+			// System.out.println(isLoc + " IS TRUE");
 		}
 		//choosing the actual loca 
 		if(usedTokens && x>=25 && x<=480 && y>= 158 && y<=477 && game.curPlayer().getLoc().size()>0){
@@ -317,7 +315,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			if(game.curPlayer().curSettlements() < 3){
 				Hex hex = game.getBoard().getHex(x, y, gridHeight, gridWidth);
 				if(hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0 && hex.gray == true){
-					if(game.curPlayer().curSettlements() == 2 && !isLoc) gameState++;			
+					if(game.curPlayer().curSettlements() == 2) gameState++;
 					hex.setColor(game.curPlayer().getColor());
 					game.curPlayer().useSettlement();
 					//get coord of the actual hex
@@ -348,10 +346,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			game.curPlayer().resetSettlements();
 			game.changePlayer();
 			gameState = 0;
-			isLoc = false;
 			copy = new ArrayList<>();
 		}
-		if(game.curPlayer().curSettlements() == 3 && usedSettlements && !usedTokens){
+
+		if(game.curPlayer().curSettlements() == 3 && usedSettlements && isLoc == false){
+			System.out.println(isLoc);
 			gameState = 2;
 		}
 		repaint();
@@ -387,6 +386,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		gameState = locType;
 		for(int j = 0; j<copy.size(); j++){
 			if(copy.get(j) == locType){
+				isLoc = true;
 				System.out.println(locType);
 				copy.remove(j);
 			}
