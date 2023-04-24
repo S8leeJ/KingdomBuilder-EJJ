@@ -1,0 +1,147 @@
+import java.awt.*;
+import java.awt.image.*;
+import javax.imageio.ImageIO;
+import Board.Hex;
+import Board.LocationTiles;
+import Game.Game;
+import java.util.*;
+
+public class KingdomHelper {
+    private static BufferedImage sector1,sector2, gray, sector3, sector4, sector5, sector6, sector7, sector8, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain, locOne, locTwo, locations;
+  	public int hexwidth = 38, hexlength = 44;
+
+    public KingdomHelper(){
+        try {
+            sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector2.png"));
+			sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector3.png"));
+			sector4 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector4.png"));
+			sector5 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector5.png"));
+			sector6 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector6.png"));
+			sector7 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector7.png"));
+			sector8 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector8.png"));
+			blackhouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/blackhouse.png"));
+			bluehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/bluehouse.png"));
+			orangehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/orangehouse.png"));
+			whitehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/whitehouse.png"));
+			background =   ImageIO.read(getClass().getResourceAsStream("/Board/Images/background.jpg"));
+			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector1.png"));
+			hexagon = ImageIO.read(getClass().getResourceAsStream("/Board/Images/hexagon.png"));
+			backTerrain =  ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Back.png"));
+			locOne =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/1.png"));
+			locTwo =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/2.png"));
+			locations = ImageIO.read(getClass().getResourceAsStream("/Board/Images/Locations.PNG"));
+			gray = ImageIO.read(getClass().getResourceAsStream("/Board/Images/darkrect.png"));
+	
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+    }
+    public void drawSettlement(Graphics g, String color){
+		if(color == "orange"){
+			g.setColor(new Color(255, 180, 0));
+			g.drawImage(orangehouse, 375, 615, 30,30, null);
+		}
+		else if(color == "black"){
+			g.setColor(Color.black);
+			g.drawImage(blackhouse, 375, 615, 30,30, null);
+		}
+		else if(color == "blue"){
+			g.setColor(new Color(73, 134, 231));
+			g.drawImage(bluehouse, 375, 615, 30,30, null);
+		}
+		else{
+			g.setColor(Color.white);
+			g.drawImage(whitehouse, 375, 615, 30,30, null);
+		}
+	}
+    public void drawGray(Graphics g, boolean combined[][], Game game){
+		for(int c = 0; c < 20; c++){
+			for(int d = 0; d < 20; d++){
+				Hex board[][] = game.getBoard().getHexes();
+				if(!combined[c][d]){
+					board[c][d].setGray(false);
+					if(c%2 == 0)g.drawImage(hexagon, 515 + d * (hexwidth - 2), 19 + c * (hexlength - 13), hexwidth, hexlength, null);
+					else g.drawImage(hexagon, 533 + d * (hexwidth - 2), 19 + c * (hexlength-13), hexwidth, hexlength, null);
+				}
+				else{
+					board[c][d].setGray(true);
+				}		
+			}
+		}
+	}
+    public void drawToken(Graphics g, Game game){
+		ArrayList<Integer> curLocs = new ArrayList<>();
+		curLocs = game.curPlayer().getLoc();
+		if(curLocs.size() > 0){
+			for(int i = 0; i<curLocs.size(); i++){
+				g.drawImage(LocationTiles.getLoc(curLocs.get(i)), 250 + i*40, 540, 40, 40, null);
+			}
+		}
+	}
+    public void drawObjective(Graphics g, ArrayList<BufferedImage> objCard){
+		g.drawImage(objCard.get(0), 12, 13, 65, 100, null);
+		g.drawImage(objCard.get(1), 77, 13, 65, 100, null);
+		g.drawImage(objCard.get(2), 142, 13, 65, 100, null);
+		g.drawImage(backTerrain, 27, 503, 94, 150, null);
+		g.setFont(new Font("Castellar", 1, 15));
+		g.setColor(Color.white);
+	}
+    public void drawHexNumbers(Graphics g, Game game){
+		for(int c = 0; c < 20; c++){
+			for(int d = 0; d < 20; d++){
+				Hex hex = game.getBoard().getHexes()[c][d];
+				if(hex.getType()>8){
+					//check the "number" of location tiles left and then display corresponding one 
+					if(hex.getLoc() == 1){
+					if(c%2 == 0)g.drawImage(locOne, 517 + d * (hexwidth - 2), 10 + c * (hexlength - 13),33, 33, null);
+					else g.drawImage(locOne, 538 + d * (hexwidth - 2), 10 + c * (hexlength-13), 30, 30, null);
+					}
+					else if(hex.getLoc() == 2){
+						if(c%2 == 0)g.drawImage(locTwo, 517 + d * (hexwidth - 2), 10 + c * (hexlength - 13),33, 33, null);
+						else g.drawImage(locTwo, 538 + d * (hexwidth - 2), 10 + c * (hexlength-13), 30, 30, null);
+					}
+				}
+			}		
+		}
+	}
+    public void displayLocs(Graphics g, int arr[]){
+        g.setFont(new Font("Castellar", 1, 15));
+        g.setColor(Color.white);
+        g.drawImage(locations, 24, 160, 457, 320, null);
+        //game.curPlayer().resetLocs();
+        for(int i = 0; i<arr.length; i++){
+            if(arr[i]!=0){
+                if(i<4)
+                g.drawString(arr[i]+"", 216, 205+i*80);
+                else
+                g.drawString(arr[i]+"", 452, 205+(i-4)*80);
+            }
+            else{
+                if(i<4)
+                g.drawImage(gray, 27, 158+(80*i), 230, 80, null);
+                else{
+                g.drawImage(gray, 253, 158+(80*(i-4)), 230, 80, null);
+
+                }
+            }
+        }
+    }
+    public BufferedImage getSector(int id){
+		if(id == 1) return sector1;
+		if(id == 2) return sector2;
+		if(id == 3) return sector3;
+		if(id == 4) return sector4;
+		if(id == 5) return sector5;
+		if(id == 6) return sector6;
+		if(id == 7) return sector7;
+		return sector8;
+	}
+    public BufferedImage settlementColor(String color){
+		if(color.equals("orange")) return orangehouse;
+		if(color.equals("black")) return blackhouse;
+		if(color.equals("white")) return whitehouse;
+		else return bluehouse;
+	}
+	
+}
