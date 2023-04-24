@@ -1,9 +1,6 @@
 package Game;
 
-import java.util.Locale;
 import java.util.*;
-import Board.Hex;
-import Board.LocationTiles;
 import Card.TerrainCard;
 
 public class Player {
@@ -12,7 +9,6 @@ public class Player {
     TerrainCard card;
     int curSettlements;
     ArrayList<Integer> locTile;
-
 
     public Player(String col){
         locTile = new ArrayList<>();

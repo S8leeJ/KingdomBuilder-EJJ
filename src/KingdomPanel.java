@@ -27,7 +27,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	ArrayList<Integer> UsedLocs;
 	ArrayList<Integer> copy;
 	KingdomHelper help = new KingdomHelper();
-
+	TerrainCard temp;
 	locationClass locclass = new locationClass();
 	boolean viewCards, isLoc;
 	int count = 0;
@@ -112,6 +112,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		if(gameState == 9){
 			usedSettlements = true;
 			game.curPlayer().locSettlement();
+			temp = game.curPlayer().getTerrainCard();
 			game.curPlayer().setType(new TerrainCard(2));
 			System.out.println(gameState+ " " + usedSettlements + game.curPlayer().curSettlements());
 			count++;
@@ -128,7 +129,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		help.drawHexNumbers(g, game);
 		drawSettlements(g);
 		//once player has placed 3 settlements
-		if(gameState == 2){
+		if(gameState == 2 && game.curPlayer().curSettlements()==3){
 			g.setColor(new Color(202, 210, 235));
 			g.fillRoundRect(223, 89, 496-223, 146-89, 20, 20);
 			resetFont(g, 25);
@@ -201,6 +202,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			gameState = 1;
 			usedSettlements = false;
 			isLoc = false;
+			//change terrain type back 
+			game.curPlayer().setType(temp);
+
 		    game.curPlayer().resetSettlements();
 		}
 	
@@ -253,7 +257,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 				}	
 			}
 		}
-		if(gameState == 2 && x >= 222 && y >= 87 && x <= 498 && y <= 150){
+		if(gameState == 2 && x >= 222 && y >= 87 && x <= 498 && y <= 150 ){
 			player++;
 			if(player >= 5) player = 1;
 			usedSettlements = false;
