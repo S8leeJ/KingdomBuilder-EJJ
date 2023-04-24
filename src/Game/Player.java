@@ -48,11 +48,9 @@ public class Player {
     public int getSettlement(){
         return settlements;
     }
-
     public ArrayList<Integer> getLoc(){
         return locTile;
     }
-    
 }
    
 

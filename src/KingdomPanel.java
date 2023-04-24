@@ -109,15 +109,16 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			help.displayLocs(g, arr);
 		}
 
-		if(gameState == 9){
+		if(gameState == 9 || gameState == 13 || gameState == 14){
 			usedSettlements = true;
 			game.curPlayer().locSettlement();
 			temp = game.curPlayer().getTerrainCard();
+			if(gameState ==9)
 			game.curPlayer().setType(new TerrainCard(2));
-			System.out.println(gameState+ " " + usedSettlements + game.curPlayer().curSettlements());
+			if(gameState == 13)
+			game.curPlayer().setType(new TerrainCard(1));
 			count++;
 		}
-		System.out.println(gameState+ " " + usedSettlements + game.curPlayer().curSettlements());
 
 		//if player is placing their 3 settlememts
 		if(gameState>=1 && usedSettlements && game.curPlayer().curSettlements()<3){
@@ -194,17 +195,13 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		//if(usedTokens && coordinates click the done button, then make usedTokens to false)
 		if(usedTokens && x>=39 && x<=108 && y>=130 && y<=146){
 			usedTokens = false;
-			// isLoc = true;
-			// System.out.println(isLoc + " IS TRUE");
 		}
 		//choosing the actual loca 
 		if(game.curPlayer().curSettlements() == 3 && isLoc == true && count ==4 ){
 			gameState = 1;
 			usedSettlements = false;
 			isLoc = false;
-			//change terrain type back 
 			game.curPlayer().setType(temp);
-
 		    game.curPlayer().resetSettlements();
 		}
 	
@@ -226,10 +223,12 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 				}
 			}
 		}
+		repaint();
 		System.out.println("count" + count);
 		if(count == 5){
 			gameState = 2;
 		}
+
 		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652 && usedSettlements == true){
 			if(game.curPlayer().curSettlements() < 3){
 				Hex hex = game.getBoard().getHex(x, y, gridHeight, gridWidth);
@@ -249,7 +248,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 						if(checkIfAvailable == 1 && locHex.getLoc()>0){
 							//set player a token
 							int locType = locHex.getType();
-							System.out.println(locType);
 							locHex.decLoc();
 							game.curPlayer().addLocTile(locType);
 						}
@@ -257,6 +255,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 				}	
 			}
 		}
+		System.out.println("gW " + gameState + " plauyer " + game.curPlayer().curSettlements());
+
 		if(gameState == 2 && x >= 222 && y >= 87 && x <= 498 && y <= 150 ){
 			player++;
 			if(player >= 5) player = 1;
@@ -271,7 +271,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		
 		if(game.curPlayer().curSettlements() == 3 && usedSettlements && isLoc == false){
-			System.out.println(isLoc+ " JER");
 			gameState = 2;
 		}
 		repaint();
@@ -296,6 +295,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 				System.out.println(locType + " "  + gameState);
 				usedSettlements = true;
 				copy.remove(j);
+				repaint();
 			}
 		}
 	}
