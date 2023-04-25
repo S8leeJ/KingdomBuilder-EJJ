@@ -132,6 +132,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 	}
 	public void drawSettlement(Graphics g, String color){
+		g.drawRect(227, 508, 471-227, 538 - 508);
 		if(color == "orange"){
 			g.setColor(new Color(255, 180, 0));
 			g.drawImage(orangehouse, 375, 615, 30,30, null);
