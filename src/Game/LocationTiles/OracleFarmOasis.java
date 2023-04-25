@@ -13,6 +13,7 @@ public class OracleFarmOasis{
     }
    
     public void farm(String color, int terrainType, int x, int y, Game game){    
+        System.out.println("AWEEEEEEE");
         Hex hex = game.getBoard().getHex(x, y, 31.25, 36.25);
         if(hex.getType() == terrainType && hex.getColor().length() == 0 && hex.gray == true){
             hex.setColor(game.curPlayer().getColor());

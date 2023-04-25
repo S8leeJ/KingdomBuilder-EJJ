@@ -100,6 +100,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		//if player picks to use tokens
 		if(gameState == 9){
+			gameState++;
 			locclass.action(9, game.curPlayer(), x, y, g);
 		}
 		if(usedTokens){
