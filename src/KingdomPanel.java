@@ -28,13 +28,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	ArrayList<BufferedImage> objCard;
 	ArrayList<Integer> UsedLocs;
 	ArrayList<Integer> copy;
-	KingdomHelper help = new KingdomHelper();
+	KingdomHelper help;
 	locationClass locclass;
 	boolean viewCards;
 	int x, y;
 
 	public KingdomPanel() {
 		game = new Game();
+		help = new KingdomHelper(game);
 		locclass = new locationClass(game);
 		gameState = 0;
 		objC = new ObjectiveCard();
@@ -52,18 +53,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		addMouseListener(this);
 	}
-	public void drawSettlements(Graphics g){
-		for(int c = 0; c < 20; c++){
-			for(int d = 0; d < 20; d++){
-				Hex board[][] = game.getBoard().getHexes();
-				Hex hex = board[c][d];	
-				if(hex.getColor().length() > 0){
-					if(c%2 == 0)g.drawImage(help.settlementColor(hex.getColor()), 520 + d * (hexwidth -2), 24 + c * (hexlength - 13), hexwidth - 15, hexlength - 15, null);
-					else g.drawImage(help.settlementColor(hex.getColor()), 538 + d * (hexwidth -2), 24 + c * (hexlength-13), hexwidth - 15, hexlength - 15, null);				
-				}		
-			}
-		}
-	}
+
 	
 	
 	public void drawBoard(Graphics g){
@@ -102,6 +92,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		if(gameState == 9){
 			gameState++;
 			locclass.action(9, game.curPlayer(), x, y, g);
+			// if(usedSettlements)
+			// gameState = 2;
+			// else
+			// gameState = 1;
 		}
 		if(usedTokens){
 			g.setColor(Color.black);			
@@ -121,7 +115,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			//drawGray(g, arr);
 		}
 		help.drawHexNumbers(g, game);
-		drawSettlements(g);
+		help.drawSettlements(g);
 		//once player has placed 3 settlements
 		if(gameState == 2 && game.curPlayer().curSettlements()==3){
 			g.setColor(new Color(202, 210, 235));

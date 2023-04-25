@@ -9,8 +9,9 @@ import java.util.*;
 public class KingdomHelper {
     private static BufferedImage sector1,sector2, gray, sector3, sector4, sector5, sector6, sector7, sector8, hexagon, background, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain, locOne, locTwo, locations;
   	public int hexwidth = 38, hexlength = 44;
-
-    public KingdomHelper(){
+	Game game;
+    public KingdomHelper(Game game){
+		this.game = game;
         try {
             sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector2.png"));
 			sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector3.png"));
@@ -143,5 +144,18 @@ public class KingdomHelper {
 		if(color.equals("white")) return whitehouse;
 		else return bluehouse;
 	}
-	
+
+public void drawSettlements(Graphics g){
+	for(int c = 0; c < 20; c++){
+		for(int d = 0; d < 20; d++){
+			Hex board[][] = game.getBoard().getHexes();
+			Hex hex = board[c][d];	
+			if(hex.getColor().length() > 0){
+				if(c%2 == 0)g.drawImage(settlementColor(hex.getColor()), 520 + d * (hexwidth -2), 24 + c * (hexlength - 13), hexwidth - 15, hexlength - 15, null);
+				else g.drawImage(settlementColor(hex.getColor()), 538 + d * (hexwidth -2), 24 + c * (hexlength-13), hexwidth - 15, hexlength - 15, null);				
+			}		
+		}
+	}
 }
+}
+

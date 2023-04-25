@@ -12,10 +12,11 @@ import Game.Player;
     Paddock pad = new Paddock();
     Tavern tavern = new Tavern();
     Tower tower = new Tower();
-    KingdomHelper help = new KingdomHelper();
+    KingdomHelper help;
     public locationClass(Game g){
         ofo =  new OracleFarmOasis();
         game = g;
+        help = new KingdomHelper(game);
     }
     public void action(/*which location tile picked*/ int loc, Player player, int x, int y, Graphics g){
           
@@ -23,6 +24,9 @@ import Game.Player;
 		    	boolean arr[][] = game.getBoard().getAvailable(2, player.getColor());
                 help.drawGray(g, arr, game);
                 ofo.farm(player.getColor(), 2, x, y, game);
+                help.drawHexNumbers(g, game);
+		        help.drawSettlements(g);
+	
             }
             if(loc == 10){
                 //boat
