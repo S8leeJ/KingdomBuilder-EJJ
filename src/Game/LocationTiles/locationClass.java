@@ -1,21 +1,28 @@
- import java.util.*;
+ import java.awt.Graphics;
+import java.util.*;
  import Board.Board;
+import Game.Game;
+import Game.Player;
 
  public class locationClass{
-    Board board;
+    Game game;
     Barn barn = new Barn();
     Harbor harbor = new Harbor();
     OracleFarmOasis ofo;
     Paddock pad = new Paddock();
     Tavern tavern = new Tavern();
     Tower tower = new Tower();
-    public locationClass(){
-        ofo =  new OracleFarmOasis(board);
+    KingdomHelper help = new KingdomHelper();
+    public locationClass(Game g){
+        ofo =  new OracleFarmOasis();
+        game = g;
     }
-    public void action(/*which location tile picked*/ int loc, /*player*/ String color, /*terrain*/ int terrain){
+    public void action(/*which location tile picked*/ int loc, Player player, int x, int y, Graphics g){
           
             if(loc == 9){
-                //farm();
+		    	boolean arr[][] = game.getBoard().getAvailable(2, player.getColor());
+                help.drawGray(g, arr, game);
+                ofo.farm(player.getColor(), 2, x, y, game);
             }
             if(loc == 10){
                 //boat
