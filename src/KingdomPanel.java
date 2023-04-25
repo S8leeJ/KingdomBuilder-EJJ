@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.image.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -104,6 +106,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 			int []arr = new int[8];
 			arr = game.locTile.getNumbers(copy);
+			System.out.println(Arrays.toString(arr));
+			//here
 			help.displayLocs(g, arr);
 		}
 
@@ -198,12 +202,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		
 		if(usedTokens && x>=25 && x<=480 && y>= 158 && y<=477 && game.curPlayer().getLoc().size()>0){
-			int arr[] =  game.locTile.getNumbers(game.curPlayer().getLoc());
+			int arr[] =  game.locTile.getNumbers(copy);
 			for(int i = 0; i<arr.length; i++){
 				if(arr[i]>=1){
 					if(i<4){
 						if(x>=24 && x<=250 && y>=158+i*80 && y<=234+i*80){
-							//can you put something to make sure that once its empty you cant click it any more
 						removing(i);
 					}
 				}
