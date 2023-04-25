@@ -4,6 +4,8 @@ public class Board {
     public Sector one, two, three, four;
     Hex[][] board;
     LocationTiles locTile;
+    double gridHeight = 31.25;
+    double gridWidth = 36.25;
     public Board(int id1, int id2, int id3, int id4){
         locTile = new LocationTiles();
         one = new Sector(id1);
@@ -125,7 +127,7 @@ public class Board {
         return false;
     }
     
-    public Hex getHex(int x, int y, double gridHeight, double gridWidth){
+    public Hex getHex(int x, int y){
         y -=19;
         x-=515;
         // Find the row and column of the box that the point falls in.

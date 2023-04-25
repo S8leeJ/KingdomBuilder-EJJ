@@ -96,6 +96,7 @@ import Game.Player;
         }
       
         if(loc == 15){
+
             //tower
         }
         if(loc == 16){
@@ -103,4 +104,5 @@ import Game.Player;
         }
         else System.out.println("not ofund");
     }   
+    
  }

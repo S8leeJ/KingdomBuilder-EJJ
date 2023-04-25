@@ -231,10 +231,10 @@ public class Game {
             }   
         }
             if(x>=1 && y<19){
-            c6 = curBoard[x-1][y+1].getColor();
-            if(c6.equals(color)){
-                settles++;
-            }
+                c6 = curBoard[x-1][y+1].getColor();
+                if(c6.equals(color)){
+                    settles++;
+                }
             }
         }
         return settles;        

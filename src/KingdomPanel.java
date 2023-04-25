@@ -219,7 +219,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652 && usedSettlements == true){
 			if(game.curPlayer().curSettlements() < 3){
-				Hex hex = game.getBoard().getHex(x, y, gridHeight, gridWidth);
+				Hex hex = game.getBoard().getHex(x, y);
 				if(hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0 && hex.gray == true){
 					if(game.curPlayer().curSettlements() == 2) gameState++;
 					hex.setColor(game.curPlayer().getColor());
