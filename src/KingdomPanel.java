@@ -80,12 +80,20 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		// when players turn starts
 		if(gameState == 0){
 			resetFont(g, 48);
-			g.drawString("Draw a card", 41, 380);
+			g.drawString("Draw a card", 50, 457);
+		}
+		if(gameState>=1 && usedSettlements && game.curPlayer().curSettlements()<3 && !usedTokens){
+			resetFont(g, 25);
+			g.drawString("Place Three Settlements", 55, 465);
+			String color = game.curPlayer().getColor();
+			boolean arr[][] = game.getBoard().getAvailable(game.curPlayer().getTerrainCard().getType(), color);
+			help.drawGray(g, arr, game);
+			//drawGray(g, arr);
 		}
 		//wen player picks between token or settlement
-		if(gameState == 1){
-			resetFont(g, 15);
-			g.drawString("Click on the 'TOKENS' or Settlement", 65, 400);
+		if(gameState == 1 && !usedSettlements){
+			resetFont(g, 21);
+			g.drawString("Choose Tokens or Settlements", 40, 457);
 		}
 		//draws terrain card
 		if(gameState >=1){
@@ -103,7 +111,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			g.fillRoundRect(34, 127, 114-34, 148-124, 10, 10);
 			g.setColor(new Color(9, 25, 77));
 			g.drawString("Done", 41 , 147);
-
+			g.setColor(Color.white);
 			int []arr = new int[8];
 			arr = game.locTile.getNumbers(copy);
 			System.out.println(Arrays.toString(arr));
@@ -112,12 +120,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 
 		//if player is placing their 3 settlememts
-		if(gameState>=1 && usedSettlements && game.curPlayer().curSettlements()<3 && !usedTokens){
-			String color = game.curPlayer().getColor();
-			boolean arr[][] = game.getBoard().getAvailable(game.curPlayer().getTerrainCard().getType(), color);
-			help.drawGray(g, arr, game);
-			//drawGray(g, arr);
-		}
+		
 		help.drawHexNumbers(g, game);
 		help.drawSettlements(g);
 		//once player has placed 3 settlements
@@ -128,7 +131,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			g.setColor(new Color(9, 25, 77));
 			g.drawString("End Turn", 36+244, 190-65);
 		}
-		drawRest(g);		
+		drawRest(g);	
+		if(viewCards){
+			//help.
+		}	
 	}
 	
 	public void drawRest(Graphics g){
@@ -154,6 +160,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawString("Player: " + player, 250, 58);
 
 	}
+
 	public void mousePressed(MouseEvent e) {
 	}
 	public void mouseReleased(MouseEvent e) {
@@ -167,6 +174,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		int x = e.getX();
 		int y = e.getY();
 		System.out.println(x + " " + y);
+		if(x >= 13 && x <= 209 && y >= 13 && y <= 113 && !viewCards){
+			viewCards = true;
+			repaint();
+			return;
+		}
 		if(locpicked >0){
 			if(locclass.action(locpicked, game.curPlayer(), getGraphics(), x, y)) locpicked = 0;
 			// if(usedSettlements)
@@ -227,7 +239,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 					if(game.curPlayer().curSettlements() == 2) gameState++;
 					hex.setColor(game.curPlayer().getColor());
 					game.curPlayer().useSettlement();
-					//get coord of the actual hex
+					//get coord of the actual hexdrwe
 					int boardX = hex.getX();
 					int boardY = hex.getY();
 					//if the settlement touches location tiles

@@ -109,6 +109,12 @@ public class KingdomHelper {
 		g.setFont(new Font("Castellar", 1, 15));
 		g.setColor(Color.white);
 	}
+	public void drawViewCards(Graphics g, ArrayList<BufferedImage> objCard){
+		g.drawImage(objCard.get(0), 12, 13, 65, 100, null);
+		g.drawImage(objCard.get(1), 77, 13, 65, 100, null);
+		g.drawImage(objCard.get(2), 142, 13, 65, 100, null);
+		g.drawImage(backTerrain, 27, 503, 94, 150, null);
+	}
     public void drawHexNumbers(Graphics g, Game game){
 		for(int c = 0; c < 20; c++){
 			for(int d = 0; d < 20; d++){
