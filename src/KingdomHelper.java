@@ -13,6 +13,7 @@ public class KingdomHelper {
     public KingdomHelper(Game game){
 		this.game = game;
         try {
+			ImageIO.setUseCache(false);
             sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector2.png"));
 			sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector3.png"));
 			sector4 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector4.png"));
@@ -20,8 +21,8 @@ public class KingdomHelper {
 			sector6 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector6.png"));
 			sector7 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector7.png"));
 			sector8 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector8.png"));
-			blackhouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/blackhouse.png"));
-			bluehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/bluehouse.png"));
+			 blackhouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/blackhouse.png"));
+			 bluehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/bluehouse.png"));
 			orangehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/orangehouse.png"));
 			whitehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/whitehouse.png"));
 			background =   ImageIO.read(getClass().getResourceAsStream("/Board/Images/background.jpg"));
@@ -38,22 +39,50 @@ public class KingdomHelper {
         }
 
     }
+	public void setFontSize(Graphics g, int size){
+		g.setFont(new Font("Castellar", 1, size));
+
+	}
+	public void drawTokenList(Graphics g){
+		g.setColor(Color.white);
+		setFontSize(g, 20);
+		g.drawString("Tokens", 300, 580);
+		g.drawRoundRect(224, 558, 471-224, 643-558, 20, 20);
+		ArrayList<Integer> curLocs =  game.curPlayer().getLoc();
+
+
+		if(curLocs.size() > 0){
+			for(int i = 0; i<curLocs.size(); i++){
+				g.drawImage(LocationTiles.getLoc(curLocs.get(i)), 234 + i*40, 600, 35, 35, null);
+			}
+		}
+	}
     public void drawSettlement(Graphics g, String color){
+		
+		g.setColor(Color.white);
+		g.drawRoundRect(224, 509, 471-224, 548-509, 20, 20);
+
+		setFontSize(g, 15);
+		g.drawString("Settlements", 240, 535);
+		g.drawString("X"+game.curPlayer().getSettlement(), 410, 535);
+
+		int adsf = 370;
+		int das = 515;
 		if(color == "orange"){
 			g.setColor(new Color(255, 180, 0));
-			g.drawImage(orangehouse, 375, 615, 30,30, null);
+			g.drawImage(orangehouse, adsf, das,25,25, null);
 		}
 		else if(color == "black"){
 			g.setColor(Color.black);
-			g.drawImage(blackhouse, 375, 615, 30,30, null);
+			g.drawImage(blackhouse, adsf, das, 25,25, null);
 		}
 		else if(color == "blue"){
 			g.setColor(new Color(73, 134, 231));
-			g.drawImage(bluehouse, 375, 615, 30,30, null);
+			g.drawImage(bluehouse, adsf, das, 25,25, null);
 		}
 		else{
 			g.setColor(Color.white);
-			g.drawImage(whitehouse, 375, 615, 30,30, null);
+			g.drawImage(whitehouse, adsf, das, 25,25, null);
 		}
 	}
     public void drawGray(Graphics g, boolean combined[][], Game game){
@@ -71,15 +100,7 @@ public class KingdomHelper {
 			}
 		}
 	}
-    public void drawToken(Graphics g, Game game){
-		ArrayList<Integer> curLocs = new ArrayList<>();
-		curLocs = game.curPlayer().getLoc();
-		if(curLocs.size() > 0){
-			for(int i = 0; i<curLocs.size(); i++){
-				g.drawImage(LocationTiles.getLoc(curLocs.get(i)), 250 + i*40, 540, 40, 40, null);
-			}
-		}
-	}
+    
     public void drawObjective(Graphics g, ArrayList<BufferedImage> objCard){
 		g.drawImage(objCard.get(0), 12, 13, 65, 100, null);
 		g.drawImage(objCard.get(1), 77, 13, 65, 100, null);

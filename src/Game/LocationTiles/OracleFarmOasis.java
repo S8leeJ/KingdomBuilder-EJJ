@@ -12,8 +12,9 @@ public class OracleFarmOasis{
     //    board = b;
     }
    
-    public void farm(String color, int terrainType, int x, int y, Game game){    
-        System.out.println("AWEEEEEEE");
+    public boolean farm(String color, int terrainType, Game game, int x, int y){    
+       // System.out.println("AWEEEEEEE");
+
         Hex hex = game.getBoard().getHex(x, y, 31.25, 36.25);
         if(hex.getType() == terrainType && hex.getColor().length() == 0 && hex.gray == true){
             hex.setColor(game.curPlayer().getColor());
@@ -32,8 +33,12 @@ public class OracleFarmOasis{
                     locHex.decLoc();
                     game.curPlayer().addLocTile(locType);
                 }
-            }   
+            }  
+            return true; 
         }	
+        return false;
+
     }
+    
 }
 
