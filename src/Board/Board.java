@@ -6,6 +6,9 @@ public class Board {
     LocationTiles locTile;
     double gridHeight = 31.25;
     double gridWidth = 36.25;
+    int oppX[] = {-1, 0, 1, 0, -1, 1, 1, -1};
+    int oppY[] = {0, -1, 0, 1, -1, -1, 1, 1};
+   
     public Board(int id1, int id2, int id3, int id4){
         locTile = new LocationTiles();
         one = new Sector(id1);
@@ -41,7 +44,7 @@ public class Board {
         }
     }
 
-    
+   
     public boolean[][] getAvailable(int x, String color){
         boolean [][] avail = new boolean[20][20];
         int numAvail = 0;
@@ -49,65 +52,27 @@ public class Board {
             for(int j = 0; j<20; j++){
                 Hex curHex = board[i][j];
                 if(curHex.getColor().equals(color)){
-                    if(i>=1){
-                        if(valid(i-1, j, x)){
-                            avail[i-1][j] = true;
-                            numAvail++;
-                        }
-                    }
-                    if(j>=1){
-                        if(valid(i, j-1, x)){
-                            avail[i][j-1] = true;
-                            numAvail++;
-                        }
-                    }
-                    if(i<19){
-                        if(valid(i+1, j, x)){
-                            avail[i+1][j] = true;
-                            numAvail++;
-                        }
-                    }
-                    if(j<19){
-                        if(valid(i, j+1, x)){
-                            avail[i][j+1] = true;
-                            numAvail++;
-                        }
-                    }
-            
-                    if(i%2 == 0){
-                        if(i>=1 && j>=1){
-                            if(valid(i-1, j-1, x)){
-                                numAvail++;
-                                avail[i-1][j-1] = true;
+                    for(int l= 0; l<8; l++){
+                        int toppX = oppX[l];
+                        int toppY = oppY[l];                       
+                        if(validBounds(toppX, toppY, i, j)){
+                            if(x%2!=0 && l==4){
+                                l=6;
                             }
-                        }
-                        if(i<19 && j>=1){
-                            if(valid(i+1, j-1, x)){
-                                numAvail++;
-                                avail[i+1][j-1] = true;
+                            if(x%2 ==0 && l==6){
+                                break;
                             }
-                        }
-                    }
-                    else{
-                        if(i<19 && j<19){
-                            if(valid(i+1, j+1, x)){
+                            if(valid(i+toppX, j+toppY, x)){
+                                System.out.println(i+toppX + " " + j+toppY);
+                                avail[i+toppX][j+toppY] = true;
                                 numAvail++;
-                                avail[i+1][j+1] = true;
-                            } 
-                    }
-                        if(i>=1 && j<19){
-                            if(valid(i-1, j+1, x)){
-                                numAvail++;
-                                avail[i-1][j+1] = true;
                             }
-                        }
-                    }
+                         }
+                     }
                 }
             }
         }
-        //make an int and increment it every time 
-        //if player has no settlementes / int is 0
-        if(numAvail == 0){
+           if(numAvail == 0){
             for(int i = 0; i<20; i++){
                 for(int j = 0; j<20; j++){
                     Hex curHex = board[i][j];
@@ -118,6 +83,11 @@ public class Board {
             } 
         }
         return avail;
+    }
+    public boolean validBounds(int i, int j, int x, int y){
+        if((x+i)>=0 && (y+i)>=0 && (y+j)<=19 && (x+j)<=19)
+            return true;
+        return false;
     }
     public boolean valid(int x, int y, int type){
         Hex curHex = board[x][y];
