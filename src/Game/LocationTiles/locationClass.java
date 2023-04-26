@@ -102,7 +102,7 @@ import Game.Player;
         if(loc == 16){
             //house
         }
-        else System.out.println("not ofund");
+        //else System.out.println("not ofund");
     }   
     
  }

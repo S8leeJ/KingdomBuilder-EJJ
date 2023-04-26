@@ -110,9 +110,9 @@ public class KingdomHelper {
 		g.setColor(Color.white);
 	}
 	public void drawViewCards(Graphics g, ArrayList<BufferedImage> objCard){
-		System.out.println("emthod is called");
+		//System.out.println("emthod is called");
 		int cardsize = 150;
-		System.out.println((int)(cardsize * (double)(3/2)));
+		//System.out.println((int)(cardsize * (double)(3/2)));
 		g.drawImage(objCard.get(0), 27, 160, cardsize, (int)(cardsize * ((double)3/2)), null);
 		g.drawImage(objCard.get(1),  27+cardsize, 160, cardsize, (int)(cardsize *((double)3/2)), null);
 		g.drawImage(objCard.get(2), 27 + 2*cardsize, 160, cardsize,  (int)(cardsize *((double)3/2)), null);
