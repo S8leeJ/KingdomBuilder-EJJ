@@ -20,6 +20,8 @@ public class Game {
     public LocationTiles locTile;
     int curLocX;
     int curLocY;
+    int oppX[] = {-1, 0, 1, 0, -1, 1, 1, -1};
+    int oppY[] = {0, -1, 0, 1, -1, -1, 1, 1};
     
     public Game(){
         locTile = new LocationTiles();
@@ -73,88 +75,36 @@ public class Game {
         Hex curBoard[][] = board.getHexes();
         curLocX = -1;
         curLocY = -1;
-        boolean one, two, three, four, five, six;
-        one = false;
-        two = false;
-        three =  false;
-        four = false;
-        five =  false;
-        six = false;
-        
-        if(x>=1){
-            //System.out.println("x-1, y " + curBoard[x-1][y].getType());
-            one = curBoard[x-1][y].getType()>8;
-            if(one){
-                curLocX = x-1;
-                curLocY = y;
-            }
-        }
-        if(y>=1){
-            two = curBoard[x][y-1].getType()>8;
-           // System.out.println("x, y-1 " + curBoard[x][y-1].getType());
-            if(two){
-                curLocX = x;
-                curLocY = y-1;
-            }
-        }
-        if(x<19){
-            //System.out.println("x+1, y " + curBoard[x+1][y].getType());
-            three = curBoard[x+1][y].getType()>8;
-            if(three){
-                curLocX = x+1;
-                curLocY = y;
-            }
-        }
-        if(y<19){
-            //System.out.println("x, y+1 " + curBoard[x][y+1].getType());
-            four = curBoard[x][y+1].getType()>8;
-            if(four){
-                curLocX = x;
-                curLocY = y+1;
-            }
-        }
-
-        if(x%2 == 0){
-            if(x>=1 && y>=1){
-                //System.out.println("x-1, y-1 " + curBoard[x-1][y-1].getType());
-            five = curBoard[x-1][y-1].getType()>8;
-
-                if(five){
-                    curLocX = x-1;
-                    curLocY = y-1;
+      
+        boolean isTrue = false;
+        for(int i = 0; i<8; i++){
+            int toppX = oppX[i];
+            int toppY = oppY[i];
+            boolean temp = false;
+            if(valid(toppX, toppY, x, y)){
+                if(x%2!=0 && i==4){
+                    i=6;
                 }
-            }
-            if(x<19 && y>=1){
-               // System.out.println("x+1, y-1 " + curBoard[x+1][y-1].getType());
-            six = curBoard[x+1][y-1].getType()>8;
-                if(six){
-                    curLocX = x+1;
-                    curLocY = y-1;
+                if(x%2 ==0 && i==6){
+                    break;
+                }
+                temp = curBoard[x+toppX][y+toppY].getType()>8;
+                isTrue = isTrue||temp;
+                if(temp){
+                    curLocX = x+toppX;
+                    curLocY = y+toppY;
+                    break;
                 }
             }
         }
-        else{
-            if(x<19 && y<19){
-            five = curBoard[x+1][y+1].getType()>8;
-            //System.out.println("x+1, y+1 " + curBoard[x+1][y+1].getType());
+       return isTrue;
+    }
 
-                if(five){
-                    curLocX = x+1;
-                    curLocY = y+1;
-                }    
-        }
-            if(x>=1 && y<19){
-               // System.out.println("x-1, y+1 " + curBoard[x-1][y+1].getType());
 
-            six = curBoard[x-1][y+1].getType()>8;
-                if(six){
-                    curLocX = x-1;
-                    curLocY = y+1;
-                }
-            }
-        }
-       // System.out.println("CURLOC of location tile: " + curLocX + " " + curLocY);
-        return (one||two||three||four||five||six);
+    public boolean valid(int i, int j, int x, int y){
+        if((x+i)>=0 && (y+i)>=0 && (y+j)<=19 && (x+j)<=19)
+            return true;
+        return false;
     }
 
     public int getTypeLoc(){
@@ -171,73 +121,23 @@ public class Game {
 
     public int checkAround(int x, int y){
         String color = curPlayer().getColor();
-        //System.out.println(color);
-        String c1, c2,c3,c4,c5,c6;
         int settles = 0;
         Hex[][] curBoard = board.getHexes();
-        c1 = "";
-        c2 = "";
-        c3 = "";
-        c4 = "";
-        c5 = "";
-        c6 = "";
-
-        if(x>=1){
-            c1 = curBoard[x-1][y].getColor();
-            
-                if(c1.equals(color)){
-                    settles++;
+        String colorT = "";
+        for(int i = 0; i<8; i++){
+            int toppX = oppX[i];
+            int toppY = oppY[i];
+            if(valid(toppX, toppY, x, y)){
+                if(x%2!=0 && i==4){
+                    i=6;
                 }
-        }
-        if(y>=1){
-            c2 = curBoard[x][y-1].getColor();
-            if(c2.equals(color)){
-                settles++;
-            }
-        }
-        if(x<19){
-            c3 = curBoard[x+1][y].getColor();
-            if(c3.equals(color)){
-                settles++;
-            }
-        }
-        if(y<19){
-            c4 = curBoard[x][y+1].getColor();
-            if(c4.equals(color)){
-                settles++;
-            }
-        }
-
-        if(x%2 == 0){
-            if(x>=1 && y>=1){
-            c5 = curBoard[x-1][y-1].getColor();
-
-            if(c5.equals(color)){
-                settles++;
-            }
-            }
-            if(x<19 && y>=1){
-            c6 = curBoard[x+1][y-1].getColor();
-            if(c6.equals(color)){
-                settles++;
-            }
-            }
-        }
-        else{
-            if(x<19 && y<19){
-            c5 = curBoard[x+1][y+1].getColor();
-            if(c5.equals(color)){
-                settles++;
-            }   
-        }
-            if(x>=1 && y<19){
-                c6 = curBoard[x-1][y+1].getColor();
-                if(c6.equals(color)){
-                    settles++;
+                if(x%2 ==0 && i==6){
+                    break;
                 }
+                colorT = curBoard[x+toppX][y+toppY].getColor();
+                if(colorT.equals(color)) settles++;
             }
         }
         return settles;        
     }
-
 }

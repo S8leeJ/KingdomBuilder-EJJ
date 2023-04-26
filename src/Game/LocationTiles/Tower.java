@@ -2,15 +2,15 @@ import Board.Hex;
 import Game.Game;
 
 public class Tower {
-    public boolean[][] getAvailable(Game game){
-        for(int c = 0; c <= 19; c++){
-            Hex hex = game.board.getHex(c, 0);
+    // public boolean[][] getAvailable(Game game){
+    //     for(int c = 0; c <= 19; c++){
+    //         Hex hex = game.board.getHex(c, 0);
 
-        }
-        for(int c = 0; c <= 19; c++){
-            Hex hex = game.board.getHex(0, c);
-        }
-    }
+    //     }
+    //     for(int c = 0; c <= 19; c++){
+    //         Hex hex = game.board.getHex(0, c);
+    //     }
+    // }
     /*public boolean[][] getAvailable(int x, String color){
         boolean [][] avail = new boolean[20][20];
         int numAvail = 0;
