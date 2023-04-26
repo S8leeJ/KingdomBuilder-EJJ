@@ -133,7 +133,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		drawRest(g);	
 		if(viewCards){
-			//help.
+			//System.out.println("cardsa re drawn");
+			help.drawViewCards(g, objCard);
 		}	
 	}
 	
@@ -174,11 +175,13 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		int x = e.getX();
 		int y = e.getY();
 		System.out.println(x + " " + y);
-		if(x >= 13 && x <= 209 && y >= 13 && y <= 113 && !viewCards){
-			viewCards = true;
+		if(x >= 13 && x <= 209 && y >= 13 && y <= 113){
+			viewCards = !viewCards;
+			//System.out.println("viewcard true");
 			repaint();
 			return;
 		}
+		if(!viewCards){
 		if(locpicked >0){
 			if(locclass.action(locpicked, game.curPlayer(), getGraphics(), x, y)) locpicked = 0;
 			// if(usedSettlements)
@@ -274,6 +277,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			gameState = 2;
 		}
 		repaint();
+		}
 	}
 	public boolean validHex(Hex hex){
 		return hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0;

@@ -28,7 +28,7 @@ public class KingdomHelper {
 			background =   ImageIO.read(getClass().getResourceAsStream("/Board/Images/background.jpg"));
 			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector1.png"));
 			hexagon = ImageIO.read(getClass().getResourceAsStream("/Board/Images/hexagon.png"));
-			backTerrain =  ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Back.png"));
+		 backTerrain =  ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Back.png"));
 			locOne =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/1.png"));
 			locTwo =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/2.png"));
 			locations = ImageIO.read(getClass().getResourceAsStream("/Board/Images/Locations.PNG"));
@@ -64,7 +64,7 @@ public class KingdomHelper {
 
 		setFontSize(g, 15);
 		g.drawString("Settlements", 240, 535);
-		g.drawString("X"+game.curPlayer().getSettlement(), 410, 535);
+		g.drawString("X "+game.curPlayer().getSettlement(), 410, 535);
 
 		int adsf = 370;
 		int das = 515;
@@ -110,10 +110,16 @@ public class KingdomHelper {
 		g.setColor(Color.white);
 	}
 	public void drawViewCards(Graphics g, ArrayList<BufferedImage> objCard){
-		g.drawImage(objCard.get(0), 12, 13, 65, 100, null);
-		g.drawImage(objCard.get(1), 77, 13, 65, 100, null);
-		g.drawImage(objCard.get(2), 142, 13, 65, 100, null);
-		g.drawImage(backTerrain, 27, 503, 94, 150, null);
+		System.out.println("emthod is called");
+		int cardsize = 150;
+		System.out.println((int)(cardsize * (double)(3/2)));
+		g.drawImage(objCard.get(0), 27, 160, cardsize, (int)(cardsize * ((double)3/2)), null);
+		g.drawImage(objCard.get(1),  27+cardsize, 160, cardsize, (int)(cardsize *((double)3/2)), null);
+		g.drawImage(objCard.get(2), 27 + 2*cardsize, 160, cardsize,  (int)(cardsize *((double)3/2)), null);
+		g.setColor(Color.black);
+		//g.fillRect(0, 0, 500, 500);
+		//g.drawImage(objCard.get(0), 50, 50, null);
+
 	}
     public void drawHexNumbers(Graphics g, Game game){
 		for(int c = 0; c < 20; c++){
