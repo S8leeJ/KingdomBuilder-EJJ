@@ -1,18 +1,8 @@
 import Board.Hex;
 import Game.Game;
-
 public class Tower {
-    public boolean[][] getAvailable(Game game){
-        boolean[][] avail = new boolean[20][20];
-        for(int c = 0; c <= 19; c++){
-            Hex hex = game.board.getHex(c, 0);
-            if()
-
-        }
-        for(int c = 0; c <= 19; c++){
-            Hex hex = game.board.getHex(0, c);
-        }
-    }
+    
+    
     /*public boolean[][] getAvailable(int x, String color){
         boolean [][] avail = new boolean[20][20];
         int numAvail = 0;

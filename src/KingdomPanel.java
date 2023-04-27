@@ -126,10 +126,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		//once player has placed 3 settlements
 		if(gameState == 2 && game.curPlayer().curSettlements()==3){
 			g.setColor(new Color(202, 210, 235));
-			g.fillRoundRect(223, 89, 496-223, 146-89, 20, 20);
+			g.fillRoundRect(223, 73, 494-223, 110-73, 20, 20);
 			resetFont(g, 25);
 			g.setColor(new Color(9, 25, 77));
-			g.drawString("End Turn", 36+244, 190-65);
+			g.drawString("End Turn", 36+244, 190-65 - 26);
 		}
 		drawRest(g);	
 		if(viewCards){
@@ -159,6 +159,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		help.drawSettlement(g, color);
 		help.setFontSize(g, 40);
 		g.drawString("Player: " + player, 250, 58);
+		drawRemainingSettlements(g);
 
 	}
 
@@ -262,7 +263,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			}
 		}
 
-		if(gameState == 2 && x >= 222 && y >= 87 && x <= 498 && y <= 150 ){
+		if(gameState == 2 && x >= 222 && y >= 74 && x <= 498 && y <= 109 ){
 			player++;
 			if(player >= 5) player = 1;
 			usedSettlements = false;
@@ -278,6 +279,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		repaint();
 		}
+	}
+
+	public void drawRemainingSettlements(Graphics g){
+		int width = 81;
+		g.setColor(new Color(28, 35, 61));
+		g.fillRoundRect(226, 122, width, 30, 10, 10);
+		g.fillRoundRect(226 + width + 5, 122, width, 30, 10, 10);
+		g.fillRoundRect(226 + 2 * width + 10, 122, width, 30, 10, 10);
 	}
 	public boolean validHex(Hex hex){
 		return hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0;

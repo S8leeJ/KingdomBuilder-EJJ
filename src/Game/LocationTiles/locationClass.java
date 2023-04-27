@@ -54,7 +54,7 @@ import Game.Player;
         }
       
         if(loc == 15){
-            //tower
+            boolean arr[][] = game.getBoard().getAvailable(player.getTerrainCard().getType(), player.getColor());
         }
         if(loc == 16){
             //house

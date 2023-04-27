@@ -41,7 +41,9 @@ public class Board {
         }
     }
 
-    
+    public boolean[][] getAvailableTower(String playerColor){
+        
+    }
     public boolean[][] getAvailable(int x, String color){
         boolean [][] avail = new boolean[20][20];
         int numAvail = 0;
