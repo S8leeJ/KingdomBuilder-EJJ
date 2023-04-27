@@ -81,7 +81,7 @@ public class Game {
             int toppX = oppX[i];
             int toppY = oppY[i];
             boolean temp = false;
-            if(valid(toppX, toppY, x, y)){
+            if(validBounds(toppX, toppY, x, y)){
                 if(x%2!=0 && i==4){
                     i=6;
                 }
@@ -101,7 +101,7 @@ public class Game {
     }
 
 
-    public boolean valid(int i, int j, int x, int y){
+    public boolean validBounds(int i, int j, int x, int y){
         if((x+i)>=0 && (y+i)>=0 && (y+j)<=19 && (x+j)<=19)
             return true;
         return false;
@@ -127,7 +127,7 @@ public class Game {
         for(int i = 0; i<8; i++){
             int toppX = oppX[i];
             int toppY = oppY[i];
-            if(valid(toppX, toppY, x, y)){
+            if(validBounds(toppX, toppY, x, y)){
                 if(x%2!=0 && i==4){
                     i=6;
                 }
