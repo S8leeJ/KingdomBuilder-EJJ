@@ -11,7 +11,6 @@ import Game.Player;
     OracleFarmOasis ofo;
     Paddock pad = new Paddock();
     Tavern tavern = new Tavern();
-    Tower tower = new Tower();
     KingdomHelper help;
     public locationClass(Game g){
         ofo =  new OracleFarmOasis();
@@ -27,8 +26,12 @@ import Game.Player;
         }
         if(loc == 11){
             //estate
-            return ofo.farm(player.getColor(), player.getTerrainCard().getType(), game, x, y);
+            System.out.println("AWDAWAW");
+            barn.remove(player.getColor(), player.getTerrainCard().getType(), game, x, y);
             //return the other one
+            drawGray(player.getTerrainCard().getType(), player, g);
+            barn.barn(player.getColor(), player.getTerrainCard().getType(), game, x, y);
+
         }
         if(loc == 12){
             //horse

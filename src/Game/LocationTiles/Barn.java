@@ -6,9 +6,16 @@ public class Barn {
     //move an existing settlement to your terrain card
           public Barn(){
           }
-         
-          public boolean farm(String color, int terrainType, Game game, int x, int y){    
-             // System.out.println("AWEEEEEEE");
+         //removes the settlement
+          public void remove(String color, int terrainType, Game game, int x, int y){    
+            Hex hex = game.getBoard().getHex(x, y);
+            if(hex.getColor().equals(color) && hex.gray == true){
+                hex.setColor("");
+                game.curPlayer().addSettlements();
+            }
+            //return true;
+         }
+          public boolean barn(String color, int terrainType, Game game, int x, int y){    
               Hex hex = game.getBoard().getHex(x, y);
               if(hex.getType() == terrainType && hex.getColor().length() == 0 && hex.gray == true){
                   hex.setColor(game.curPlayer().getColor());
