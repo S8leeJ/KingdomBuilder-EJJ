@@ -54,7 +54,11 @@ import Game.Player;
         }
       
         if(loc == 15){
-            boolean arr[][] = game.getBoard().getAvailable(player.getTerrainCard().getType(), player.getColor());
+            boolean arr[][] = game.getBoard().getAvailableTower(player.getTerrainCard().getType(), player.getColor());
+            help.drawGray(g, arr, game);
+            help.drawHexNumbers(g, game);
+            help.drawSettlements(g);
+            return ofo.farm(player.getColor(), player.getTerrainCard().getType(), game, x, y);
         }
         if(loc == 16){
             //house
@@ -96,8 +100,10 @@ import Game.Player;
         }
       
         if(loc == 15){
-
-            //tower
+            boolean arr[][] = game.getBoard().getAvailableTower(player.getTerrainCard().getType(), player.getColor());
+            help.drawGray(g, arr, game);
+            help.drawHexNumbers(g, game);
+            help.drawSettlements(g);   
         }
         if(loc == 16){
             //house

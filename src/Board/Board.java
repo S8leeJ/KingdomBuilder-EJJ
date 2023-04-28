@@ -43,46 +43,23 @@ public class Board {
             }
         }
     }
-
-    // public boolean[][] getAvailableTower(String playerColor){
-    //     boolean [][] avail = new boolean[20][20];
-    //     int numAvail = 0;
-    //     for(int i = 0; i<20; i++){
-    //         for(int j = 0; j<20; j++){
-    //             Hex curHex = board[i][j];
-    //             if(curHex.getColor().equals(playerColor)){
-    //                 for(int l= 0; l<8; l++){
-    //                     int toppX = oppX[l];
-    //                     int toppY = oppY[l];                       
-    //                     if(validBounds(toppX, toppY, i, j)){
-    //                         if(x%2!=0 && l==4){
-    //                             l=6;
-    //                         }
-    // //                         if(x%2 ==0 && l==6){
-    // //                             break;
-    // //                         }
-    // //                         if(curHex.getColor().length() == 0){
-    // //                             System.out.println(i+toppX + " " + j+toppY);
-    // //                             avail[i+toppX][j+toppY] = true;
-    // //                             numAvail++;
-    // //                         }
-    // //                      }
-    // //                  }
-    // //             }
-    // //         }
-    // //     }
-    //        if(numAvail == 0){
-    //         for(int i = 0; i<20; i++){
-    //             for(int j = 0; j<20; j++){
-    //                 Hex curHex = board[i][j];
-    //                 if(curHex.getColor().length() == 0){
-    //                     avail[i][j] = true;
-    //                 }
-    //             }
-    //         } 
-    //     }
-    //     return avail;
-    // }
+    public boolean[][] getAvailableTower(int x, String color){
+        boolean [][] avail = getAvailable(x,color);
+        boolean [][] borders = new boolean[20][20];
+        //top across 
+        for(int c = 0; c<20; c++){
+            //top across
+            borders[0][c] = avail[0][c];
+            //left down
+            borders[c][0] = avail[c][0];
+            //down accross
+            borders[19][c] = avail[19][c];
+            //right down
+            borders[c][19] = avail[c][19];
+        }
+        return borders;
+    }
+  
     public boolean[][] getAvailable(int x, String color){
         boolean [][] avail = new boolean[20][20];
         int numAvail = 0;

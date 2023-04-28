@@ -27,7 +27,7 @@ public class Game {
         locTile = new LocationTiles();
         ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(1,2, 3,4, 5, 6, 7, 8));
        // oneid = nums.remove((int)(Math.random()*nums.size()));
-        oneid = nums.remove((int)(Math.random()*nums.size()));;
+        oneid = nums.remove(2);
         twoid = nums.remove((int)(Math.random()*nums.size()));
         threeid = nums.remove((int)(Math.random()*nums.size()));
         fourid = nums.remove((int)(Math.random()*nums.size()));
@@ -81,20 +81,22 @@ public class Game {
             int toppX = oppX[i];
             int toppY = oppY[i];
             boolean temp = false;
-            if(validBounds(toppX, toppY, x, y)){
-              
+            if(validBounds((toppX+x), (toppY+y))){
+                System.out.println("WEEE 1 : " + i+" " + (x+toppX) + " " + (y+toppY));
+
                 temp = curBoard[x+toppX][y+toppY].getType()>8;
                 isTrue = isTrue||temp;
                 if(temp){
                     curLocX = x+toppX;
                     curLocY = y+toppY;
+                    System.out.println(curLocX +" " + curLocY);
                     break;
                 }
                       
                 if(x%2!=0 && i==3){
                     i=5;
                 }
-                if(x%2 ==0 && i==6){
+                if(x%2 ==0 && i==5){
                     break;
                 }
             }
@@ -103,8 +105,8 @@ public class Game {
     }
 
 
-    public boolean validBounds(int i, int j, int x, int y){
-        if((x+i)>=0 && (y+i)>=0 && (y+j)<=19 && (x+j)<=19)
+    public boolean validBounds(int i, int j){
+        if(i>=0 && j>=0 && j<=19 && i<=19)
             return true;
         return false;
     }
@@ -129,14 +131,14 @@ public class Game {
         for(int i = 0; i<8; i++){
             int toppX = oppX[i];
             int toppY = oppY[i];
-            if(validBounds(toppX, toppY, x, y)){
+            if(validBounds(toppX+x, toppY+y)){
               
                 colorT = curBoard[x+toppX][y+toppY].getColor();
                 if(colorT.equals(color)) settles++;
                 if(x%2!=0 && i==3){
                     i=5;
                 }
-                if(x%2 ==0 && i==6){
+                if(x%2 ==0 && i==5){
                     break;
                 }
             }
