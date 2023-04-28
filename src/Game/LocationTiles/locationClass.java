@@ -20,45 +20,28 @@ import Game.Player;
     }
     public boolean action(/*which location tile picked*/ int loc, Player player, Graphics g, int x, int y){
         if(loc == 9){
-             boolean arr[][] = game.getBoard().getAvailable(2, player.getColor());
-             help.drawGray(g, arr, game);
-             help.drawHexNumbers(g, game);
-             help.drawSettlements(g);
              return ofo.farm(player.getColor(), 2, game, x, y);
-
-
         }
         if(loc == 10){
             //boat
         }
         if(loc == 11){
             //estate
+            return ofo.farm(player.getColor(), player.getTerrainCard().getType(), game, x, y);
+            //return the other one
         }
         if(loc == 12){
             //horse
         }
           if(loc == 13){
-            boolean arr[][] = game.getBoard().getAvailable(1, player.getColor());
-            help.drawGray(g, arr, game);
-            help.drawHexNumbers(g, game);
-            help.drawSettlements(g);
             return ofo.farm(player.getColor(), 1, game, x, y);            
         }
           if(loc == 14){
-            // oracle();
-            boolean arr[][] = game.getBoard().getAvailable(player.getTerrainCard().getType(), player.getColor());
-             help.drawGray(g, arr, game);
-             help.drawHexNumbers(g, game);
-             help.drawSettlements(g);
              return ofo.farm(player.getColor(), player.getTerrainCard().getType(), game, x, y);
         }
       
         if(loc == 15){
-            boolean arr[][] = game.getBoard().getAvailableTower(player.getTerrainCard().getType(), player.getColor());
-            help.drawGray(g, arr, game);
-            help.drawHexNumbers(g, game);
-            help.drawSettlements(g);
-            return ofo.farm(player.getColor(), player.getTerrainCard().getType(), game, x, y);
+           return ofo.farm(player.getColor(), player.getTerrainCard().getType(), game, x, y);
         }
         if(loc == 16){
             //house
@@ -79,11 +62,11 @@ import Game.Player;
         }
         if(loc == 11){
             //estate
-        //    boolean arr[][] = game.getBoard().getAvailableEstate(player.getColor());
-        //    help.drawGray(g, arr, game);
-        //    help.drawHexNumbers(g, game);
-        //    help.drawSettlements(g);
-        //    //choose settlement then remove
+             boolean arr[][] = game.getBoard().getAvailableEstate(player.getColor());
+             help.drawGray(g, arr, game);
+             help.drawHexNumbers(g, game);
+             help.drawSettlements(g);
+        // //    //choose settlement then remove
         //    boolean arr2[][] = game.getBoard().getAvailable(player.getTerrainCard().getType(), player.getColor());
         //    help.drawGray(g, arr2, game);
         //    help.drawHexNumbers(g, game);

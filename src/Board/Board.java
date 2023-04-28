@@ -60,7 +60,7 @@ public class Board {
         return borders;
     }
   
-    public boolean[][] getAvailableEstate(int x, String color){
+    public boolean[][] getAvailableEstate(String color){
             boolean [][] avail = new boolean[20][20];
             for(int i = 0; i<20; i++){
                 for(int j = 0; j<20; j++){
@@ -83,7 +83,7 @@ public class Board {
                     for(int l= 0; l<8; l++){
                         int toppX = oppX[l];
                         int toppY = oppY[l];                       
-                        if(validBounds(toppX, toppY, i, j)){
+                        if(validBounds(toppX+i, toppY+j)){
                             System.out.println("WEEE 1 : " + l+" " + (i+toppX) + " " + (j+toppY));
 
                             if(valid(i+toppX, j+toppY, x)){
@@ -115,11 +115,12 @@ public class Board {
         }
         return avail;
     }
-    public boolean validBounds(int i, int j, int x, int y){
-        if((x+i)>=0 && (y+i)>=0 && (y+j)<=19 && (x+j)<=19)
+    public boolean validBounds(int i, int j){
+        if(i>=0 && j>=0 && j<=19 && i<=19)
             return true;
         return false;
     }
+
     public boolean valid(int x, int y, int type){
         Hex curHex = board[x][y];
         if(curHex.getColor().length()==0 && curHex.getType() == type){
