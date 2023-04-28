@@ -44,9 +44,45 @@ public class Board {
         }
     }
 
-    public boolean[][] getAvailableTower(String playerColor){
-        
-    }
+    // public boolean[][] getAvailableTower(String playerColor){
+    //     boolean [][] avail = new boolean[20][20];
+    //     int numAvail = 0;
+    //     for(int i = 0; i<20; i++){
+    //         for(int j = 0; j<20; j++){
+    //             Hex curHex = board[i][j];
+    //             if(curHex.getColor().equals(playerColor)){
+    //                 for(int l= 0; l<8; l++){
+    //                     int toppX = oppX[l];
+    //                     int toppY = oppY[l];                       
+    //                     if(validBounds(toppX, toppY, i, j)){
+    //                         if(x%2!=0 && l==4){
+    //                             l=6;
+    //                         }
+    // //                         if(x%2 ==0 && l==6){
+    // //                             break;
+    // //                         }
+    // //                         if(curHex.getColor().length() == 0){
+    // //                             System.out.println(i+toppX + " " + j+toppY);
+    // //                             avail[i+toppX][j+toppY] = true;
+    // //                             numAvail++;
+    // //                         }
+    // //                      }
+    // //                  }
+    // //             }
+    // //         }
+    // //     }
+    //        if(numAvail == 0){
+    //         for(int i = 0; i<20; i++){
+    //             for(int j = 0; j<20; j++){
+    //                 Hex curHex = board[i][j];
+    //                 if(curHex.getColor().length() == 0){
+    //                     avail[i][j] = true;
+    //                 }
+    //             }
+    //         } 
+    //     }
+    //     return avail;
+    // }
     public boolean[][] getAvailable(int x, String color){
         boolean [][] avail = new boolean[20][20];
         int numAvail = 0;
@@ -58,14 +94,16 @@ public class Board {
                         int toppX = oppX[l];
                         int toppY = oppY[l];                       
                         if(validBounds(toppX, toppY, i, j)){
-                            if(x%2!=0 && l==4){
+                            System.out.println("WEEE 1 : " + (i+toppX) + " " + (j+toppY));
+
+                            if(i%2!=0 && l==4){
                                 l=6;
                             }
-                            if(x%2 ==0 && l==6){
+                            if(i%2 ==0 && l==6){
                                 break;
                             }
                             if(valid(i+toppX, j+toppY, x)){
-                                System.out.println(i+toppX + " " + j+toppY);
+                               // System.out.println("WEEE 2 : " + (i+toppX + " " + (j+toppY));
                                 avail[i+toppX][j+toppY] = true;
                                 numAvail++;
                             }
