@@ -159,7 +159,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		help.drawSettlement(g, color);
 		help.setFontSize(g, 40);
 		g.drawString("Player: " + player, 250, 58);
-		drawRemainingSettlements(g);
+		help.drawRemainingSettlements(g);
 
 	}
 
@@ -281,13 +281,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 	}
 
-	public void drawRemainingSettlements(Graphics g){
-		int width = 81;
-		g.setColor(new Color(28, 35, 61));
-		g.fillRoundRect(226, 122, width, 30, 10, 10);
-		g.fillRoundRect(226 + width + 5, 122, width, 30, 10, 10);
-		g.fillRoundRect(226 + 2 * width + 10, 122, width, 30, 10, 10);
-	}
+	
 	public boolean validHex(Hex hex){
 		return hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0;
 	}

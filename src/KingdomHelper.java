@@ -13,7 +13,6 @@ public class KingdomHelper {
     public KingdomHelper(Game game){
 		this.game = game;
         try {
-			ImageIO.setUseCache(false);
             sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector2.png"));
 			sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector3.png"));
 			sector4 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector4.png"));
@@ -28,7 +27,7 @@ public class KingdomHelper {
 			background =   ImageIO.read(getClass().getResourceAsStream("/Board/Images/background.jpg"));
 			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector1.png"));
 			hexagon = ImageIO.read(getClass().getResourceAsStream("/Board/Images/hexagon.png"));
-		 backTerrain =  ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Back.png"));
+			backTerrain =  ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Back.png"));
 			locOne =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/1.png"));
 			locTwo =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/2.png"));
 			locations = ImageIO.read(getClass().getResourceAsStream("/Board/Images/Locations.PNG"));
@@ -178,17 +177,36 @@ public class KingdomHelper {
 		else return bluehouse;
 	}
 
-public void drawSettlements(Graphics g){
-	for(int c = 0; c < 20; c++){
-		for(int d = 0; d < 20; d++){
-			Hex board[][] = game.getBoard().getHexes();
-			Hex hex = board[c][d];	
-			if(hex.getColor().length() > 0){
-				if(c%2 == 0)g.drawImage(settlementColor(hex.getColor()), 520 + d * (hexwidth -2), 24 + c * (hexlength - 13), hexwidth - 15, hexlength - 15, null);
-				else g.drawImage(settlementColor(hex.getColor()), 538 + d * (hexwidth -2), 24 + c * (hexlength-13), hexwidth - 15, hexlength - 15, null);				
-			}		
+	public void drawSettlements(Graphics g){
+		for(int c = 0; c < 20; c++){
+			for(int d = 0; d < 20; d++){
+				Hex board[][] = game.getBoard().getHexes();
+				Hex hex = board[c][d];	
+				if(hex.getColor().length() > 0){
+					if(c%2 == 0)g.drawImage(settlementColor(hex.getColor()), 520 + d * (hexwidth -2), 24 + c * (hexlength - 13), hexwidth - 15, hexlength - 15, null);
+					else g.drawImage(settlementColor(hex.getColor()), 538 + d * (hexwidth -2), 24 + c * (hexlength-13), hexwidth - 15, hexlength - 15, null);				
+				}		
+			}
 		}
 	}
-}
+	public void drawRemainingSettlements(Graphics g){
+		int width = 81;
+		setFontSize(g, 15);
+		g.setColor(new Color(28, 35, 61));
+		g.fillRoundRect(226, 122, width, 30, 10, 10);
+		g.drawImage(settlementColor(game.getPlayers().get((game.curPlayer+ 1)% 4).getColor()),228, 124, 26, 26, null);
+		g.setColor(Color.white);
+		g.drawString("X " + game.getPlayers().get((game.curPlayer+ 1)% 4).getSettlement(), 260, 145);
+		g.setColor(new Color(28, 35, 61));
+		g.fillRoundRect(226 + width + 5, 122, width, 30, 10, 10);
+		g.drawImage(settlementColor(game.getPlayers().get((game.curPlayer+ 2)% 4).getColor()),228 + width + 5, 124, 26, 26, null);
+		g.setColor(Color.white);
+		g.drawString("X " + game.getPlayers().get((game.curPlayer+ 2)% 4).getSettlement(), 260 + width + 5, 145);
+		g.setColor(new Color(28, 35, 61));
+		g.fillRoundRect(226 + 2 * width + 10, 122, width, 30, 10, 10);
+		g.drawImage(settlementColor(game.getPlayers().get((game.curPlayer+ 3)% 4).getColor()),228 + 2 * width + 10, 124, 26, 26, null);
+		g.setColor(Color.white);
+		g.drawString("X " + game.getPlayers().get((game.curPlayer+ 3)% 4).getSettlement(), 260 + 2 * width + 10, 145);
+	}												
 }
 
