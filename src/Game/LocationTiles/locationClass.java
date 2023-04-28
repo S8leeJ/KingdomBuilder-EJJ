@@ -79,6 +79,15 @@ import Game.Player;
         }
         if(loc == 11){
             //estate
+        //    boolean arr[][] = game.getBoard().getAvailableEstate(player.getColor());
+        //    help.drawGray(g, arr, game);
+        //    help.drawHexNumbers(g, game);
+        //    help.drawSettlements(g);
+        //    //choose settlement then remove
+        //    boolean arr2[][] = game.getBoard().getAvailable(player.getTerrainCard().getType(), player.getColor());
+        //    help.drawGray(g, arr2, game);
+        //    help.drawHexNumbers(g, game);
+           help.drawSettlements(g);
         }
         if(loc == 12){
             //horse
