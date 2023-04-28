@@ -82,17 +82,19 @@ public class Game {
             int toppY = oppY[i];
             boolean temp = false;
             if(validBounds(toppX, toppY, x, y)){
-                if(x%2!=0 && i==4){
-                    i=5;
-                }
-                if(x%2 ==0 && i==6){
-                    break;
-                }
+              
                 temp = curBoard[x+toppX][y+toppY].getType()>8;
                 isTrue = isTrue||temp;
                 if(temp){
                     curLocX = x+toppX;
                     curLocY = y+toppY;
+                    break;
+                }
+                      
+                if(x%2!=0 && i==3){
+                    i=5;
+                }
+                if(x%2 ==0 && i==6){
                     break;
                 }
             }
@@ -128,15 +130,17 @@ public class Game {
             int toppX = oppX[i];
             int toppY = oppY[i];
             if(validBounds(toppX, toppY, x, y)){
-                if(x%2!=0 && i==4){
-                    i=6;
+              
+                colorT = curBoard[x+toppX][y+toppY].getColor();
+                if(colorT.equals(color)) settles++;
+                if(x%2!=0 && i==3){
+                    i=5;
                 }
                 if(x%2 ==0 && i==6){
                     break;
                 }
-                colorT = curBoard[x+toppX][y+toppY].getColor();
-                if(colorT.equals(color)) settles++;
             }
+
         }
         return settles;        
     }
