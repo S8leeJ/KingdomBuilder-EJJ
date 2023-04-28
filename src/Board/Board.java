@@ -60,6 +60,19 @@ public class Board {
         return borders;
     }
   
+    public boolean[][] getAvailableEstate(int x, String color){
+            boolean [][] avail = new boolean[20][20];
+            for(int i = 0; i<20; i++){
+                for(int j = 0; j<20; j++){
+                    Hex curHex = board[i][j];
+                    if(curHex.getColor().equals(color)){
+                       avail[i][j] = true;
+                    }
+                }
+            }
+            return avail;
+        }
+    
     public boolean[][] getAvailable(int x, String color){
         boolean [][] avail = new boolean[20][20];
         int numAvail = 0;

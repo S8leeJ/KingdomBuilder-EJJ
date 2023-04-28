@@ -87,7 +87,7 @@ import Game.Player;
         //    boolean arr2[][] = game.getBoard().getAvailable(player.getTerrainCard().getType(), player.getColor());
         //    help.drawGray(g, arr2, game);
         //    help.drawHexNumbers(g, game);
-           help.drawSettlements(g);
+        //    help.drawSettlements(g);
         }
         if(loc == 12){
             //horse
