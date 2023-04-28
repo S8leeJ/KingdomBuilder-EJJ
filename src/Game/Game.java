@@ -83,7 +83,7 @@ public class Game {
             boolean temp = false;
             if(validBounds(toppX, toppY, x, y)){
                 if(x%2!=0 && i==4){
-                    i=6;
+                    i=5;
                 }
                 if(x%2 ==0 && i==6){
                     break;

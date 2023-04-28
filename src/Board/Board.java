@@ -94,18 +94,19 @@ public class Board {
                         int toppX = oppX[l];
                         int toppY = oppY[l];                       
                         if(validBounds(toppX, toppY, i, j)){
-                            System.out.println("WEEE 1 : " + (i+toppX) + " " + (j+toppY));
+                            System.out.println("WEEE 1 : " + l+" " + (i+toppX) + " " + (j+toppY));
 
-                            if(i%2!=0 && l==4){
-                                l=6;
-                            }
-                            if(i%2 ==0 && l==6){
-                                break;
-                            }
                             if(valid(i+toppX, j+toppY, x)){
                                // System.out.println("WEEE 2 : " + (i+toppX + " " + (j+toppY));
                                 avail[i+toppX][j+toppY] = true;
                                 numAvail++;
+                            }
+                            
+                            if(i%2!=0 && l==3){
+                                l=5;
+                            }
+                            if(i%2 ==0 && l==5){
+                                break;
                             }
                          }
                      }
