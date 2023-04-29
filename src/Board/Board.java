@@ -43,6 +43,20 @@ public class Board {
             }
         }
     }
+    public boolean[][] getAvailablePaddock(int x, int y){
+        boolean[][] avail = new boolean[20][20];
+        int[] xNums = {-2, -2, 0, 0, 2, 2};
+        int[] yNums = {-1, 1, -2, 2, -1, 1};   
+
+        for(int c = 0; c < 6; c++){
+            if(validBounds(x + xNums[c], y + yNums[c])){
+                if(board[x + xNums[c]][ y + yNums[c]].getType() < 6 && board[x + xNums[c]][ y + yNums[c]].getColor().equals("")){
+                    avail[x + xNums[c]][y + yNums[c]] = true;
+                }
+            }
+        }
+        return avail;
+    }
     public boolean[][] getAvailableTower(int x, String color){
         boolean [][] avail = getAvailable(x,color);
         boolean [][] borders = new boolean[20][20];

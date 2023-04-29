@@ -21,7 +21,7 @@ public class BarnHarbor {
          public boolean barn(String color, int terrainType, Game game, int x, int y){    
             //allws player to chose new spot to move settlemt
               Hex hex = game.getBoard().getHex(x, y);
-              if(hex.getType() == terrainType && hex.getColor().length() == 0){
+              if(hex.getType() == terrainType && hex.getColor().length() == 0 && hex.gray){
                   hex.setColor(game.curPlayer().getColor());
                   game.curPlayer().decSettlement();
                   int boardX = hex.getX();

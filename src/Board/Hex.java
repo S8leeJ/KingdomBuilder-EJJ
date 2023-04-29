@@ -7,14 +7,19 @@ public class Hex {
     int x;
     int y;
     int numberOfLocTiles;
+    public boolean gray;
     
     public Hex(int type){
         this.type = type;
+        gray = true;
         color = "";
         if(type>8)
             numberOfLocTiles = 2;
         else
             numberOfLocTiles = 0;
+    }
+    public void setGray(boolean bool){
+        gray = bool;
     }
     public int getType(){
         return type;
