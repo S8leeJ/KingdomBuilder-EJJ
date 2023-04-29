@@ -6,7 +6,7 @@ import Game.Player;
 
  public class locationClass{
     Game game;
-    Barn barn = new Barn();
+    BarnHarbor barnHarb = new BarnHarbor();
     Harbor harbor = new Harbor();
     OracleFarmOasis ofo;
     Paddock pad = new Paddock();
@@ -23,11 +23,12 @@ import Game.Player;
         }
         if(loc == 10){
             //boat
+            return barnHarb.harbor(player.getColor(), game, x, y);
         }
         if(loc == 11){
             //barn
             //return the other one
-            return barn.barn(player.getColor(), player.getTerrainCard().getType(), game, x, y);
+            return barnHarb.barn(player.getColor(), player.getTerrainCard().getType(), game, x, y);
 
         }
         if(loc == 12){
@@ -50,12 +51,14 @@ import Game.Player;
     }   
 
     public boolean pickingSettlements(int loc, Player player, int x, int y){
-        return barn.remove(player.getColor(), player.getTerrainCard().getType(), game, x, y);
+        return barnHarb.remove(player.getColor(), game, x, y);
     }
 
-    public void drawMoves(Player player, Graphics g){
+    public void drawMoves(Player player, Graphics g, int locType){
         //draws all spots where player can place their settlement
-        boolean arr[][] = game.getBoard().getAvailable(player.getTerrainCard().getType(), player.getColor());
+        boolean[][] arr = new boolean[20][20];
+        if(locType == 11) arr = game.getBoard().getAvailable(player.getTerrainCard().getType(), player.getColor());
+        if(locType == 10) arr = game.getBoard().getAvailable(7, player.getColor());
         help.drawGray(g, arr, game);
     }
     public void drawGray(/*which location tile picked*/ int loc, Player player, Graphics g){
@@ -69,12 +72,16 @@ import Game.Player;
         }
         if(loc == 10){
             //boat
+            boolean arr[][] = game.getBoard().getAvailableBarnHarb(player.getColor());
+             help.drawGray(g, arr, game);
+             help.drawHexNumbers(g, game);
+             help.drawSettlements(g);
         }
         if(loc == 11){
             //draws all spots where player can select their settlement to move
 
-            //estate
-             boolean arr[][] = game.getBoard().getAvailableEstate(player.getColor());
+            //barn
+             boolean arr[][] = game.getBoard().getAvailableBarnHarb(player.getColor());
              help.drawGray(g, arr, game);
              help.drawHexNumbers(g, game);
              help.drawSettlements(g);
@@ -110,7 +117,7 @@ import Game.Player;
             help.drawSettlements(g);   
         }
         if(loc == 16){
-            //house
+            //tavern
         }
         //else System.out.println("not ofund");
     }   

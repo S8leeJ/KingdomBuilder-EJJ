@@ -102,7 +102,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		//if player picks to use tokens
 		if(locpicked > 0){
 			if(moveSettlement){
-				locclass.drawMoves(game.curPlayer(), g);
+				locclass.drawMoves(game.curPlayer(), g, locpicked);
 				System.out.println("drqwgray 2nd phase");
 			}
 			else{
@@ -193,7 +193,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		if(!viewCards){
 		if(locpicked >0){
 			if((locpicked == 9 || locpicked == 13 || locpicked == 14 || locpicked == 15) && locclass.action(locpicked, game.curPlayer(),  x, y)) locpicked = 0;
-			else if((locpicked == 11 || locpicked == 10) && !moveSettlement){
+			else if((locpicked == 11 || locpicked == 10) && !moveSettlement){ //player hasnt picked settlementt to move
 				//locclass.drawGray(locpicked, game.curPlayer(), getGraphics());
 				if(locclass.pickingSettlements(locpicked, game.curPlayer(), x, y)){
 					moveSettlement = true;
@@ -202,7 +202,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 					return;
 				}
 			}
-			else if((locpicked == 11 || locpicked == 10) && moveSettlement){
+			else if((locpicked == 11 || locpicked == 10) && moveSettlement){ //player has pikced settlement to move
 				if(locclass.action(locpicked, game.curPlayer(), x, y)){
 					System.out.println("spot to place piked");
 					locpicked = 0;

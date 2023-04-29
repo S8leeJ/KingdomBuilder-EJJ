@@ -28,7 +28,7 @@ public class Game {
         ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(1,2, 3,4, 5, 6, 7, 8));
         //oneid = nums.remove((int)(Math.random()*nums.size()));
         oneid = nums.remove(0);
-        twoid = nums.remove((int)(Math.random()*nums.size()));
+        twoid = nums.remove(6);
         threeid = nums.remove((int)(Math.random()*nums.size()));
         fourid = nums.remove((int)(Math.random()*nums.size()));
     
