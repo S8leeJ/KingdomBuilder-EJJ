@@ -84,7 +84,7 @@ public class Board {
                         int toppX = oppX[l];
                         int toppY = oppY[l];                       
                         if(validBounds(toppX+i, toppY+j)){
-                            System.out.println("WEEE 1 : " + l+" " + (i+toppX) + " " + (j+toppY));
+                            //System.out.println("WEEE 1 : " + l+" " + (i+toppX) + " " + (j+toppY));
 
                             if(valid(i+toppX, j+toppY, x)){
                                // System.out.println("WEEE 2 : " + (i+toppX + " " + (j+toppY));

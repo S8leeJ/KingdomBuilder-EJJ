@@ -89,13 +89,11 @@ public class KingdomHelper {
 			for(int d = 0; d < 20; d++){
 				Hex board[][] = game.getBoard().getHexes();
 				if(!combined[c][d]){
-					board[c][d].setGray(false);
+					//board[c][d].setGray(false);
 					if(c%2 == 0)g.drawImage(hexagon, 515 + d * (hexwidth - 2), 19 + c * (hexlength - 13), hexwidth, hexlength, null);
 					else g.drawImage(hexagon, 533 + d * (hexwidth - 2), 19 + c * (hexlength-13), hexwidth, hexlength, null);
 				}
-				else{
-					board[c][d].setGray(true);
-				}		
+					
 			}
 		}
 	}

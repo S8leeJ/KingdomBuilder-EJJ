@@ -1,7 +1,7 @@
 package Board;
 import java.util.*;
 public class Hex {
-    public boolean gray;
+    //public boolean gray;
     int type;
     private String color;
     int x;
@@ -9,16 +9,12 @@ public class Hex {
     int numberOfLocTiles;
     
     public Hex(int type){
-        gray = true;
         this.type = type;
         color = "";
         if(type>8)
             numberOfLocTiles = 2;
         else
             numberOfLocTiles = 0;
-    }
-    public void setGray(boolean bool){
-        gray = bool;
     }
     public int getType(){
         return type;

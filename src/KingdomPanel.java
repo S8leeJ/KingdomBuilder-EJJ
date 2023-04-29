@@ -89,7 +89,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			String color = game.curPlayer().getColor();
 			boolean arr[][] = game.getBoard().getAvailable(game.curPlayer().getTerrainCard().getType(), color);
 			help.drawGray(g, arr, game);
-			//drawGray(g, arr);
 		}
 		//wen player picks between token or settlement
 		if(gameState == 1 && !usedSettlements){
@@ -102,7 +101,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		//if player picks to use tokens
 		if(locpicked > 0){
-			locclass.drawGray(locpicked, game.curPlayer(), g);
+			if(moveSettlement){
+				locclass.drawMoves(game.curPlayer(), g);
+				System.out.println("drqwgray 2nd phase");
+			}
+			else{
+				System.out.println("drawgray 1st phase");
+				locclass.drawGray(locpicked, game.curPlayer(), g);
+			}
 		}
 		
 		if(usedTokens){
@@ -186,8 +192,25 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		if(!viewCards){
 		if(locpicked >0){
-			if((locpicked == 9 || locpicked == 13 || locpicked == 14 || locpicked == 15) && locclass.action(locpicked, game.curPlayer(), getGraphics(), x, y)) locpicked = 0;
-			//else if(locpicked)
+			if((locpicked == 9 || locpicked == 13 || locpicked == 14 || locpicked == 15) && locclass.action(locpicked, game.curPlayer(),  x, y)) locpicked = 0;
+			else if((locpicked == 11 || locpicked == 10) && !moveSettlement){
+				//locclass.drawGray(locpicked, game.curPlayer(), getGraphics());
+				if(locclass.pickingSettlements(locpicked, game.curPlayer(), x, y)){
+					moveSettlement = true;
+					System.out.println("settlement picked");
+					repaint();
+					return;
+				}
+			}
+			else if((locpicked == 11 || locpicked == 10) && moveSettlement){
+				if(locclass.action(locpicked, game.curPlayer(), x, y)){
+					System.out.println("spot to place piked");
+					locpicked = 0;
+					moveSettlement = false;
+					repaint();
+					return;
+				}
+			}
 			// if(usedSettlements)
 			// gameState = 2;
 			// else
@@ -242,7 +265,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652 && usedSettlements == true){
 			if(game.curPlayer().curSettlements() < 3){
 				Hex hex = game.getBoard().getHex(x, y);
-				if(hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0 && hex.gray == true){
+				if(hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0){
 					if(game.curPlayer().curSettlements() == 2) gameState++;
 					hex.setColor(game.curPlayer().getColor());
 					game.curPlayer().useSettlement();
@@ -296,6 +319,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	}
 	
 	public void removing(int i){
+		System.out.println("token picked");
 		int locType = game.locTile.getLocation(i);
 		locpicked = locType;
 		for(int j = 0; j<copy.size(); j++){

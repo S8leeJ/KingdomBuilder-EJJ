@@ -83,14 +83,14 @@ public class Game {
             int toppY = oppY[i];
             boolean temp = false;
             if(validBounds((toppX+x), (toppY+y))){
-                System.out.println("WEEE 1 : " + i+" " + (x+toppX) + " " + (y+toppY));
+                //System.out.println("WEEE 1 : " + i+" " + (x+toppX) + " " + (y+toppY));
 
                 temp = curBoard[x+toppX][y+toppY].getType()>8;
                 isTrue = isTrue||temp;
                 if(temp){
                     curLocX = x+toppX;
                     curLocY = y+toppY;
-                    System.out.println(curLocX +" " + curLocY);
+                    //System.out.println(curLocX +" " + curLocY);
                     break;
                 }
                       

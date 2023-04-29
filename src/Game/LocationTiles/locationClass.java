@@ -17,7 +17,7 @@ import Game.Player;
         game = g;
         help = new KingdomHelper(game);
     }
-    public boolean action(/*which location tile picked*/ int loc, Player player, Graphics g, int x, int y){
+    public boolean action(/*which location tile picked*/ int loc, Player player, int x, int y){
         if(loc == 9){
              return ofo.farm(player.getColor(), 2, game, x, y);
         }
@@ -25,12 +25,9 @@ import Game.Player;
             //boat
         }
         if(loc == 11){
-            //estate
-            System.out.println("AWDAWAW");
-            barn.remove(player.getColor(), player.getTerrainCard().getType(), game, x, y);
+            //barn
             //return the other one
-            drawGray(player.getTerrainCard().getType(), player, g);
-            barn.barn(player.getColor(), player.getTerrainCard().getType(), game, x, y);
+            return barn.barn(player.getColor(), player.getTerrainCard().getType(), game, x, y);
 
         }
         if(loc == 12){
@@ -47,10 +44,20 @@ import Game.Player;
            return ofo.farm(player.getColor(), player.getTerrainCard().getType(), game, x, y);
         }
         if(loc == 16){
-            //house
+            //tavern
         }
         return false;
     }   
+
+    public boolean pickingSettlements(int loc, Player player, int x, int y){
+        return barn.remove(player.getColor(), player.getTerrainCard().getType(), game, x, y);
+    }
+
+    public void drawMoves(Player player, Graphics g){
+        //draws all spots where player can place their settlement
+        boolean arr[][] = game.getBoard().getAvailable(player.getTerrainCard().getType(), player.getColor());
+        help.drawGray(g, arr, game);
+    }
     public void drawGray(/*which location tile picked*/ int loc, Player player, Graphics g){
         if(loc == 9){
             boolean arr[][] = game.getBoard().getAvailable(2, player.getColor());
@@ -64,6 +71,8 @@ import Game.Player;
             //boat
         }
         if(loc == 11){
+            //draws all spots where player can select their settlement to move
+
             //estate
              boolean arr[][] = game.getBoard().getAvailableEstate(player.getColor());
              help.drawGray(g, arr, game);

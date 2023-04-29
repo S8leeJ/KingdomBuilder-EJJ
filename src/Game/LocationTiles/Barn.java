@@ -4,20 +4,23 @@ import Game.Game;
 public class Barn {
     //change this to draw pick only a settlement 
     //move an existing settlement to your terrain card
-          public Barn(){
-          }
+          
          //removes the settlement
-          public void remove(String color, int terrainType, Game game, int x, int y){    
+         public boolean remove(String color, int terrainType, Game game, int x, int y){    
             Hex hex = game.getBoard().getHex(x, y);
-            if(hex.getColor().equals(color) && hex.gray == true){
+            if(hex.getColor().equals(color)){
+    
                 hex.setColor("");
                 game.curPlayer().addSettlements();
+                return true;
             }
             //return true;
+            return false;
          }
           public boolean barn(String color, int terrainType, Game game, int x, int y){    
+            //allws player to chose new spot to move settlemt
               Hex hex = game.getBoard().getHex(x, y);
-              if(hex.getType() == terrainType && hex.getColor().length() == 0 && hex.gray == true){
+              if(hex.getType() == terrainType && hex.getColor().length() == 0){
                   hex.setColor(game.curPlayer().getColor());
                   game.curPlayer().decSettlement();
                   int boardX = hex.getX();
@@ -39,7 +42,7 @@ public class Barn {
               }	
               return false;
       
-          }
+          } 
           
       }
       
