@@ -26,6 +26,7 @@ import Game.Player;
     public boolean action(/*which location tile picked*/ int loc, Player player, int x, int y){
         if(loc == 9){
              return ofo.farm(player.getColor(), 2, game, x, y);
+          // return true;
         }
         if(loc == 10){
             //boat
@@ -54,6 +55,8 @@ import Game.Player;
         }
         if(loc == 16){
             //tavern
+            return ofo.farm(player.getColor(), player.getTerrainCard().getType(), game, x, y);
+
         }
         return false;
     }   
@@ -140,6 +143,12 @@ import Game.Player;
         }
         if(loc == 16){
             //tavern
+            boolean arr[][] = game.getBoard().getAvailableTavern(player.getColor());
+            help.drawGray(g, arr, game);
+            help.drawHexNumbers(g, game);
+            help.drawSettlements(g);   
+      
+
         }
         //else System.out.println("not ofund");
     }   

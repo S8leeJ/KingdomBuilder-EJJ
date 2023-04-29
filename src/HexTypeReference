@@ -26,11 +26,11 @@ Board location corresponding letters:
 9. Farm DONE
 10. boat DONE 
 11. barn  DONE
-12. horse woring on rn
+12. horse woring on rn (account for odd)
 13. oasis DONE
 14. oracle DONE
 15. tower DONE
-16. tavern
+16. tavern working on rn (theres a really annoying offset on the board for it....)
 
 settlement colors:
  not settled -1

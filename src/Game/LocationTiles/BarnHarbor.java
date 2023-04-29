@@ -19,8 +19,6 @@ public class BarnHarbor {
     
                     if(checkIfAvailable == 1){ // if thats the only settlement
                         int locType = locHex.getType();
-                        locHex.incLoc();
-                        //the number of location tiles adds one
                         game.curPlayer().removeLocTile(locType); // removes that location tile 
                         System.out.println(game.curPlayer().getLoc());
                     }

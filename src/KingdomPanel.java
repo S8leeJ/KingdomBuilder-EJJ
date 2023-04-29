@@ -186,7 +186,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 		int x = e.getX();
 		int y = e.getY();
-		System.out.println(x + " " + y);
 		if(x >= 13 && x <= 209 && y >= 13 && y <= 113){
 			viewCards = !viewCards;
 			//System.out.println("viewcard true");
@@ -195,7 +194,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		if(!viewCards){
 		if(locpicked >0){
-			if((locpicked == 9 || locpicked == 13 || locpicked == 14 || locpicked == 15) && locclass.action(locpicked, game.curPlayer(),  x, y)) locpicked = 0;
+			if((locpicked == 9 || locpicked == 13 || locpicked == 14 || locpicked == 15 || locpicked == 16) && locclass.action(locpicked, game.curPlayer(),  x, y)) locpicked = 0;
 			else if((locpicked == 11 || locpicked == 10 || locpicked == 12) && !moveSettlement){ //player hasnt picked settlementt to move
 				//locclass.drawGray(locpicked, game.curPlayer(), getGraphics());
 				if(locclass.pickingSettlements(game.curPlayer(), x, y)){
