@@ -26,6 +26,9 @@ public class Player {
        card = car;
     }
     
+    public void addSettlements(){
+        settlements++;
+    }
     public TerrainCard getTerrainCard(){
         return card;
     }
