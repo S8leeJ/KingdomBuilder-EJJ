@@ -43,6 +43,9 @@ public class Hex {
     public void decLoc(){
         numberOfLocTiles--;
     }
+    public void incLoc(){
+        numberOfLocTiles++;
+    }
     public int getLoc(){
         return numberOfLocTiles;
     }

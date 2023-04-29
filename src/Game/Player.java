@@ -21,6 +21,10 @@ public class Player {
     public void addLocTile(int x){
         locTile.add(x);
     }
+    public void removeLocTile(int x){
+        int ind = locTile.indexOf(x);
+        locTile.remove(ind);
+    }
    
     public void setType(TerrainCard car){
        card = car;

@@ -27,8 +27,8 @@ public class Game {
         locTile = new LocationTiles();
         ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(1,2, 3,4, 5, 6, 7, 8));
         //oneid = nums.remove((int)(Math.random()*nums.size()));
-        oneid = 6;
-        twoid = nums.remove((int)(Math.random()*nums.size()));
+        oneid = 1;
+        twoid = 8;
         threeid = nums.remove((int)(Math.random()*nums.size()));
         fourid = nums.remove((int)(Math.random()*nums.size()));
     
@@ -83,7 +83,7 @@ public class Game {
             int toppY = oppY[i];
             boolean temp = false;
             if(validBounds((toppX+x), (toppY+y))){
-                //System.out.println("WEEE 1 : " + i+" " + (x+toppX) + " " + (y+toppY));
+            System.out.println("WEEE 1 : " + i+" " + (x+toppX) + " " + (y+toppY));
 
                 temp = curBoard[x+toppX][y+toppY].getType()>8;
                 isTrue = isTrue||temp;

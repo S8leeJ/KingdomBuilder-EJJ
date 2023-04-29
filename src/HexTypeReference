@@ -24,8 +24,8 @@ Board location corresponding letters:
 7. Water
 8. Castle
 9. Farm DONE
-10. boat ALMOST DONE NEED TO REMOVE TOKEN
-11. barn  ALMOST DONE NEED TO REMOVE TOKEN
+10. boat DONE 
+11. barn  DONE
 12. horse woring on rn
 13. oasis DONE
 14. oracle DONE
@@ -59,16 +59,5 @@ Objective cards:
 9. Min
 10. Work
 
-left
-24, 160
-250, 232
-
-right
-251, 158
-481, 234
-
-main screen 
-25, 158
-480, 477
 
 
