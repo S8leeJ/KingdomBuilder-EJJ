@@ -33,9 +33,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	locationClass locclass;
 	boolean viewCards;
 	int locpicked;
+	boolean moveSettlement;
 	//int x, y;
 
 	public KingdomPanel() {
+		moveSettlement = false;
 		locpicked = 0;
 		game = new Game();
 		help = new KingdomHelper(game);
@@ -71,8 +73,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.setFont(new Font("Castellar", 1, size));
 		g.setColor(Color.white);
 	}
-	
-	
+		
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		//draws the board image
@@ -103,6 +104,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		if(locpicked > 0){
 			locclass.drawGray(locpicked, game.curPlayer(), g);
 		}
+		
 		if(usedTokens){
 			g.setColor(Color.black);			
 			g.fillRoundRect(400, 490, 20, 20, 20, 20);
@@ -184,7 +186,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		if(!viewCards){
 		if(locpicked >0){
-			if(locclass.action(locpicked, game.curPlayer(), getGraphics(), x, y)) locpicked = 0;
+			if((locpicked == 9 || locpicked == 13 || locpicked == 14 || locpicked == 15) && locclass.action(locpicked, game.curPlayer(), getGraphics(), x, y)) locpicked = 0;
+			//else if(locpicked)
 			// if(usedSettlements)
 			// gameState = 2;
 			// else
