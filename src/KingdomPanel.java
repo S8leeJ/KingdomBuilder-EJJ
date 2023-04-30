@@ -102,14 +102,18 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		//if player picks to use tokens
 		if(locpicked > 0){
 			if(moveSettlement){
-				
 				if(locpicked == 10 || locpicked == 11) locclass.drawMoves(game.curPlayer(), g, locpicked);
 				//System.out.println("drqwgray 2nd phase");
 				if(locpicked == 12) locclass.drawPaddock(g);
 			}
 			else{
 				//System.out.println("drawgray 1st phase");
-				
+				if(locpicked == 16){
+					boolean[][] arr = game.board.getAvailableTavern(game.curPlayer().getColor());
+					if(arr.length==1){
+						locpicked = 0;
+					}
+				}
 				locclass.drawGray(locpicked, game.curPlayer(), g);
 			}
 		}
@@ -306,6 +310,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		if(game.curPlayer().curSettlements() == 3 && usedSettlements){
 			gameState = 2;
 		}
+		//
 		repaint();
 		}
 	}
