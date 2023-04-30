@@ -8,7 +8,7 @@ public class Board {
     double gridWidth = 36.25;
     int oppX[] = {-1, 0, 1, 0, -1, 1, 1, -1};
     int oppY[] = {0, -1, 0, 1, -1, -1, 1, 1};
-   
+    int curTavernCount;
     public Board(int id1, int id2, int id3, int id4){
         locTile = new LocationTiles();
         one = new Sector(id1);
@@ -91,6 +91,7 @@ public class Board {
 
         int[] xNumsEven3 = {-3, -3, 0, 0, 3, 3};
         int[] yNumsEven3 = {-2, 1, -3, 3, -2, 1};
+        //do something to check if tehre are no available 3 rows
         for(int i = 0; i<20; i++){
             for(int j = 0; j<20; j++){
                 Hex curHex = board[i][j];
@@ -108,6 +109,7 @@ public class Board {
                                         y = j + yNumsEven3[c];
                                         if(validBounds(x, y) && board[x][y].getColor().equals("") && board[x][y].getType() < 6){
                                             avail[x][y] = true;
+                                            curTavernCount++;
                                         }
                                     }
                                 }
@@ -125,6 +127,8 @@ public class Board {
                                         y = j + yNumsOdd3[c];
                                         if(validBounds(x, y) && board[x][y].getColor().equals("") && board[x][y].getType() < 6){
                                             avail[x][y] = true;
+                                            curTavernCount++;
+
                                         }
                                     }
                                 }
@@ -134,7 +138,12 @@ public class Board {
                     }
                  }
              }
+
+            if(curTavernCount>0)
             return avail;
+            else{
+               return new boolean[1][1];
+            }
         }
     
     public boolean[][] getAvailableBarnHarb(String color){
