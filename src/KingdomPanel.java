@@ -117,7 +117,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 				locclass.drawGray(locpicked, game.curPlayer(), g);
 			}
 		}
-		
+		System.out.println(locpicked + " " + usedTokens + "CHECK PLS");
 		if(locpicked == 0 && usedTokens){
 			g.setColor(Color.black);			
 			g.fillRoundRect(400, 490, 20, 20, 20, 20);

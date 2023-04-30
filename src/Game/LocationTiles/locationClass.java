@@ -143,14 +143,11 @@ import Game.Player;
         if(loc == 16){
             //tavern
             boolean arr[][] = game.getBoard().getAvailableTavern(player.getColor());
-            if(arr.length == 1){
-
-            }
-            else{
+          
             help.drawGray(g, arr, game);
             help.drawHexNumbers(g, game);
             help.drawSettlements(g);   
-            }
+            
 
         }
         //else System.out.println("not ofund");
