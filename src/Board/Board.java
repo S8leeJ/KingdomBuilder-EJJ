@@ -106,7 +106,7 @@ public class Board {
                                     if(validBounds(x, y) && board[x][y].getColor().equals(color)){
                                         x = i+ xNumsEven3[c];
                                         y = j + yNumsEven3[c];
-                                        if(validBounds(x, y) && board[x][y].equals("") && board[x][y].getType() < 6){
+                                        if(validBounds(x, y) && board[x][y].getColor().equals("") && board[x][y].getType() < 6){
                                             avail[x][y] = true;
                                         }
                                     }
@@ -123,7 +123,7 @@ public class Board {
                                     if(validBounds(x, y) && board[x][y].getColor().equals(color)){
                                         x = i+ xNumsOdd3[c];
                                         y = j + yNumsOdd3[c];
-                                        if(validBounds(x, y) && board[x][y].equals("") && board[x][y].getType() < 6){
+                                        if(validBounds(x, y) && board[x][y].getColor().equals("") && board[x][y].getType() < 6){
                                             avail[x][y] = true;
                                         }
                                     }
