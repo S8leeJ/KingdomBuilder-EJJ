@@ -106,62 +106,35 @@ public class Board {
                                     if(validBounds(x, y) && board[x][y].getColor().equals(color)){
                                         x = i+ xNumsEven3[c];
                                         y = j + yNumsEven3[c];
-                                        if(validBounds(x, y) && board[x][y].equals("") && board[x][y])
+                                        if(validBounds(x, y) && board[x][y].equals("") && board[x][y].getType() < 6){
+                                            avail[x][y] = true;
+                                        }
                                     }
                                 }
                             }
                         }
-                        for(int l= 0; l<8; l++){ // iterate through the 6 directions
-                            boolean valid = true;
-                            for(int c = 1; c<3; c++){ // this is to increment the array by 1 so that it goes 1 farther
-                                int toppX;
-                                int toppY;  
-                                if(c==1){
-                                    toppX = oppX[l];
-                                    toppY = oppY[l];  
-                                }
-                                else{
-                                    toppX = xNums2[l];
-                                    toppY = yNums2[l];  
-                              
-                                }
-                                if(validBounds(toppX+i, toppY+j)){ // if in bounds
-                                    //System.out.println("WEEE 1 : " + l+" " + (i+toppX) + " " + (j+toppY));
-                                    Hex temp = board[toppX+i][toppY+j]; // curent hex 
-                                    if(!temp.getColor().equals(color)){ // if the next hex is not the same colored settlement or its j empty
-                                        valid = false; 
-                                        break;
+                        if(i % 2 == 1){
+                            for(int c = 0; c < 6; c++){
+                                int x = i+ xNumsOdd1[c];
+                                int y = j + yNumsOdd1[c];
+                                if(validBounds(x, y) && board[x][y].getColor().equals(color)){
+                                     x = i+ xNums2[c];
+                                     y = j + yNums2[c];
+                                    if(validBounds(x, y) && board[x][y].getColor().equals(color)){
+                                        x = i+ xNumsOdd3[c];
+                                        y = j + yNumsOdd3[c];
+                                        if(validBounds(x, y) && board[x][y].equals("") && board[x][y].getType() < 6){
+                                            avail[x][y] = true;
+                                        }
                                     }
-                                    System.out.println("WEEE 2 : " + c+" " + (i+toppX) + " " + (j+toppY));
-
                                 }
                             }
-                        int tempx;
-                        int tempy;
-                        if(i%2 == 0){
-                            tempx = xNumsOdd
+                        
                         }
-                        else{
-                            
-                        }
-                            if(valid && validBounds(i + (oppX[l]*3), j + oppY[l]*3)){
-                                System.out.println(i + " " + j);
-                                if(board[i + (oppX[l]*3)][j + (oppY[l]*3)].getType()<=5)
-                                avail[i + (oppX[l]*3)][j + (oppY[l]*3)] = true; // set the third most right to true
-                            }
-                                if(i%2!=0 && l==3){
-                                    l=5;
-                                }
-                                if(i%2 ==0 && l==5){
-                                    break;
-                                }
-                             }
-                         }
                     }
-                }
-            
+                 }
+             }
             return avail;
-
         }
     
     public boolean[][] getAvailableBarnHarb(String color){
