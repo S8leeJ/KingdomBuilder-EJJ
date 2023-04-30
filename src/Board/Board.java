@@ -76,31 +76,74 @@ public class Board {
   
     public boolean[][] getAvailableTavern(String color){
         boolean [][] avail = new boolean[20][20];
+        //top left, top right, mid left, mid right, bottom l, bottom r
+        int[] xNumsEven1 = {-1, -1, 0, 0, 1, 1};
+        int[] yNumsEven1 = {-1, 0, -1, 1, -1, 0};
+
+        int[] xNumsOdd1 = {-1, -1, 0, 0, 1, 1};
+        int[] yNumsOdd1 = {0, 1, -1, 1, 0, 1};
+       
+        int[] xNums2 = {-2, -2, 0, 0, 2, 2};
+        int[] yNums2 = {-1, 1, -2, 2, -1, 1};   
+       
+        int[] xNumsOdd3 = {-3, -3, 0, 0, 3, 3};
+        int[] yNumsOdd3= {-1, 2, -3, 3, -1, 2};
+
+        int[] xNumsEven3 = {-3, -3, 0, 0, 3, 3};
+        int[] yNumsEven3 = {-2, 1, -3, 3, -2, 1};
         for(int i = 0; i<20; i++){
             for(int j = 0; j<20; j++){
                 Hex curHex = board[i][j];
                     if(color.equals(curHex.getColor())){ // if hex has the players settlement
                         System.out.println(i + " " + j + " red" );
-
-                        for(int l= 0; l<8; l++){ // iterate through the 6 directions
-                            boolean valid = true;
-
-                            for(int c = 1; c<3; c++){ // this is to increment the array by 1 so that it goes 1 farther
-                            int toppX = oppX[l]*c;
-                            int toppY = oppY[l]*c;  
-                   
-                            if(validBounds(toppX+i, toppY+j)){ // if in bounds
-                                //System.out.println("WEEE 1 : " + l+" " + (i+toppX) + " " + (j+toppY));
-                                Hex temp = board[toppX+i][toppY+j]; // curent hex 
-                                if(!temp.getColor().equals(color)){ // if the next hex is not the same colored settlement or its j empty
-                                    valid = false; 
-                                    break;
+                        if(i % 2 == 0){
+                            for(int c = 0; c < 6; c++){
+                                int x = i+ xNumsEven1[c];
+                                int y = j + yNumsEven1[c];
+                                if(validBounds(x, y) && board[x][y].getColor().equals(color)){
+                                     x = i+ xNums2[c];
+                                     y = j + yNums2[c];
+                                    if(validBounds(x, y) && board[x][y].getColor().equals(color)){
+                                        x = i+ xNumsEven3[c];
+                                        y = j + yNumsEven3[c];
+                                        if(validBounds(x, y) && board[x][y].equals("") && board[x][y])
+                                    }
                                 }
-                                System.out.println("WEEE 2 : " + c+" " + (i+toppX) + " " + (j+toppY));
-
                             }
                         }
+                        for(int l= 0; l<8; l++){ // iterate through the 6 directions
+                            boolean valid = true;
+                            for(int c = 1; c<3; c++){ // this is to increment the array by 1 so that it goes 1 farther
+                                int toppX;
+                                int toppY;  
+                                if(c==1){
+                                    toppX = oppX[l];
+                                    toppY = oppY[l];  
+                                }
+                                else{
+                                    toppX = xNums2[l];
+                                    toppY = yNums2[l];  
+                              
+                                }
+                                if(validBounds(toppX+i, toppY+j)){ // if in bounds
+                                    //System.out.println("WEEE 1 : " + l+" " + (i+toppX) + " " + (j+toppY));
+                                    Hex temp = board[toppX+i][toppY+j]; // curent hex 
+                                    if(!temp.getColor().equals(color)){ // if the next hex is not the same colored settlement or its j empty
+                                        valid = false; 
+                                        break;
+                                    }
+                                    System.out.println("WEEE 2 : " + c+" " + (i+toppX) + " " + (j+toppY));
 
+                                }
+                            }
+                        int tempx;
+                        int tempy;
+                        if(i%2 == 0){
+                            tempx = xNumsOdd
+                        }
+                        else{
+                            
+                        }
                             if(valid && validBounds(i + (oppX[l]*3), j + oppY[l]*3)){
                                 System.out.println(i + " " + j);
                                 if(board[i + (oppX[l]*3)][j + (oppY[l]*3)].getType()<=5)
