@@ -34,6 +34,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	boolean viewCards;
 	int locpicked;
 	boolean moveSettlement;
+	boolean playerDone;
 	//int x, y;
 
 	public KingdomPanel() {
@@ -117,7 +118,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 				locclass.drawGray(locpicked, game.curPlayer(), g);
 			}
 		}
-		System.out.println(locpicked + " " + usedTokens + "CHECK PLS");
 		if(locpicked == 0 && usedTokens){
 			g.setColor(Color.black);			
 			g.fillRoundRect(400, 490, 20, 20, 20, 20);
@@ -129,13 +129,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			g.setColor(Color.white);
 			int []arr = new int[8];
 			arr = game.locTile.getNumbers(copy);
-			//System.out.println(Arrays.toString(arr));
-			//here
 			help.displayLocs(g, arr);
 		}
 
 		//if player is placing their 3 settlememts
-		
 		help.drawHexNumbers(g, game);
 		help.drawSettlements(g);
 		//once player has placed 3 settlements
@@ -148,7 +145,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		drawRest(g);	
 		if(viewCards){
-			//System.out.println("cardsa re drawn");
 			help.drawViewCards(g, objCard);
 		}	
 	}
@@ -192,7 +188,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		int y = e.getY();
 		if(x >= 13 && x <= 209 && y >= 13 && y <= 113){
 			viewCards = !viewCards;
-			//System.out.println("viewcard true");
 			repaint();
 			return;
 		}
@@ -200,17 +195,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		if(locpicked >0){
 			if((locpicked == 9 || locpicked == 13 || locpicked == 14 || locpicked == 15 || locpicked == 16) && locclass.action(locpicked, game.curPlayer(),  x, y)) locpicked = 0;
 			else if((locpicked == 11 || locpicked == 10 || locpicked == 12) && !moveSettlement){ //player hasnt picked settlementt to move
-				//locclass.drawGray(locpicked, game.curPlayer(), getGraphics());
 				if(locclass.pickingSettlements(game.curPlayer(), x, y)){
 					moveSettlement = true;
-					//System.out.println("settlement picked");
 					repaint();
 					return;
 				}
 			}
 			else if((locpicked == 11 || locpicked == 10 || locpicked == 12) && moveSettlement){ //player has pikced settlement to move
 				if(locclass.action(locpicked, game.curPlayer(), x, y)){
-					//System.out.println("spot to place piked");
 					locpicked = 0;
 					moveSettlement = false;
 
@@ -218,10 +210,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 					return;
 				}
 			}
-			// if(usedSettlements)
-			// gameState = 2;
-			// else
-			// gameState = 1;
 		}
 		if(gameState == 0 && x >= 27 && x <= 121 && y >= 503 && y <= 653){
 			game.drawCard();
@@ -273,9 +261,20 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			if(game.curPlayer().curSettlements() < 3){
 				Hex hex = game.getBoard().getHex(x, y);
 				if(hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0 && hex.gray){
+					
+					if(game.curPlayerInd() == 4 && playerDone && game.curPlayer().curSettlements() == 2){ 
+							gameState = 4;
+					}
 					if(game.curPlayer().curSettlements() == 2) gameState++;
 					hex.setColor(game.curPlayer().getColor());
 					game.curPlayer().useSettlement();
+					if(game.curPlayer().getSettlement() == 0){
+						 	//set boolean to true 
+							playerDone = true;
+							gameState++;
+					}
+				
+					//here is where we would change the gamestate to end screen 
 					//get coord of the actual hexdrwe
 					int boardX = hex.getX();
 					int boardY = hex.getY();
@@ -297,6 +296,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 
 		if(gameState == 2 && x >= 222 && y >= 74 && x <= 498 && y <= 109 ){
+			
 			player++;
 			if(player >= 5) player = 1;
 			usedSettlements = false;
@@ -327,7 +327,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	}
 	
 	public void removing(int i){
-		//System.out.println("token picked");
 		int locType = game.locTile.getLocation(i);
 		locpicked = locType;
 		for(int j = 0; j<copy.size(); j++){

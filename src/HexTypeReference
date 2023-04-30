@@ -1,18 +1,22 @@
 To do:
-- can the player get a location tile and then use it right after? (the code rn lets them_
 
-Positions:
-- upper left: (601, 19)
-- upper middle: (925, 19)
-- upper right: (1247, 19)
+- add a case for if they have no more settlements to place 
+- begin end game phase; however, must finish the round, so player 4 is the last player to go
+end game:
+- keep board same position
+- draw the little chart 
+- add guidelines for graphics
 
-- middle left: (601, 340)
-- middle middle: (925, 340)
-- middle right: (1247, 340)
 
-- lower left: (601, 666)
-- lower middle: (925, 666)
-- lower right: (1247, 666)
+- castle hex:
+players will earn 3 gold for each
+castle hex if they have built at least one of their own
+settlements next to it.
+
+
+
+
+
 
 Board location corresponding letters:
 1. Desert 
@@ -30,7 +34,7 @@ Board location corresponding letters:
 13. oasis DONE
 14. oracle DONE
 15. tower DONE
-16. tavern working on rn (theres a really annoying offset on the board for it....)
+16. tavern DONE
 
 settlement colors:
  not settled -1

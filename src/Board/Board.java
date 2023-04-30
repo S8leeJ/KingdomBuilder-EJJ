@@ -8,7 +8,6 @@ public class Board {
     double gridWidth = 36.25;
     int oppX[] = {-1, 0, 1, 0, -1, 1, 1, -1};
     int oppY[] = {0, -1, 0, 1, -1, -1, 1, 1};
-    int curTavernCount;
     public Board(int id1, int id2, int id3, int id4){
         locTile = new LocationTiles();
         one = new Sector(id1);
@@ -76,6 +75,8 @@ public class Board {
   
     public boolean[][] getAvailableTavern(String color){
         boolean [][] avail = new boolean[20][20];
+        int curTavernCount = 0;
+
         //top left, top right, mid left, mid right, bottom l, bottom r
         int[] xNumsEven1 = {-1, -1, 0, 0, 1, 1};
         int[] yNumsEven1 = {-1, 0, -1, 1, -1, 0};
@@ -96,7 +97,6 @@ public class Board {
             for(int j = 0; j<20; j++){
                 Hex curHex = board[i][j];
                     if(color.equals(curHex.getColor())){ // if hex has the players settlement
-                        System.out.println(i + " " + j + " red" );
                         if(i % 2 == 0){
                             for(int c = 0; c < 6; c++){
                                 int x = i+ xNumsEven1[c];
@@ -170,10 +170,7 @@ public class Board {
                         int toppX = oppX[l];
                         int toppY = oppY[l];                       
                         if(validBounds(toppX+i, toppY+j)){
-                            //System.out.println("WEEE 1 : " + l+" " + (i+toppX) + " " + (j+toppY));
-
                             if(valid(i+toppX, j+toppY, x)){
-                               // System.out.println("WEEE 2 : " + (i+toppX + " " + (j+toppY));
                                 avail[i+toppX][j+toppY] = true;
                                 numAvail++;
                             }
