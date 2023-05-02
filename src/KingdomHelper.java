@@ -36,8 +36,14 @@ public class KingdomHelper {
         } catch (Exception e) {
             // TODO: handle exception
         }
-
     }
+
+	public void drawEnd(Graphics g, int scorePhase){
+		g.setColor(Color.white);
+		//21 300
+		//488 618 
+
+	}
 	public void setFontSize(Graphics g, int size){
 		g.setFont(new Font("Castellar", 1, size));
 
@@ -114,6 +120,18 @@ public class KingdomHelper {
 		g.drawImage(objCard.get(0), 27, 160, cardsize, (int)(cardsize * ((double)3/2)), null);
 		g.drawImage(objCard.get(1),  27+cardsize, 160, cardsize, (int)(cardsize *((double)3/2)), null);
 		g.drawImage(objCard.get(2), 27 + 2*cardsize, 160, cardsize,  (int)(cardsize *((double)3/2)), null);
+		g.setColor(Color.black);
+		//g.fillRect(0, 0, 500, 500);
+		//g.drawImage(objCard.get(0), 50, 50, null);
+
+	}
+	public void drawViewCards2(Graphics g, ArrayList<BufferedImage> objCard){
+		//System.out.println("emthod is called");
+		int cardsize = 125;
+		//System.out.println((int)(cardsize * (double)(3/2)));
+		g.drawImage(objCard.get(0), 27, 100, cardsize, (int)(cardsize * ((double)3/2)), null);
+		g.drawImage(objCard.get(1),  27+cardsize, 100, cardsize, (int)(cardsize *((double)3/2)), null);
+		g.drawImage(objCard.get(2), 27 + 2*cardsize, 100, cardsize,  (int)(cardsize *((double)3/2)), null);
 		g.setColor(Color.black);
 		//g.fillRect(0, 0, 500, 500);
 		//g.drawImage(objCard.get(0), 50, 50, null);
