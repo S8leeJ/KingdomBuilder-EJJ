@@ -13,36 +13,75 @@ public class KingdomHelper {
     public KingdomHelper(Game game){
 		this.game = game;
         try {
-            sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector2.png"));
-			sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector3.png"));
-			sector4 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector4.png"));
-			sector5 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector5.png"));
-			sector6 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector6.png"));
-			sector7 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector7.png"));
-			sector8 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector8.png"));
-			 blackhouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/blackhouse.png"));
-			 bluehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/bluehouse.png"));
-			orangehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/orangehouse.png"));
-			whitehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/whitehouse.png"));
-			background =   ImageIO.read(getClass().getResourceAsStream("/Board/Images/background.jpg"));
-			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector1.png"));
-			hexagon = ImageIO.read(getClass().getResourceAsStream("/Board/Images/hexagon.png"));
-			backTerrain =  ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Back.png"));
-			locOne =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/1.png"));
-			locTwo =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/2.png"));
-			locations = ImageIO.read(getClass().getResourceAsStream("/Board/Images/Locations.PNG"));
-			gray = ImageIO.read(getClass().getResourceAsStream("/Board/Images/darkrect.png"));
+            // sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector2.png"));
+			// sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector3.png"));
+			// sector4 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector4.png"));
+			// sector5 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector5.png"));
+			// sector6 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector6.png"));
+			// sector7 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector7.png"));
+			// sector8 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector8.png"));
+			//  blackhouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/blackhouse.png"));
+			//  bluehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/bluehouse.png"));
+			// orangehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/orangehouse.png"));
+			// whitehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/whitehouse.png"));
+			// background =   ImageIO.read(getClass().getResourceAsStream("/Board/Images/background.jpg"));
+			// sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector1.png"));
+			// hexagon = ImageIO.read(getClass().getResourceAsStream("/Board/Images/hexagon.png"));
+			// backTerrain =  ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Back.png"));
+			// locOne =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/1.png"));
+			// locTwo =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/2.png"));
+			// locations = ImageIO.read(getClass().getResourceAsStream("/Board/Images/Locations.PNG"));
+			// gray = ImageIO.read(getClass().getResourceAsStream("/Board/Images/darkrect.png"));
 	
         } catch (Exception e) {
             // TODO: handle exception
         }
     }
 
-	public void drawEnd(Graphics g, int scorePhase){
+	public void drawEnd(Graphics g, int scorePhase, ArrayList<BufferedImage> objCard){
 		g.setColor(Color.white);
+		int cardsize = 125;
+		//System.out.println((int)(cardsize * (double)(3/2)));
+		g.drawImage(objCard.get(0), 27, 100, cardsize, (int)(cardsize * ((double)3/2)), null);
+		g.drawImage(objCard.get(1),  27+cardsize, 100, cardsize, (int)(cardsize *((double)3/2)), null);
+		g.drawImage(objCard.get(2), 27 + 2*cardsize, 100, cardsize,  (int)(cardsize *((double)3/2)), null);
+		g.setColor(new Color(48,81,110, 127));
+		g.fillRoundRect(30, 299, 490 - 30, 591-299, 20, 20);
+		g.setColor(Color.white);
+		g.drawRoundRect(30, 299, 490-30, 591-299, 20, 20);
+		for(int c = 0; c < 4; c++){
+			g.drawLine(30, 357 + 58 * c, 490, 357 + 58 * c);
+		}
+		g.drawLine(162, 299, 162, 591);
+		for(int c = 0; c < 3; c++){
+			g.drawLine(244 + c * 82, 299, 244 + c * 82, 591);
+		}
+		for(int c = 0; c < 4; c++){
+			
+			getCol(game.getPlayers().get(c).getColor(), g);
+			g.drawString(c + 1 + "", 185 + c * 82, 350);
+		}
 		//21 300
 		//488 618 
 
+	}
+	public void getCol(String color, Graphics g){
+		//one = new Player("blue");
+			// two = new Player("white");
+			// three = new Player("orange");
+			// four = new Player("black");
+		if(color.equals("blue")){
+			g.setColor(new Color(73, 134, 231));
+		}
+		if(color.equals("black")){
+			g.setColor(Color.black);
+		}
+		if(color.equals("orange")){
+			g.setColor(new Color(255, 180, 0));
+		}
+		if(color.equals("white")){
+			g.setColor(Color.white);
+		}
 	}
 	public void setFontSize(Graphics g, int size){
 		g.setFont(new Font("Castellar", 1, size));
@@ -125,18 +164,7 @@ public class KingdomHelper {
 		//g.drawImage(objCard.get(0), 50, 50, null);
 
 	}
-	public void drawViewCards2(Graphics g, ArrayList<BufferedImage> objCard){
-		//System.out.println("emthod is called");
-		int cardsize = 125;
-		//System.out.println((int)(cardsize * (double)(3/2)));
-		g.drawImage(objCard.get(0), 27, 100, cardsize, (int)(cardsize * ((double)3/2)), null);
-		g.drawImage(objCard.get(1),  27+cardsize, 100, cardsize, (int)(cardsize *((double)3/2)), null);
-		g.drawImage(objCard.get(2), 27 + 2*cardsize, 100, cardsize,  (int)(cardsize *((double)3/2)), null);
-		g.setColor(Color.black);
-		//g.fillRect(0, 0, 500, 500);
-		//g.drawImage(objCard.get(0), 50, 50, null);
 
-	}
     public void drawHexNumbers(Graphics g, Game game){
 		for(int c = 0; c < 20; c++){
 			for(int d = 0; d < 20; d++){

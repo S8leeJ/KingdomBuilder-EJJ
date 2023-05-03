@@ -9,6 +9,7 @@ import java.util.*;
 public class ObjectiveCard{
    int type;
    public static BufferedImage Citizens, Discoverers, Farmers, Fishermen, Hermits, Knights, Lords, Merchants, Miners, Workers;
+   public ArrayList<String> objectiveNames;
    public ArrayList<BufferedImage> objectives;
    
    public ObjectiveCard( ){
@@ -24,7 +25,7 @@ public class ObjectiveCard{
         Merchants  =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/MerchantsObjective.png"));
         Miners =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/MinersObjective.png"));
         Workers =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/WorkersObjective.png"));
-       
+        Collections.addAll(objectiveNames, "Citizens", "Discoverers", "Farmers", "Fishermen", "Hermits", "Knights", "Lords", "Merchants", "Miners", "Workers");
         Collections.addAll(objectives, Citizens, Discoverers, Farmers, Fishermen, Hermits, Knights, Lords, Merchants, Miners, Workers);
         //add method to turn from buff image to actual numbered card.
     } catch (Exception e) {
@@ -39,6 +40,7 @@ public class ObjectiveCard{
    public ArrayList<BufferedImage> get3(){
         Collections.shuffle(objectives);
         ArrayList<BufferedImage> bufIm = new ArrayList<>();
+        //int ran = Math.random()
         bufIm.add(objectives.get(0));
         bufIm.add(objectives.get(1));
         bufIm.add(objectives.get(2));

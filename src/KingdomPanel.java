@@ -88,8 +88,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			help.drawSettlements(g);	
 			//21 300
 			//488 618
-			help.drawViewCards2(g, objCard);
-			help.drawEnd(g, scorePhase);
+			help.drawEnd(g, scorePhase, objCard);
 
 		}
 		else{
