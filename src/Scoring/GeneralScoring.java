@@ -30,7 +30,6 @@ public class GeneralScoring {
             return 0;
        }
        public int score2(int x, Player player){
-        System.out.println("AwddddW" + x);
 
             if(x==0){
                 //citizens
@@ -77,29 +76,37 @@ public class GeneralScoring {
 
        public int lords(Player Curone, ArrayList<Player>x){
              int c = 0;
-            // for(int i = 0; i<3; i++){
-            //     if(x.get(i).equals(Curone)){
-            //         x.remove(i);
-            //     }
-            // }
-            // int playerOne = lordHelp(Curone.getColor());
-            // int playerTwo = lordHelp(x.get(0).getColor());
-            // int playerThree = lordHelp(x.get(1).getColor());
-            // int playerFour = lordHelp(x.get(2).getColor());
-            // System.out.println(playerOne +  " " + playerTwo + " " + playerThree + " " + playerFour);
-            // ArrayList<Integer> tots = new ArrayList<>();
-        
-            // tots.add(playerTwo);
-            // tots.add(playerThree);
-            // tots.add(playerFour);
-
-            // Collections.sort(tots);
-            // if(playerOne == tots.get(0)){
-            //     c+=12;
-            // }
-            // else if((tots.size()>1) && playerOne == tots.get(1)){
-            //     c+=6;
-            // }
+             //create copy of x 
+             ArrayList<Player> temp = new ArrayList<>();
+             for(int i = 0; i<x.size(); i++){
+                temp.add(x.get(i));
+             }
+             //go through players, and remove if its hte target 
+            for(int i = 0; i<3; i++){
+                if(temp.get(i).equals(Curone)){
+                    System.out.println("remove" + i);
+                    temp.remove(i);
+                }
+            }
+            //get # of settlements 
+            int playerOne = lordHelp(Curone.getColor());
+            int playerTwo = lordHelp(temp.get(0).getColor());
+            int playerThree = lordHelp(temp.get(1).getColor());
+            int playerFour = lordHelp(temp.get(2).getColor());
+            System.out.println(playerOne +  " " + playerTwo + " " + playerThree + " " + playerFour);
+            ArrayList<Integer> tots = new ArrayList<>();
+            tots.add(playerTwo);
+            tots.add(playerThree);
+            tots.add(playerFour);
+            //sort everything from least to greatest
+            Collections.sort(tots);
+            System.out.println(tots);
+            if(playerOne >= tots.get(2)){
+                c+=12;
+            }
+            else if((tots.size()>1) && playerOne >= tots.get(1)){
+                c+=6;
+            }
 
             return c;
        }
