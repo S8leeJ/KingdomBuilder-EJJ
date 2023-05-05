@@ -342,6 +342,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			System.out.println(game.curPlayerInd() + "WAEWD");
 			if(player == 1 && playerDone){ 
 				gameState = 4;
+				objCard = 0;
+				scorePlayer = 1;
 				System.out.println("JERE");
 				repaint();
 			}
