@@ -82,6 +82,7 @@ public class KingdomHelper {
 		g.setColor(new Color(48,81,110, 127));
 		g.fillRoundRect(30, 299, 490 - 30, 591-299, 20, 20);
 		g.setColor(Color.white);
+		
 		g.drawRoundRect(30, 299, 490-30, 591-299, 20, 20);
 		for(int c = 0; c < 4; c++){
 			g.drawLine(30, 357 + 58 * c, 490, 357 + 58 * c);
@@ -99,7 +100,7 @@ public class KingdomHelper {
 			g.drawString(c + 1 + "", 185 + c * 82, 350);
 		}
 		g.setColor(new Color(255, 191, 0, 100));
-		g.fillRect(162, 357, 82 * scorePlayer, 58 * (card + 1));
+		g.fillRect(162 + 82 * (scorePlayer), 357 + 58 * (card), 82, 58);
 		//162 357 242 414
 
 	}

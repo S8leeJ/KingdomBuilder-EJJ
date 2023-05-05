@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,6 +15,8 @@ import ObjectiveCards.ObjectiveCard;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
+import java.util.Timer;
+
 
 public class KingdomPanel extends JPanel implements MouseListener, MouseMotionListener{
 	Game game;
@@ -35,10 +38,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	boolean playerDone;
 	int objCard;
 	int scorePlayer;
+	boolean next = false;
 
 	public KingdomPanel() {
 		objCard = -1;
-		scorePlayer = 0; 
+		scorePlayer = -1; 
 		moveSettlement = false;
 		locpicked = 0;
 		game = new Game();
@@ -86,7 +90,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			help.drawSettlements(g);	
 			//21 300
 			//488 618
+			
 			help.drawEnd(g, objCard, scorePlayer, game.getCards());
+			if(next) drawNext(g);
 			if(viewCards) {
 				help.drawViewCards(g, game.getCards());
 			}
@@ -193,7 +199,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		help.drawRemainingSettlements(g);
 
 	}
-
+	public void drawNext(Graphics g){
+		g.setColor(new Color(48,81,110, 127));
+		g.fillRoundRect(412, 247, 492 - 412, 283 - 247, 20, 20);
+		g.setColor(Color.white);
+		g.drawRoundRect(412, 247, 492 - 412, 283 - 247, 20, 20);
+		g.setFont(new Font("Castellar", 1, 20));
+		g.drawString("NEXT",  420, 270);
+	}
 	public void mousePressed(MouseEvent e) {
 	}
 	public void mouseReleased(MouseEvent e) {
@@ -211,6 +224,26 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			repaint();
 			return;
 		}
+		if(x >= 412 && x <= 492 && y >= 247 && y <= 282 && gameState == 4 && next){
+			next = false;
+			scorePlayer++;
+			if(scorePlayer == 4){
+				scorePlayer = 0;
+				objCard++;
+			}		
+			//call method	
+			repaint();
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask(){
+				@Override
+				public void run(){
+					next = true;
+					repaint();
+				}
+			}, 1000);
+		}
+		
+
 		System.out.println(x+ " " + y);
 		if(x >= 27 && x <= 403 && y >= 98 && y <= 286 && gameState >= 4 && !viewCards){
 			viewCards = true;
@@ -343,7 +376,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			if(player == 1 && playerDone){ 
 				gameState = 4;
 				objCard = 0;
-				scorePlayer = 1;
+				scorePlayer = 0;
 				System.out.println("JERE");
 				repaint();
 			}

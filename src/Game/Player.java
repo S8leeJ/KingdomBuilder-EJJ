@@ -10,13 +10,15 @@ public class Player {
     int curSettlements;
     ArrayList<Integer> locTile;
     int score;
+    int[] scores;
 //aint no way we dont have score bruh
     public Player(String col){
         locTile = new ArrayList<>();
         color = col;
-        settlements = 4;
+        settlements = 1;
         curSettlements = 0;
         score = 0;
+        scores = new int[4];
     }
     
     public int getScore(){
