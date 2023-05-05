@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import Board.Hex;
 import Board.LocationTiles;
 import Game.Game;
+import Game.Player;
 import ObjectiveCards.ObjectiveCard;
 
 import java.util.*;
@@ -59,11 +60,26 @@ public class KingdomHelper {
 
     }
 
+	public void testScore(){
+		Hex[][] board = game.board.getHexes();
+		for(int i = 0; i<20; i++){
+			for(int j = 0; j<4; j++){
+				for(int p = 0; p<2; p++){
+					int r1 = (int)(Math.random()*20);
+					Player player = game.getPlayers().get(j);
+					String color = player.getColor();
+					if(board[i][r1].getType()<6)
+					board[i][r1].setColor(color);
+				}
+			}
+		}
+	}
 
 	public void setGame(Game g){
 		game = g;
 	}
 	public ArrayList<ObjectiveCard> get3Obj(){
+		//use this for the hack
         ArrayList<ObjectiveCard> cards = new ArrayList<>();
         int ran =(int) (Math.random()* objectives.size());
 		cards.add(new ObjectiveCard(objectiveNames.remove(ran), objectives.remove(ran)));

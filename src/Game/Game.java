@@ -55,8 +55,7 @@ public class Game {
     }
     public void setCards(ArrayList<ObjectiveCard> cards){
         objCards = cards;
-        for(int c = 0; c < cards.size(); c++){
-        }
+        
     }
     public void drawCard(){
         TerrainCard card = deck.getNext();

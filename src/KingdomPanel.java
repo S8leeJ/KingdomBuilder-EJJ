@@ -12,6 +12,8 @@ import Board.Hex;
 import Card.TerrainCard;
 import Game.Game;
 import ObjectiveCards.ObjectiveCard;
+import Scoring.GeneralScoring;
+
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
@@ -39,6 +41,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	int objCard;
 	int scorePlayer;
 	boolean next = false;
+	GeneralScoring score;
 
 	public KingdomPanel() {
 		objCard = -1;
@@ -46,6 +49,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		moveSettlement = false;
 		locpicked = 0;
 		game = new Game();
+		score = new GeneralScoring(game);
 		help = new KingdomHelper(game);
 		locclass = new locationClass(game);
 		gameState = 0;
@@ -61,6 +65,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			return;
 		}
 		game.setCards(help.get3Obj());
+		help.testScore();
 		addMouseListener(this);
 	}
 
@@ -271,7 +276,17 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 					return;
 				}	
 				//call method	
-				game.getPlayers().get(scorePlayer).getScores()[objCard]++;
+				
+				if(objCard <= 2) {
+					int scored = score.score(game.getCards().get(objCard), game.getPlayers().get(scorePlayer));
+					game.getPlayers().get(scorePlayer).getScores()[objCard]  = scored;
+					System.out.println("HERR" + scored);
+					
+				}
+				else{
+					int scored = score.scoreCastle(game.getPlayers().get(scorePlayer));
+					System.out.println("CASTLE" + scored);game.getPlayers().get(scorePlayer).getScores()[objCard]  = scored;
+				}
 				repaint();
 				Timer timer = new Timer();
 				timer.schedule(new TimerTask(){
@@ -409,7 +424,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 				objCard = 0;
 				scorePlayer = 0;
 				next = true;
-				game.getPlayers().get(scorePlayer).getScores()[objCard]++;
+				int s = score.score(game.getCards().get(objCard), game.getPlayers().get(scorePlayer));
+				System.out.println(s);
+				game.getPlayers().get(scorePlayer).getScores()[objCard]  = s;
 				repaint();
 			}
 
