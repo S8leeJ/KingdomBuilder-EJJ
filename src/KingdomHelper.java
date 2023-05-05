@@ -58,6 +58,9 @@ public class KingdomHelper {
 		Collections.addAll(objectives, Citizens, Discoverers, Farmers, Fishermen, Hermits, Knights, Lords, Merchants, Miners, Workers);
 
     }
+
+
+
 	public ArrayList<ObjectiveCard> get3Obj(){
         ArrayList<ObjectiveCard> cards = new ArrayList<>();
         int ran =(int) (Math.random()* objectives.size());
@@ -69,7 +72,7 @@ public class KingdomHelper {
 		System.out.println(cards.size() + " cards size");
         return cards;
     }
-	public void drawEnd(Graphics g, int scorePhase, ArrayList<ObjectiveCard> objCard){
+	public void drawEnd(Graphics g, int card, int scorePlayer, ArrayList<ObjectiveCard> objCard){
 		g.setColor(Color.white);
 		int cardsize = 125;
 		//System.out.println((int)(cardsize * (double)(3/2)));
@@ -95,8 +98,9 @@ public class KingdomHelper {
 			getCol(game.getPlayers().get(c).getColor(), g);
 			g.drawString(c + 1 + "", 185 + c * 82, 350);
 		}
-		//21 300
-		//488 618 
+		g.setColor(new Color(255, 191, 0, 100));
+		g.fillRect(162, 357, 82 * scorePlayer, 58 * (card + 1));
+		//162 357 242 414
 
 	}
 	public void getCol(String color, Graphics g){
@@ -185,11 +189,12 @@ public class KingdomHelper {
 		g.setColor(Color.white);
 	}
 	
-	public void drawViewCards(Graphics g, ArrayList<ObjectiveCard> objCard){
+	public void drawViewCards(Graphics g, ArrayList<ObjectiveCard> objCard){//🐒 
 		//System.out.println("emthod is called");
-		g.setColor(new Color(0, 0, 0, 127));
+		g.setColor(new Color(0, 0, 0, 127)); //here bro the 127 is 50% transparency  💀 
 		g.fillRect(0, 0, 1280, 720);
 		int cardsize = 180;
+		//wheres the like transparentcy part fr where
 		g.setColor(new Color(0, 0, 50));
 		g.fillRoundRect(365, 184, 915 -365, 465-184, 20, 20);
 		//System.out.println((int)(cardsize * (double)(3/2)));

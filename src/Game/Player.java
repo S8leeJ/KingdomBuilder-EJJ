@@ -9,15 +9,22 @@ public class Player {
     TerrainCard card;
     int curSettlements;
     ArrayList<Integer> locTile;
-
+    int score;
+//aint no way we dont have score bruh
     public Player(String col){
         locTile = new ArrayList<>();
         color = col;
         settlements = 4;
         curSettlements = 0;
+        score = 0;
     }
     
-
+    public int getScore(){
+        return score;
+    }
+    public void incScore(int x){
+        score+=x;
+    }
     public void addLocTile(int x){
         locTile.add(x);
     }

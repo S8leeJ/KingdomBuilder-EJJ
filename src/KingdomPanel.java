@@ -33,11 +33,12 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	int locpicked;
 	boolean moveSettlement;
 	boolean playerDone;
-	int scorePhase;
-	//int x, y;
+	int objCard;
+	int scorePlayer;
 
 	public KingdomPanel() {
-		scorePhase = 0;
+		objCard = -1;
+		scorePlayer = 0; 
 		moveSettlement = false;
 		locpicked = 0;
 		game = new Game();
@@ -85,11 +86,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			help.drawSettlements(g);	
 			//21 300
 			//488 618
-			help.drawEnd(g, scorePhase, game.getCards());
+			help.drawEnd(g, objCard, scorePlayer, game.getCards());
 			if(viewCards) {
 				help.drawViewCards(g, game.getCards());
-
 			}
+			
 
 		}
 		else{
@@ -256,6 +257,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		if(usedTokens == false && x >= 225 && x <= 470 && y >= 557 && y <= 643 && game.curPlayer().getLoc().size()>0 && (game.curPlayer().curSettlements() == 0 || game.curPlayer().curSettlements() == 3 || game.curPlayer().getSettlement() == 0)){
 			//token
+			if(game.curPlayer().getSettlement()>3)
 			usedTokens = true;
 		}
 		//if(usedTokens && coordinates click the done button, then make usedTokens to false)
