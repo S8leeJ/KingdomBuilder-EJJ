@@ -8,16 +8,12 @@ public class Paddock {
     
     public boolean paddock( Game game, int x, int y, int xhex, int yhex){    
         //allws player to chose new spot to move settlemt
-       //System.out.println("calling pddock method");
           Hex hex = game.getBoard().getHex(x, y);
           int x2 = hex.getX();
           int y2 = hex.getY();
           if(hex.getType() < 6 && hex.getColor().length() == 0 && hex.gray){
             for(int c = 0; c < 6; c++){
-                System.out.print(xhex + xNums[c] + " ");
-                System.out.println(yhex + yNums[c]);
                 if(xhex + xNums[c] == x2 && yhex + yNums[c] == y2){
-                    System.out.println("wow it works " );
                     hex.setColor(game.curPlayer().getColor());
                     game.curPlayer().decSettlement();
                     int boardX = hex.getX();

@@ -11,7 +11,6 @@ public class BarnHarbor {
             if(hex.getColor().equals(color)){
                 int hX = hex.getX();
                 int hY = hex.getY();
-                System.out.println(game.CheckLocTiles(hX, hY));
                    if(game.CheckLocTiles(hX, hY)){ // if settlement is touching a location tile
                     Hex temp[][] =  game.getBoard().getHexes();
                     Hex locHex = temp[game.getCurLocX()][game.getCurLocY()];
@@ -20,7 +19,6 @@ public class BarnHarbor {
                     if(checkIfAvailable == 1){ // if thats the only settlement
                         int locType = locHex.getType();
                         game.curPlayer().removeLocTile(locType); // removes that location tile 
-                        System.out.println(game.curPlayer().getLoc());
                     }
                 }
                 hex.setColor("");

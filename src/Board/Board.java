@@ -250,9 +250,7 @@ public class Board {
         }
         if(row < 0) row = 0;
         if(column < 0) column = 0;
-        //System.out.println(row + " " + column);
         board[row][column].setXY(row, column);
-       // System.out.println("JO:AWE"+board[row][column].getX()+" " + board[row][column].getY());
         return board[row][column];
     }   
 }

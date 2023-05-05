@@ -56,7 +56,6 @@ public class Game {
     public void setCards(ArrayList<ObjectiveCard> cards){
         objCards = cards;
         for(int c = 0; c < cards.size(); c++){
-            System.out.println(cards.get(c).getType() + " " +  cards.get(c).getImage());
         }
     }
     public void drawCard(){

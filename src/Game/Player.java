@@ -20,7 +20,9 @@ public class Player {
         score = 0;
         scores = new int[4];
     }
-    
+    public int[] getScores(){
+        return scores;
+    }
     public int getScore(){
         return score;
     }

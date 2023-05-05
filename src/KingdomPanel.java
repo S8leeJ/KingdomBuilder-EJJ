@@ -81,7 +81,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		if(gameState == 4){
+		
+		if(gameState >= 4){
 			drawBoard(g);
 			g.setFont(new Font("Castellar", 1, 50));
 			g.setColor(Color.white);
@@ -95,6 +96,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			if(next) drawNext(g);
 			if(viewCards) {
 				help.drawViewCards(g, game.getCards());
+			}
+			if(gameState == 5){
+				g.setColor(new Color(48,81,110, 127));
+				g.fillRoundRect(147, 617, 351 - 147, 655 - 617, 20, 20);
+				g.setColor(Color.white);
+				g.drawRoundRect(147, 617, 351 - 147, 655 - 617, 20, 20);
+				g.setFont(new Font("Castellar", 1, 20));
+				g.drawString("Play Again",  174, 640);
 			}
 			
 
@@ -127,11 +136,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		if(locpicked > 0){
 			if(moveSettlement){
 				if(locpicked == 10 || locpicked == 11) locclass.drawMoves(game.curPlayer(), g, locpicked);
-				//System.out.println("drqwgray 2nd phase");
 				if(locpicked == 12) locclass.drawPaddock(g);
 			}
 			else{
-				//System.out.println("drawgray 1st phase");
 				if(locpicked == 16){
 					boolean[][] arr = game.board.getAvailableTavern(game.curPlayer().getColor());
 					if(arr.length==1){
@@ -180,7 +187,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		//objective cards
 		//drawObjective(g);
 		help.drawObjective(g, game.getCards());
-		System.out.println("cards drawn");
 
 		//draw Chosen IF chosen
 		resetFont(g, 22);
@@ -215,6 +221,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	}
 	public void mouseExited(MouseEvent e) {
 	}
+
+
+
 	public void mouseClicked(MouseEvent e) {
 
 		int x = e.getX();
@@ -224,24 +233,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			repaint();
 			return;
 		}
-		if(x >= 412 && x <= 492 && y >= 247 && y <= 282 && gameState == 4 && next){
-			next = false;
-			scorePlayer++;
-			if(scorePlayer == 4){
-				scorePlayer = 0;
-				objCard++;
-			}		
-			//call method	
-			repaint();
-			Timer timer = new Timer();
-			timer.schedule(new TimerTask(){
-				@Override
-				public void run(){
-					next = true;
-					repaint();
-				}
-			}, 1000);
-		}
+		
 		
 
 		System.out.println(x+ " " + y);
@@ -249,6 +241,47 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			viewCards = true;
 			repaint();
 			return;
+		}
+		if(!viewCards){
+			if(x >= 147 && x <= 350 && y >= 618 && y <= 654 && gameState == 5){
+				objCard = -1;
+				scorePlayer = -1; 
+				moveSettlement = false;
+				locpicked = 0;
+				game = new Game();
+				help.setGame(game);
+				//locclass = new locationClass(game);
+				gameState = 0;
+				viewCards = false;
+				UsedLocs = new ArrayList<>();
+				copy = new ArrayList<>();
+				game.setCards(help.get3Obj());
+				repaint();
+			}
+			if(x >= 412 && x <= 492 && y >= 247 && y <= 282 && gameState == 4 && next){
+				next = false;
+				scorePlayer++;
+				if(scorePlayer == 4){
+					scorePlayer = 0;
+					objCard++;
+				}	
+				if( objCard == 4){
+					gameState = 5;
+					repaint();
+					return;
+				}	
+				//call method	
+				game.getPlayers().get(scorePlayer).getScores()[objCard]++;
+				repaint();
+				Timer timer = new Timer();
+				timer.schedule(new TimerTask(){
+					@Override
+					public void run(){
+						next = true;
+						repaint();
+					}
+				}, 1000);
+			}
 		}
 		if(gameState< 4){
 		if(x >= 13 && x <= 209 && y >= 13 && y <= 113 && !viewCards){
@@ -362,7 +395,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 
 		if(gameState == 2 && x >= 222 && y >= 74 && x <= 498 && y <= 109 ){
-			System.out.println(game.curPlayerInd() + "awdawdawdD");
 
 			player++;
 			if(player >= 5) player = 1;
@@ -372,12 +404,12 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			game.changePlayer();
 			gameState = 0;
 			copy = new ArrayList<>();
-			System.out.println(game.curPlayerInd() + "WAEWD");
 			if(player == 1 && playerDone){ 
 				gameState = 4;
 				objCard = 0;
 				scorePlayer = 0;
-				System.out.println("JERE");
+				next = true;
+				game.getPlayers().get(scorePlayer).getScores()[objCard]++;
 				repaint();
 			}
 

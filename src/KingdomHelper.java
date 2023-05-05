@@ -60,7 +60,9 @@ public class KingdomHelper {
     }
 
 
-
+	public void setGame(Game g){
+		game = g;
+	}
 	public ArrayList<ObjectiveCard> get3Obj(){
         ArrayList<ObjectiveCard> cards = new ArrayList<>();
         int ran =(int) (Math.random()* objectives.size());
@@ -69,13 +71,11 @@ public class KingdomHelper {
 		cards.add(new ObjectiveCard(objectiveNames.remove(ran), objectives.remove(ran)));
 		ran =(int) (Math.random()* objectives.size());
 		cards.add(new ObjectiveCard(objectiveNames.remove(ran), objectives.remove(ran)));
-		System.out.println(cards.size() + " cards size");
         return cards;
     }
 	public void drawEnd(Graphics g, int card, int scorePlayer, ArrayList<ObjectiveCard> objCard){
 		g.setColor(Color.white);
 		int cardsize = 125;
-		//System.out.println((int)(cardsize * (double)(3/2)));
 		g.drawImage(objCard.get(0).getImage(), 27, 100, cardsize, (int)(cardsize * ((double)3/2)), null);
 		g.drawImage(objCard.get(1).getImage(),  27+cardsize, 100, cardsize, (int)(cardsize *((double)3/2)), null);
 		g.drawImage(objCard.get(2).getImage(), 27 + 2*cardsize, 100, cardsize,  (int)(cardsize *((double)3/2)), null);
@@ -97,10 +97,17 @@ public class KingdomHelper {
 		for(int c = 0; c < 4; c++){
 			setFontSize(g, 40);
 			getCol(game.getPlayers().get(c).getColor(), g);
-			g.drawString(c + 1 + "", 185 + c * 82, 350);
+			g.drawString(c + 1 + "", 190 + c * 82, 345);
+		}g.setColor(Color.white);
+		for(int c = 0; c < 4; c++){
+			for(int d = 0; d < 4; d++){
+				int score = game.getPlayers().get(d).getScores()[c];
+				g.drawString(score + "", 187 + d * 82, 400 + 58 * c);
+			}
 		}
 		g.setColor(new Color(255, 191, 0, 100));
-		g.fillRect(162 + 82 * (scorePlayer), 357 + 58 * (card), 82, 58);
+		if(card <= 3 )g.fillRect(162 + 82 * (scorePlayer), 357 + 58 * (card), 82, 58);
+
 		//162 357 242 414
 
 	}
@@ -191,14 +198,12 @@ public class KingdomHelper {
 	}
 	
 	public void drawViewCards(Graphics g, ArrayList<ObjectiveCard> objCard){//🐒 
-		//System.out.println("emthod is called");
 		g.setColor(new Color(0, 0, 0, 127)); //here bro the 127 is 50% transparency  💀 
 		g.fillRect(0, 0, 1280, 720);
 		int cardsize = 180;
 		//wheres the like transparentcy part fr where
 		g.setColor(new Color(0, 0, 50));
 		g.fillRoundRect(365, 184, 915 -365, 465-184, 20, 20);
-		//System.out.println((int)(cardsize * (double)(3/2)));
 		g.drawImage(objCard.get(0).getImage(), 369, 190, cardsize, (int)(cardsize * ((double)3/2)), null);
 		g.drawImage(objCard.get(1).getImage(),  369+cardsize, 190, cardsize, (int)(cardsize *((double)3/2)), null);
 		g.drawImage(objCard.get(2).getImage(), 369 + 2*cardsize, 190, cardsize,  (int)(cardsize *((double)3/2)), null);
