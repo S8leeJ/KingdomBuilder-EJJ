@@ -13,7 +13,7 @@ public class Player {
     public Player(String col){
         locTile = new ArrayList<>();
         color = col;
-        settlements = 1;
+        settlements = 4;
         curSettlements = 0;
     }
     

@@ -24,9 +24,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 	public int sectwidth = 381, sectheight = 322;
 	public int hexwidth = 38, hexlength = 44;
 	double  gridHeight = 31.25, gridWidth = 36.25;
-	ObjectiveCard objC;
 	int player = 1;
-	ArrayList<BufferedImage> objCard;
 	ArrayList<Integer> UsedLocs;
 	ArrayList<Integer> copy;
 	KingdomHelper help;
@@ -45,20 +43,19 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		game = new Game();
 		help = new KingdomHelper(game);
 		locclass = new locationClass(game);
-		gameState = 4;
-		objC = new ObjectiveCard();
-	    objCard = objC.get3();
+		gameState = 0;
 		viewCards = false;
 		UsedLocs = new ArrayList<>();
 		copy = new ArrayList<>();
 
 		try {     
-			background =   ImageIO.read(getClass().getResourceAsStream("/Board/Images/background.jpg"));
+			background = ImageIO.read(getClass().getResourceAsStream("/Board/Images/background.jpg"));
 		
 			} catch (Exception E) {
 			System.out.println("Exception Error");
 			return;
 		}
+		game.setCards(help.get3Obj());
 		addMouseListener(this);
 	}
 
@@ -88,7 +85,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			help.drawSettlements(g);	
 			//21 300
 			//488 618
-			help.drawEnd(g, scorePhase, objCard);
+			help.drawEnd(g, scorePhase, game.getCards());
+			if(viewCards) {
+				help.drawViewCards(g, game.getCards());
+
+			}
 
 		}
 		else{
@@ -99,9 +100,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			resetFont(g, 48);
 			g.drawString("Draw a card", 50, 457);
 		}
-		if(gameState>=1 && usedSettlements && game.curPlayer().curSettlements()<3 && !usedTokens){
+		if(gameState>=1 && gameState != 2 && usedSettlements && game.curPlayer().curSettlements()<3 && !usedTokens){
 			resetFont(g, 25);
-			g.drawString("Place Three Settlements", 55, 465);
+			g.drawString("Place " +  (3 - game.curPlayer().curSettlements()) + " Settlement(s)", 55, 465);
 			String color = game.curPlayer().getColor();
 			boolean arr[][] = game.getBoard().getAvailable(game.curPlayer().getTerrainCard().getType(), color);
 			help.drawGray(g, arr, game);
@@ -160,7 +161,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		drawRest(g);	
 		if(viewCards){
-			help.drawViewCards(g, objCard);
+			help.drawViewCards(g, game.getCards());
 		}	
 	}
 	}
@@ -171,7 +172,9 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.drawRoundRect(24, 160, 457, 320, 20, 20);
 		//objective cards
 		//drawObjective(g);
-		help.drawObjective(g, objCard);
+		help.drawObjective(g, game.getCards());
+		System.out.println("cards drawn");
+
 		//draw Chosen IF chosen
 		resetFont(g, 22);
 		//g.drawString("Tokens", 245, 540);
@@ -202,9 +205,20 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 		int x = e.getX();
 		int y = e.getY();
+		if(viewCards){
+			viewCards = false;
+			repaint();
+			return;
+		}
 		System.out.println(x+ " " + y);
-		if(x >= 13 && x <= 209 && y >= 13 && y <= 113){
-			viewCards = !viewCards;
+		if(x >= 27 && x <= 403 && y >= 98 && y <= 286 && gameState >= 4 && !viewCards){
+			viewCards = true;
+			repaint();
+			return;
+		}
+		if(gameState< 4){
+		if(x >= 13 && x <= 209 && y >= 13 && y <= 113 && !viewCards){
+			viewCards = true;
 			repaint();
 			return;
 		}
@@ -230,7 +244,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 		if(gameState == 0 && x >= 27 && x <= 121 && y >= 503 && y <= 653){
 			game.drawCard();
-			gameState+=1;
+			gameState = 1;
 		    ArrayList<Integer> curLocation = game.curPlayer().getLoc();
 			for(int i = 0; i<curLocation.size(); i++){
 				copy.add(curLocation.get(i));
@@ -240,7 +254,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			//settlement
 			usedSettlements = true;
 		}
-		if(usedTokens == false && x >= 225 && x <= 470 && y >= 557 && y <= 643 && game.curPlayer().getLoc().size()>0){
+		if(usedTokens == false && x >= 225 && x <= 470 && y >= 557 && y <= 643 && game.curPlayer().getLoc().size()>0 && (game.curPlayer().curSettlements() == 0 || game.curPlayer().curSettlements() == 3 || game.curPlayer().getSettlement() == 0)){
 			//token
 			usedTokens = true;
 		}
@@ -274,23 +288,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		}
 
 
-		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652 && usedSettlements == true){
-			if(game.curPlayer().curSettlements() < 3){
+		if(x >= 515 && x <= 1255 && y >= 15 && y <= 652 && usedSettlements){
+			if(game.curPlayer().curSettlements() < 3 && game.curPlayer().getSettlement() > 0){
 				Hex hex = game.getBoard().getHex(x, y);
 				if(hex.getType() == game.curPlayer().getTerrainCard().getType() && hex.getColor().length() == 0 && hex.gray){
-					
-					
-					if(game.curPlayer().curSettlements() == 2) gameState++;
+					if(game.curPlayer().curSettlements() == 2) gameState = 2;
 					hex.setColor(game.curPlayer().getColor());
 					game.curPlayer().useSettlement();
-					if(game.curPlayer().getSettlement() == 0){
-						 	//set boolean to true 
-							playerDone = true;
-							gameState=2;
-							usedSettlements = false;
-							repaint();
-
-					}
+					
 				
 					//here is where we would change the gamestate to end screen 
 					//get coord of the actual hexdrwe
@@ -308,6 +313,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 							locHex.decLoc();
 							game.curPlayer().addLocTile(locType);
 						}
+					}
+					if(game.curPlayer().getSettlement() == 0){
+						//set boolean to true 
+					   playerDone = true;
+					   gameState=2;
+					   //usedSettlements = false;
+					   repaint();
+					   return;
 					}
 				}	
 			}
@@ -340,6 +353,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 		repaint();
 		}
+	}
 	}
 
 	

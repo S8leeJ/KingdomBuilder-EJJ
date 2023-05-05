@@ -15,6 +15,7 @@ public class Game {
     public Board board;
     private Player one, two, three, four;
     private ArrayList<Player> players;
+    private ArrayList<ObjectiveCard> objCards;
     public int curPlayer;
     public terrainDeck deck;
     public LocationTiles locTile;
@@ -24,6 +25,7 @@ public class Game {
     int oppY[] = {0, -1, 0, 1, -1, -1, 1, 1};
     
     public Game(){
+        objCards = new ArrayList<>();
         locTile = new LocationTiles();
         ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(1,2, 3,4, 5, 6, 7, 8));
         //oneid = nums.remove((int)(Math.random()*nums.size()));
@@ -46,8 +48,17 @@ public class Game {
         players.add(four);
         int ran = (int)(Math.random()*4);
         curPlayer = ran;
+        
+    }
+    public ArrayList<ObjectiveCard> getCards(){
+        return objCards;
+    }
+    public void setCards(ArrayList<ObjectiveCard> cards){
+        objCards = cards;
+        for(int c = 0; c < cards.size(); c++){
+            System.out.println(cards.get(c).getType() + " " +  cards.get(c).getImage());
         }
-   
+    }
     public void drawCard(){
         TerrainCard card = deck.getNext();
         if(deck.empty()) deck.resetTerrainDeck();
