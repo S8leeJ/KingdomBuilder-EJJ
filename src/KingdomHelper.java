@@ -82,7 +82,7 @@ public class KingdomHelper {
 		//use this for the hack
         ArrayList<ObjectiveCard> cards = new ArrayList<>();
         int ran =(int) (Math.random()* objectives.size());
-		cards.add(new ObjectiveCard(objectiveNames.remove(ran), objectives.remove(ran)));
+		cards.add(new ObjectiveCard(objectiveNames.remove(6), objectives.remove(6)));
 		ran =(int) (Math.random()* objectives.size());
 		cards.add(new ObjectiveCard(objectiveNames.remove(ran), objectives.remove(ran)));
 		ran =(int) (Math.random()* objectives.size());

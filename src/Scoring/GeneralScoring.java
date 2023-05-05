@@ -57,9 +57,11 @@ public class GeneralScoring {
             }
             else if(x==6){
                 //lorfs
+                lords(player, game.getPlayers());
+               
             }
             else if(x==7){
-
+//emrchenats
             }
             //merchants
             else if(x==8){
@@ -71,6 +73,47 @@ public class GeneralScoring {
             }
             return -1;
     
+       }
+
+       public int lords(Player Curone, ArrayList<Player>x){
+             int c = 0;
+            // for(int i = 0; i<3; i++){
+            //     if(x.get(i).equals(Curone)){
+            //         x.remove(i);
+            //     }
+            // }
+            // int playerOne = lordHelp(Curone.getColor());
+            // int playerTwo = lordHelp(x.get(0).getColor());
+            // int playerThree = lordHelp(x.get(1).getColor());
+            // int playerFour = lordHelp(x.get(2).getColor());
+            // System.out.println(playerOne +  " " + playerTwo + " " + playerThree + " " + playerFour);
+            // ArrayList<Integer> tots = new ArrayList<>();
+        
+            // tots.add(playerTwo);
+            // tots.add(playerThree);
+            // tots.add(playerFour);
+
+            // Collections.sort(tots);
+            // if(playerOne == tots.get(0)){
+            //     c+=12;
+            // }
+            // else if((tots.size()>1) && playerOne == tots.get(1)){
+            //     c+=6;
+            // }
+
+            return c;
+       }
+       public int lordHelp(String color){
+        int count = 0;
+        Hex[][] board = game.board.getHexes();
+            for(int i = 0; i<20; i++){
+                for(int j = 0; j<20; j++){
+                        if(board[i][j].getColor().equals(color)){
+                             count++;
+                        }
+                }   
+            }
+            return count;
        }
        public int Farmer(Player player){
         Hex s1[][] = game.board.one.getSector();
@@ -150,7 +193,7 @@ public class GeneralScoring {
                     maxSettle = temp;
                 }
             }
-            return maxSettle;
+            return maxSettle*2;
 
        }
        public int Discoverers(Player player){
