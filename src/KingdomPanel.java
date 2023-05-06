@@ -52,7 +52,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		score = new GeneralScoring(game);
 		help = new KingdomHelper(game);
 		locclass = new locationClass(game);
-		gameState = 0;
+		gameState = 4;
 		viewCards = false;
 		UsedLocs = new ArrayList<>();
 		copy = new ArrayList<>();
@@ -96,7 +96,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			help.drawSettlements(g);	
 			//21 300
 			//488 618
-			
+			help.drawTotal(g);
 			help.drawEnd(g, objCard, scorePlayer, game.getCards());
 			if(next) drawNext(g);
 			if(viewCards) {
