@@ -60,8 +60,6 @@ public class KingdomHelper {
 
     }
 	public void drawFirstPlayer(Graphics g){
-		/*184 124
-		218 149*/
 		g.drawImage(startingToken, 184, 120, 34, 34, null);
 	}
 	public void testScore(){
@@ -253,9 +251,9 @@ public class KingdomHelper {
 		g.setColor(new Color(0, 0, 0, 127)); //here bro the 127 is 50% transparency  💀 
 		g.fillRect(0, 0, 1280, 720);		
 		g.setColor(new Color(48,81,110, 127));
-		g.fillRoundRect(330, 158, 967 - 330, 485 - 158, 20, 20);
+		g.fillRoundRect(330, 158, 967 - 330, 485 - 158, 30, 30);
 		g.setColor(Color.white);
-		g.drawRoundRect(330, 158, 967 - 330, 485 - 158, 20, 20);
+		g.drawRoundRect(330, 158, 967 - 330, 485 - 158, 30, 30);
 		ArrayList<Player> play = game.getPlayers();
 		for(int i = 0; i<4; i++){
 			Player player = play.get(i);
@@ -274,10 +272,15 @@ public class KingdomHelper {
 				Player p = entry.getValue();
 				String color = p.getColor();
 				int pos = p.getPos();
-				
-				g.drawString("Player " + pos, 600, 250 + (ind*15));
-				g.drawString(score+"", 920, 250 + (ind*15));
+				setFontSize(g, 45);
+				g.drawString("Final Standings", 420, 150);
 
+				getCol(color, g);
+				setFontSize(g, 25);
+				g.drawString("Player " + (pos+1), 359, 250 + (ind*60));
+				g.setColor(Color.white);
+				g.drawString("....................................................", 540, 250 + (ind * 60));
+				g.drawString(score+"", 910, 250 + (ind*60));
 				ind++;
 		}
 		

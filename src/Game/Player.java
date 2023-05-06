@@ -15,7 +15,7 @@ public class Player {
     public Player(String col){
         locTile = new ArrayList<>();
         color = col;
-        settlements = 1;
+        settlements = 40;
         curSettlements = 0;
         scores = new int[4];
     }
