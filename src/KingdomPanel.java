@@ -136,6 +136,10 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		//draws terrain card
 		if(gameState >=1 && gameState !=4){
 			g.drawImage(game.curPlayer().getTerrainCard().getImage(), 121, 503, 94, 150, null);
+			resetFont(g, 15);
+
+			g.drawString(game.deck.getSize()+"X left", 40, 500);
+
 		}
 		//if player picks to use tokens
 		if(locpicked > 0){
@@ -281,12 +285,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 				if(objCard <= 2) {
 					int scored = score.score(game.getCards().get(objCard), game.getPlayers().get(scorePlayer));
 					game.getPlayers().get(scorePlayer).getScores()[objCard]  = scored;
-					System.out.println("HERR" + scored);
 					
 				}
 				else{
 					int scored = score.scoreCastle(game.getPlayers().get(scorePlayer));
-					System.out.println("CASTLE" + scored);game.getPlayers().get(scorePlayer).getScores()[objCard]  = scored;
+					game.getPlayers().get(scorePlayer).getScores()[objCard]  = scored;
 				}
 				repaint();
 				Timer timer = new Timer();
