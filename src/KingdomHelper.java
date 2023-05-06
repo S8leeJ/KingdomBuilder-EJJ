@@ -63,7 +63,7 @@ public class KingdomHelper {
 	public void drawFirstPlayer(Graphics g){
 		/*184 124
 		218 149*/
-		g.drawImage(startingToken, 184, 124, 34, 34, null);
+		g.drawImage(startingToken, 184, 120, 34, 34, null);
 	}
 	public void testScore(){
 		Hex[][] board = game.board.getHexes();
