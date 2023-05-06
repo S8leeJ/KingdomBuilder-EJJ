@@ -13,10 +13,10 @@ import Game.Player;
     Tavern tavern = new Tavern();
     KingdomHelper help;
     int xsave, ysave;
-    public locationClass(Game g){
+    public locationClass(Game g, KingdomHelper h){
         ofo =  new OracleFarmOasis();
         game = g;
-        help = new KingdomHelper(game);
+        help = h;
     }
 
     public void setXY(int x, int y){
