@@ -8,6 +8,7 @@ import Game.Player;
 import ObjectiveCards.ObjectiveCard;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 public class KingdomHelper {
     private static BufferedImage sector1,sector2, gray, sector3, sector4, sector5, sector6, sector7, sector8, hexagon, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain, locOne, locTwo, locations;
@@ -20,9 +21,7 @@ public class KingdomHelper {
 		this.game = game;
     	objectives = new ArrayList<>();
     	objectiveNames = new ArrayList<>();
-    	Collections.addAll(objectiveNames, "Citizens", "Discoverers", "Farmers", "Fishermen", "Hermits", "Knights", "Lords", "Merchants", "Miners", "Workers");
-   
-   
+    	Collections.addAll(objectiveNames,  "Discoverers", "Farmers", "Fishermen","Knights", "Lords", "Miners", "Workers");
         try {
             sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector2.png"));
 			sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector3.png"));
@@ -57,7 +56,7 @@ public class KingdomHelper {
         } catch (Exception e) {
             System.out.println("oopsies");// TODO: handle exception
         }
-		Collections.addAll(objectives, Citizens, Discoverers, Farmers, Fishermen, Hermits, Knights, Lords, Merchants, Miners, Workers);
+		Collections.addAll(objectives, Discoverers, Farmers, Fishermen, Knights, Lords, Miners);
 
     }
 	public void drawFirstPlayer(Graphics g){
@@ -106,7 +105,7 @@ public class KingdomHelper {
 		//use this for the hack
         ArrayList<ObjectiveCard> cards = new ArrayList<>();
         int ran =(int) (Math.random()* objectives.size());
-		cards.add(new ObjectiveCard(objectiveNames.remove(6), objectives.remove(6)));
+		cards.add(new ObjectiveCard(objectiveNames.remove(ran), objectives.remove(ran)));
 		ran =(int) (Math.random()* objectives.size());
 		cards.add(new ObjectiveCard(objectiveNames.remove(ran), objectives.remove(ran)));
 		ran =(int) (Math.random()* objectives.size());
@@ -250,7 +249,39 @@ public class KingdomHelper {
 		//g.drawImage(objCard.get(0), 50, 50, null);
 
 	}
+	public void viewStandings(Graphics g){//🐒 
+		g.setColor(new Color(0, 0, 0, 127)); //here bro the 127 is 50% transparency  💀 
+		g.fillRect(0, 0, 1280, 720);		
+		g.setColor(new Color(48,81,110, 127));
+		g.fillRoundRect(330, 158, 967 - 330, 485 - 158, 20, 20);
+		g.setColor(Color.white);
+		g.drawRoundRect(330, 158, 967 - 330, 485 - 158, 20, 20);
+		ArrayList<Player> play = game.getPlayers();
+		for(int i = 0; i<4; i++){
+			Player player = play.get(i);
+			player.setPos(i);
+		}
+		TreeMap<Integer, Player> s = new TreeMap<>();
+		for(int i = 0; i<play.size(); i++){
+			s.put(play.get(i).getScore(), play.get(i));
+		}
+		Set<Entry<Integer, Player>> entries = s.entrySet();
+		int ind = 0;
+		for (Map.Entry<Integer, Player> entry : entries) {
+				System.out.println(entry.getKey() + "->"
+								+ entry.getValue());
+				int score = entry.getKey();
+				Player p = entry.getValue();
+				String color = p.getColor();
+				int pos = p.getPos();
+				
+				g.drawString("Player " + pos, 600, 250 + (ind*15));
+				g.drawString(score+"", 920, 250 + (ind*15));
 
+				ind++;
+		}
+		
+	}
     public void drawHexNumbers(Graphics g, Game game){
 		for(int c = 0; c < 20; c++){
 			for(int d = 0; d < 20; d++){

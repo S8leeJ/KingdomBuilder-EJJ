@@ -9,26 +9,33 @@ public class Player {
     TerrainCard card;
     int curSettlements;
     ArrayList<Integer> locTile;
-    int score;
     int[] scores;
+    int pos;
 //aint no way we dont have score bruh
     public Player(String col){
         locTile = new ArrayList<>();
         color = col;
-        settlements = 40;
+        settlements = 1;
         curSettlements = 0;
-        score = 0;
         scores = new int[4];
+    }
+    public void setPos(int p){
+        pos = p;
+    }
+    public int getPos(){
+        return pos;
     }
     public int[] getScores(){
         return scores;
     }
     public int getScore(){
-        return score;
+        int total = 0;
+        for(int c = 0; c < 4; c++){
+            total += scores[c];
+        }
+        return total;
     }
-    public void incScore(int x){
-        score+=x;
-    }
+    
     public void addLocTile(int x){
         locTile.add(x);
     }

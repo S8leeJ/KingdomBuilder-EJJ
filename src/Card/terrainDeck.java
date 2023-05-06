@@ -9,7 +9,7 @@ public class terrainDeck {
     }
     public void resetTerrainDeck(){
         for(int i = 1; i<6; i++){
-            for(int j = 0; j<1; j++){
+            for(int j = 0; j<5; j++){
                 terrains.add(new TerrainCard(i));
             }
         }
