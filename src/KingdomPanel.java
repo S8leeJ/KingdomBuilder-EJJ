@@ -128,7 +128,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		else{
 		//draws the board image
 		drawBoard(g);
-		 if(player == 1)help.drawFirstPlayer(g);
+		  help.drawFirstPlayer(g);
 		// when players turn starts
 		if(gameState == 0){
 			resetFont(g, 48);
@@ -208,20 +208,13 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.setColor(Color.white);
 		g.drawRoundRect(24, 500, 457, 156, 20, 20);
 		g.drawRoundRect(24, 160, 457, 320, 20, 20);
-		//objective cards
-		//drawObjective(g);
 		help.drawObjective(g, game.getCards());
-
-		//draw Chosen IF chosen
-		resetFont(g, 22);
-		//g.drawString("Tokens", 245, 540);
-	
+		resetFont(g, 22);	
 		resetFont(g, 40);
 		String color = game.curPlayer().getColor();	
 		g.setColor(new Color(28, 35, 61));
 		g.fillRect(222, 15, 275, 55);
 
-		//draw tokesn
 		help.drawTokenList(g);
 		help.drawSettlement(g, color);
 		help.setFontSize(g, 40);
@@ -249,7 +242,6 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 
 
 	public void mouseClicked(MouseEvent e) {
-
 		int x = e.getX();
 		int y = e.getY();
 		if(viewCards){
