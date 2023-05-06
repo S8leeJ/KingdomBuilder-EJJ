@@ -56,11 +56,11 @@ public class GeneralScoring {
             }
             else if(x==6){
                 //lorfs
-                lords(player, game.getPlayers());
+                return lords(player, game.getPlayers());
                
             }
             else if(x==7){
-//emrchenats
+//emrchenats    `
             }
             //merchants
             else if(x==8){
@@ -70,7 +70,7 @@ public class GeneralScoring {
             else if(x==10){
                 return scoreWorker(player);
             }
-            return -1;
+            return 0;
     
        }
 
@@ -93,6 +93,7 @@ public class GeneralScoring {
             int playerTwo = lordHelp(temp.get(0).getColor());
             int playerThree = lordHelp(temp.get(1).getColor());
             int playerFour = lordHelp(temp.get(2).getColor());
+            
             System.out.println(playerOne +  " " + playerTwo + " " + playerThree + " " + playerFour);
             ArrayList<Integer> tots = new ArrayList<>();
             tots.add(playerTwo);
@@ -101,10 +102,14 @@ public class GeneralScoring {
             //sort everything from least to greatest
             Collections.sort(tots);
             System.out.println(tots);
+            System.out.println(playerOne + " " + tots.get(2));
+            System.out.println(playerOne + " "  + tots.get(1));
+
             if(playerOne >= tots.get(2)){
                 c+=12;
             }
-            else if((tots.size()>1) && playerOne >= tots.get(1)){
+
+            else if(playerOne >= tots.get(1)){
                 c+=6;
             }
 

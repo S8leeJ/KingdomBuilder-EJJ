@@ -104,11 +104,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			}
 			if(gameState == 5){
 				g.setColor(new Color(48,81,110, 127));
-				g.fillRoundRect(147, 617, 351 - 147, 655 - 617, 20, 20);
+				g.fillRoundRect(335, 24, 351 - 200, 655 - 617, 20, 20);
 				g.setColor(Color.white);
-				g.drawRoundRect(147, 617, 351 - 147, 655 - 617, 20, 20);
+				g.drawRoundRect(335, 24, 351 - 200, 655 - 617, 20, 20);
 				g.setFont(new Font("Castellar", 1, 20));
-				g.drawString("Play Again",  174, 640);
+				g.drawString("Play Again",  340, 44);
 			}
 			
 
@@ -248,7 +248,8 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			return;
 		}
 		if(!viewCards){
-			if(x >= 147 && x <= 350 && y >= 618 && y <= 654 && gameState == 5){
+			//335, 24, 351 - 200, 655 - 617,
+			if(x >= 335 && x <= 486 && y >= 24 && y <= 62 && gameState == 5){
 				objCard = -1;
 				scorePlayer = -1; 
 				moveSettlement = false;

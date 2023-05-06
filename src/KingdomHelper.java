@@ -59,7 +59,7 @@ public class KingdomHelper {
 		Collections.addAll(objectives, Citizens, Discoverers, Farmers, Fishermen, Hermits, Knights, Lords, Merchants, Miners, Workers);
 
     }
-
+	
 	public void testScore(){
 		Hex[][] board = game.board.getHexes();
 		for(int i = 0; i<20; i++){
@@ -78,6 +78,16 @@ public class KingdomHelper {
 	public void setGame(Game g){
 		game = g;
 	}
+	public void drawTotal(Graphics g){
+		g.setColor(new Color(48,81,110, 127));
+		g.fillRoundRect(30, 541, 490-30, 58, 20, 20);
+		g.setColor(Color.white);
+		g.drawRoundRect(30, 541, 490-30, 58, 20, 20);
+		g.drawString("Total", 40, 564 + 68);	
+		for(int c = 0; c < 4; c++){
+			g.drawLine();
+		}	
+	}
 	public ArrayList<ObjectiveCard> get3Obj(){
 		//use this for the hack
         ArrayList<ObjectiveCard> cards = new ArrayList<>();
@@ -90,7 +100,6 @@ public class KingdomHelper {
         return cards;
     }
 	public void drawEnd(Graphics g, int card, int scorePlayer, ArrayList<ObjectiveCard> objCard){
-		g.setColor(Color.white);
 		int cardsize = 125;
 		g.drawImage(objCard.get(0).getImage(), 27, 100, cardsize, (int)(cardsize * ((double)3/2)), null);
 		g.drawImage(objCard.get(1).getImage(),  27+cardsize, 100, cardsize, (int)(cardsize *((double)3/2)), null);

@@ -1,21 +1,6 @@
 To do:
-
-- add a case for if they have no more settlements to place 
-- begin end game phase; however, must finish the round, so player 4 is the last player to go
-end game:
-lets plan out the stages 
-iterate through the arraylist of cards right
-then iterate through each player
-call corresponding method 
-then draw the next button and oce they click then score the next player
--  transparent highlight square thing over the one thats going yk 
-
-
-- castle hex:
-players will earn 3 gold for each
-castle hex if they have built at least one of their own
-settlements next to it.
-
+- track 25 terrain cards, shuffle when necessary
+- round start token
 
 
 
