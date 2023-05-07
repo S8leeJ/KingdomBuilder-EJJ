@@ -92,7 +92,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			drawBoard(g);
 			g.setFont(new Font("Castellar", 1, 50));
 			g.setColor(Color.white);
-			g.drawString("Scoring", 50, 65);
+			g.drawString("Scoring", 50, 67);
 			help.drawHexNumbers(g, game);
 			help.drawSettlements(g);	
 			//21 300
@@ -108,14 +108,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 				g.setColor(Color.white);
 				g.drawRoundRect(335, 24, 351 - 200, 655 - 617, 20, 20);
 				g.setFont(new Font("Castellar", 1, 20));
-				g.drawString("Play Again",  340, 50);
+				g.drawString("Play Again",  341, 51);
 				help.drawTotal(g);
 				g.setColor(new Color(48,81,110, 127));
 				g.fillRoundRect(335, 65, 351 - 200, 655 - 617, 20, 20);
 				g.setColor(Color.white);
 				g.drawRoundRect(335, 65, 351 - 200, 655 - 617, 20, 20);
 				g.setFont(new Font("Castellar", 1, 17));
-				g.drawString("See standings",  340, 92);
+				g.drawString("See Standings",  340, 92);
 
 				if(viewStandings){
 					help.viewStandings(g);
@@ -132,11 +132,11 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		// when players turn starts
 		if(gameState == 0){
 			resetFont(g, 48);
-			g.drawString("Draw a card", 50, 457);
+			g.drawString("Draw a card", 43, 457);
 		}
 		if(gameState>=1 && gameState != 2 && usedSettlements && game.curPlayer().curSettlements()<3 && !usedTokens){
 			resetFont(g, 25);
-			g.drawString("Place " +  Math.min((3 - game.curPlayer().curSettlements()), game.curPlayer().getSettlement()) + " Settlement(s)", 55, 465);
+			g.drawString("Place " +  Math.min((3 - game.curPlayer().curSettlements()), game.curPlayer().getSettlement()) + " Settlement(s)", 88, 457);
 			String color = game.curPlayer().getColor();
 			boolean arr[][] = game.getBoard().getAvailable(game.curPlayer().getTerrainCard().getType(), color);
 			help.drawGray(g, arr, game);
@@ -144,14 +144,14 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		//wen player picks between token or settlement
 		if(gameState == 1 && !usedSettlements && locpicked == 0){
 			resetFont(g, 21);
-			g.drawString("Choose Tokens or Settlements", 40, 457);
+			g.drawString("Choose Tokens or Settlements", 55, 457);
 		}
 		//draws terrain card
 		if(gameState >=1 && gameState !=4){
 			g.drawImage(game.curPlayer().getTerrainCard().getImage(), 121, 503, 94, 150, null);
 			resetFont(g, 15);
 			if(game.deck.getSize() == 1)
-			g.drawString("Reseting terrain deck after next turn", 40, 350);
+			g.drawString("Resetting Terrain Deck After Next Turn",  57, 350);
 
 			g.drawString(game.deck.getSize()+"X left", 37, 495);
 
@@ -195,7 +195,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			g.fillRoundRect(223, 73, 494-223, 110-73, 20, 20);
 			resetFont(g, 25);
 			g.setColor(new Color(9, 25, 77));
-			g.drawString("End Turn", 36+244, 190-65 - 26);
+			g.drawString("End Turn", 36+242, 190-65 - 26);
 		}
 		drawRest(g);	
 		if(viewCards){
@@ -212,7 +212,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		resetFont(g, 22);	
 		resetFont(g, 40);
 		String color = game.curPlayer().getColor();	
-		g.setColor(new Color(28, 35, 61));
+		g.setColor(new Color(121, 121, 121));
 		g.fillRect(222, 15, 275, 55);
 
 		help.drawTokenList(g);
@@ -228,7 +228,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		g.setColor(Color.white);
 		g.drawRoundRect(412, 247, 492 - 412, 283 - 247, 20, 20);
 		g.setFont(new Font("Castellar", 1, 20));
-		g.drawString("NEXT",  420, 270);
+		g.drawString("NEXT",  422, 272);
 	}
 	public void mousePressed(MouseEvent e) {
 	}
