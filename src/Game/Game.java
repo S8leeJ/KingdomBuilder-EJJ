@@ -59,8 +59,8 @@ public class Game {
         players.add(three);
         players.add(four);
         int rand = (int)(Math.random()*4);
-        curPlayer = ran;
-        finFirst = ran;
+        curPlayer = rand;
+        finFirst = rand;
         
     }
     public ArrayList<ObjectiveCard> getCards(){
