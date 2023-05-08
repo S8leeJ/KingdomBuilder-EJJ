@@ -56,6 +56,18 @@ public class KingdomHelper {
 
     }
 	public void drawFirstPlayer(Graphics g){
+		int tmep = game.curPlayerInd();
+		System.out.println(tmep + "w");
+		for(int i = 0; i<4; i++){
+			System.out.print( game.getPlayers().get(i).getColor()+" ");
+		}
+		int start = game.finFirst;
+		Player fp = game.getPlayers().get(start);
+		getCol(fp.getColor(), g);
+		setFontSize(g, 20);
+		
+		g.drawString("Player 1", 80, 145);
+
 		g.drawImage(startingToken, 184, 120, 34, 34, null);
 	}
 	public void testScore(){

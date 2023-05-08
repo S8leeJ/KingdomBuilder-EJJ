@@ -24,6 +24,8 @@ public class Game {
     int oppX[] = {-1, 0, 1, 0, -1, 1, 1, -1};
     int oppY[] = {0, -1, 0, 1, -1, -1, 1, 1};
     public ArrayList<String> objectiveNames;
+    public int finFirst;
+    
     public Game(){
         objectiveNames = new ArrayList<>();
     	Collections.addAll(objectiveNames,  "Discoverers", "Farmers", "Fishermen","Knights", "Lords", "Miners", "Workers");
@@ -57,7 +59,8 @@ public class Game {
         players.add(three);
         players.add(four);
         int rand = (int)(Math.random()*4);
-        curPlayer = rand;
+        curPlayer = ran;
+        finFirst = ran;
         
     }
     public ArrayList<ObjectiveCard> getCards(){

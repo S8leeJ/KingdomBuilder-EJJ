@@ -1,5 +1,6 @@
 To do:
-- round start token
+- round start token (first player is not just the 0th index of the player array)
+- this will impact the last standings as well
 
 bugs to fix:
 - when settlement is removed and its touching a token, it can still be used
