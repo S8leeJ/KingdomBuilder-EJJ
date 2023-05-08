@@ -11,52 +11,48 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class KingdomHelper {
-    private static BufferedImage sector1,sector2, gray, sector3, sector4, sector5, sector6, sector7, sector8, hexagon, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain, locOne, locTwo, locations;
+    private static BufferedImage sector1,sector2, gray, sector3, sector4, hexagon, blackhouse, bluehouse, orangehouse, whitehouse, backTerrain, locOne, locTwo, locations, startingToken, desert, meadow, flower, canyon, forest;
   	public int hexwidth = 38, hexlength = 44;
 	Game game;
-	public static BufferedImage Citizens, Discoverers, Farmers, Fishermen, Hermits, Knights, Lords, Merchants, Miners, Workers, startingToken;
-   	public ArrayList<String> objectiveNames;
-   	public ArrayList<BufferedImage> objectives;	
+	public static BufferedImage obj1, obj2, obj3;
+	//public static BufferedImage Citizens, Discoverers, Farmers, Fishermen, Hermits, Knights, Lords, Merchants, Miners, Workers, ;
     public KingdomHelper(Game game){
 		this.game = game;
-    	objectives = new ArrayList<>();
-    	objectiveNames = new ArrayList<>();
-    	Collections.addAll(objectiveNames,  "Discoverers", "Farmers", "Fishermen","Knights", "Lords", "Miners", "Workers");
+    	
         try {
-            sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector2.png"));
-			sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector3.png"));
-			sector4 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector4.png"));
-			sector5 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector5.png"));
-			sector6 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector6.png"));
-			sector7 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector7.png"));
-			sector8 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector8.png"));
+
+			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector" + game.oneid + ".png"));
+			sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector" + game.twoid + ".png"));
+			sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector" + game.threeid + ".png"));
+			sector4 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector" + game.fourid + ".png"));
+
+            // sector2 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector2.png"));
+			// sector3 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector3.png"));
+			// sector4 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector4.png"));
+			obj1 = ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/" + game.getCards().get(0).getType()+ "Objective.png"));
+			obj2 = ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/" + game.getCards().get(1).getType()+ "Objective.png"));
+			obj3 = ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/" + game.getCards().get(2).getType()+ "Objective.png"));
+
 			blackhouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/blackhouse.png"));
 			bluehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/bluehouse.png"));
 			orangehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/orangehouse.png"));
 			whitehouse = ImageIO.read(getClass().getResourceAsStream("/Board/Images/whitehouse.png"));
-			sector1 = ImageIO.read(getClass().getResourceAsStream("/Board/BoardImages/sector1.png"));
 			hexagon = ImageIO.read(getClass().getResourceAsStream("/Board/Images/hexagon.png"));
 			backTerrain =  ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Back.png"));
 			locOne =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/1.png"));
 			locTwo =  ImageIO.read(getClass().getResourceAsStream("/Board/Images/2.png"));
 			locations = ImageIO.read(getClass().getResourceAsStream("/Board/Images/Locations.PNG"));
 			gray = ImageIO.read(getClass().getResourceAsStream("/Board/Images/darkrect.png"));
-			Citizens =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/CitizensObjective.png"));
-			Discoverers =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/DiscoverersObjective.png"));
-			Farmers =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/FarmersObjective.png"));
-			Fishermen =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/FishermenObjective.png"));
-			Hermits =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/HermitsObjective.png"));
-			Knights =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/KnightsObjective.png"));
-			Lords =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/LordsObjective.png"));
-			Merchants  =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/MerchantsObjective.png"));
-			Miners =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/MinersObjective.png"));
-			Workers =  ImageIO.read(getClass().getResourceAsStream("/ObjectiveCards/CardImages/WorkersObjective.png"));
 			startingToken = ImageIO.read(getClass().getResourceAsStream("/Board/Images/startingToken.png"));
+			desert = ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Desert.png"));
+          	meadow = ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Meadow.png"));
+            flower = ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Flower.png"));
+            canyon = ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Canyon.png"));
+            forest = ImageIO.read(getClass().getResourceAsStream("/Card/TerrainImages/KB-Card-Forest.png"));
 	
         } catch (Exception e) {
             System.out.println("oopsies");// TODO: handle exception
         }
-		Collections.addAll(objectives, Discoverers, Farmers, Fishermen, Knights, Lords, Miners);
 
     }
 	public void drawFirstPlayer(Graphics g){
@@ -77,9 +73,7 @@ public class KingdomHelper {
 		}
 	}
 
-	public void setGame(Game g){
-		game = g;
-	}
+	
 	public void drawTotal(Graphics g){
 		g.setColor(new Color(48,81,110, 127));
 		g.fillRoundRect(30, 601, 490-30, 58, 20, 20);
@@ -99,22 +93,12 @@ public class KingdomHelper {
 			g.drawString(total + "", 187 + c * 82, 640);
 		}
 	}
-	public ArrayList<ObjectiveCard> get3Obj(){
-		//use this for the hack
-        ArrayList<ObjectiveCard> cards = new ArrayList<>();
-        int ran =(int) (Math.random()* objectives.size());
-		cards.add(new ObjectiveCard(objectiveNames.remove(ran), objectives.remove(ran)));
-		ran =(int) (Math.random()* objectives.size());
-		cards.add(new ObjectiveCard(objectiveNames.remove(ran), objectives.remove(ran)));
-		ran =(int) (Math.random()* objectives.size());
-		cards.add(new ObjectiveCard(objectiveNames.remove(ran), objectives.remove(ran)));
-        return cards;
-    }
+	
 	public void drawEnd(Graphics g, int card, int scorePlayer, ArrayList<ObjectiveCard> objCard){
 		int cardsize = 125;
-		g.drawImage(objCard.get(0).getImage(), 27, 100, cardsize, (int)(cardsize * ((double)3/2)), null);
-		g.drawImage(objCard.get(1).getImage(),  27+cardsize, 100, cardsize, (int)(cardsize *((double)3/2)), null);
-		g.drawImage(objCard.get(2).getImage(), 27 + 2*cardsize, 100, cardsize,  (int)(cardsize *((double)3/2)), null);
+		g.drawImage(obj1, 27, 100, cardsize, (int)(cardsize * ((double)3/2)), null);
+		g.drawImage(obj2,  27+cardsize, 100, cardsize, (int)(cardsize *((double)3/2)), null);
+		g.drawImage(obj3, 27 + 2*cardsize, 100, cardsize,  (int)(cardsize *((double)3/2)), null);
 		g.setColor(new Color(48,81,110, 127));
 		g.fillRoundRect(30, 299, 490 - 30, 591-299, 20, 20);
 		g.setColor(Color.white);
@@ -225,9 +209,9 @@ public class KingdomHelper {
 	}
     
     public void drawObjective(Graphics g, ArrayList<ObjectiveCard> objCard){
-		g.drawImage(objCard.get(0).getImage(), 12, 13, 65, 100, null);
-		g.drawImage(objCard.get(1).getImage(), 77, 13, 65, 100, null);
-		g.drawImage(objCard.get(2).getImage(), 142, 13, 65, 100, null);
+		g.drawImage(obj1, 12, 13, 65, 100, null);
+		g.drawImage(obj2, 77, 13, 65, 100, null);
+		g.drawImage(obj3, 142, 13, 65, 100, null);
 		g.drawImage(backTerrain, 27, 503, 94, 150, null);
 		g.setFont(new Font("Castellar", 1, 15));
 		g.setColor(Color.white);
@@ -240,9 +224,9 @@ public class KingdomHelper {
 		//wheres the like transparentcy part fr where
 		g.setColor(new Color(0, 0, 50));
 		g.fillRoundRect(365, 184, 915 -365, 465-184, 20, 20);
-		g.drawImage(objCard.get(0).getImage(), 369, 190, cardsize, (int)(cardsize * ((double)3/2)), null);
-		g.drawImage(objCard.get(1).getImage(),  369+cardsize, 190, cardsize, (int)(cardsize *((double)3/2)), null);
-		g.drawImage(objCard.get(2).getImage(), 369 + 2*cardsize, 190, cardsize,  (int)(cardsize *((double)3/2)), null);
+		g.drawImage(obj1, 369, 190, cardsize, (int)(cardsize * ((double)3/2)), null);
+		g.drawImage(obj2,  369+cardsize, 190, cardsize, (int)(cardsize *((double)3/2)), null);
+		g.drawImage(obj3, 369 + 2*cardsize, 190, cardsize,  (int)(cardsize *((double)3/2)), null);
 		//g.fillRect(0, 0, 500, 500);
 		//g.drawImage(objCard.get(0), 50, 50, null);
 
@@ -329,11 +313,8 @@ public class KingdomHelper {
 		if(id == 1) return sector1;
 		if(id == 2) return sector2;
 		if(id == 3) return sector3;
-		if(id == 4) return sector4;
-		if(id == 5) return sector5;
-		if(id == 6) return sector6;
-		if(id == 7) return sector7;
-		return sector8;
+		return sector4;
+		
 	}
     public BufferedImage settlementColor(String color){
 		if(color.equals("orange")) return orangehouse;
@@ -372,6 +353,16 @@ public class KingdomHelper {
 		g.drawImage(settlementColor(game.getPlayers().get((game.curPlayer+ 3)% 4).getColor()),228 + 2 * width + 10, 124, 26, 26, null);
 		g.setColor(Color.white);
 		g.drawString("X " + game.getPlayers().get((game.curPlayer+ 3)% 4).getSettlement(), 260 + 2 * width + 10, 145);
-	}												
+	}	
+	public BufferedImage getTerrainCard(int num){
+		switch(num){
+			case 1: return desert;
+			case 2: return meadow;
+			case 3: return flower;
+			case 4: return canyon;
+			case 5: return forest;
+		}
+		return desert;
+	}											
 }
 

@@ -68,11 +68,13 @@ import Game.Player;
         }
         return false;
     }
-    public void drawPaddock( Graphics g){
+    public int drawPaddock( Graphics g){
         //draws where payer can place settlement
         //setXY(x, y);
         boolean[][] arr =game.getBoard().getAvailablePaddock(xsave, ysave);
+        if(arr.length == 1) return -1;
         help.drawGray(g, arr, game);
+        return 1;
     }
     public void drawMoves(Player player, Graphics g, int locType){
         //draws all spots where player can place their settlement

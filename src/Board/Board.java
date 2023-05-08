@@ -3,13 +3,11 @@ package Board;
 public class Board {
     public Sector one, two, three, four;
     Hex[][] board;
-    LocationTiles locTile;
     double gridHeight = 31.25;
     double gridWidth = 36.25;
     int oppX[] = {-1, 0, 1, 0, -1, 1, 1, -1};
     int oppY[] = {0, -1, 0, 1, -1, -1, 1, 1};
     public Board(int id1, int id2, int id3, int id4){
-        locTile = new LocationTiles();
         one = new Sector(id1);
         two = new Sector(id2);
         three = new Sector(id3);
@@ -46,15 +44,17 @@ public class Board {
         boolean[][] avail = new boolean[20][20];
         int[] xNums = {-2, -2, 0, 0, 2, 2};
         int[] yNums = {-1, 1, -2, 2, -1, 1};   
-
+        int count = 0;
         for(int c = 0; c < 6; c++){
             if(validBounds(x + xNums[c], y + yNums[c])){
                 if(board[x + xNums[c]][ y + yNums[c]].getType() < 6 && board[x + xNums[c]][ y + yNums[c]].getColor().equals("")){
                     avail[x + xNums[c]][y + yNums[c]] = true;
+                    count++;
                 }
             }
         }
-        return avail;
+        if(count == 0) return new boolean[1][1];
+        else return avail;
     }
     public boolean[][] getAvailableTower(int x, String color){
         boolean [][] avail = getAvailable(x,color);
@@ -139,8 +139,7 @@ public class Board {
                  }
              }
 
-            if(curTavernCount>0)
-            return avail;
+            if(curTavernCount>0) return avail;
             else{
                return new boolean[1][1];
             }

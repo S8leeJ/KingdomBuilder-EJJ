@@ -23,9 +23,19 @@ public class Game {
     int curLocY;
     int oppX[] = {-1, 0, 1, 0, -1, 1, 1, -1};
     int oppY[] = {0, -1, 0, 1, -1, -1, 1, 1};
-    
+    public ArrayList<String> objectiveNames;
     public Game(){
+        objectiveNames = new ArrayList<>();
+    	Collections.addAll(objectiveNames,  "Discoverers", "Farmers", "Fishermen","Knights", "Lords", "Miners", "Workers");
         objCards = new ArrayList<>();
+            //use this for the hack
+        int ran =(int) (Math.random()* objectiveNames.size());
+        objCards.add(new ObjectiveCard(objectiveNames.remove(ran)));
+        ran =(int) (Math.random()* objectiveNames.size());
+        objCards.add(new ObjectiveCard(objectiveNames.remove(ran)));
+        ran =(int) (Math.random()* objectiveNames.size());
+        objCards.add(new ObjectiveCard(objectiveNames.remove(ran)));
+        
         locTile = new LocationTiles();
         ArrayList<Integer> nums = new ArrayList<>(Arrays.asList(1,2, 3,4, 5, 6, 7, 8));
         //oneid = nums.remove((int)(Math.random()*nums.size()));
@@ -46,8 +56,8 @@ public class Game {
         players.add(two);
         players.add(three);
         players.add(four);
-        int ran = (int)(Math.random()*4);
-        curPlayer = ran;
+        int rand = (int)(Math.random()*4);
+        curPlayer = rand;
         
     }
     public ArrayList<ObjectiveCard> getCards(){
