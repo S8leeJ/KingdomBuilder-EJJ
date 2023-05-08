@@ -128,6 +128,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 		else{
 		//draws the board image
 		drawBoard(g);
+		if(!usedTokens)
 		  help.drawFirstPlayer(g);
 		// when players turn starts
 		if(gameState == 0){

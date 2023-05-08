@@ -23,6 +23,7 @@ public class Game {
     int curLocY;
     int oppX[] = {-1, 0, 1, 0, -1, 1, 1, -1};
     int oppY[] = {0, -1, 0, 1, -1, -1, 1, 1};
+    public int finFirst;
     
     public Game(){
         objCards = new ArrayList<>();
@@ -48,6 +49,7 @@ public class Game {
         players.add(four);
         int ran = (int)(Math.random()*4);
         curPlayer = ran;
+        finFirst = ran;
         
     }
     public ArrayList<ObjectiveCard> getCards(){
