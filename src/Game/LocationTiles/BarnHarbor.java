@@ -57,7 +57,7 @@ public class BarnHarbor {
           } public boolean harbor(String color, Game game, int x, int y){    
             //allws player to chose new spot to move settlemt
               Hex hex = game.getBoard().getHex(x, y);
-              if(hex.getType() == 7 && hex.getColor().length() == 0){
+              if(hex.getType() == 7 && hex.getColor().length() == 0 && hex.gray){
                   hex.setColor(game.curPlayer().getColor());
                   game.curPlayer().decSettlement();
                   int boardX = hex.getX();
