@@ -59,17 +59,48 @@ public class Board {
     public boolean[][] getAvailableTower(int x, String color){
         boolean [][] avail = getAvailable(x,color);
         boolean [][] borders = new boolean[20][20];
+        
+        System.out.println("AWDAWD" + x + " " + color);
         //top across 
+        int count = 0;
         for(int c = 0; c<20; c++){
             //top across
             borders[0][c] = avail[0][c];
+            if(borders[0][c]) count++;
             //left down
             borders[c][0] = avail[c][0];
+            if(borders[c][0]) count++;
+
             //down accross
             borders[19][c] = avail[19][c];
+            if(borders[19][c]) count++;
+
             //right down
             borders[c][19] = avail[c][19];
+            if(borders[c][19]) count++;
+
         }
+        if(count!=0)
+        return borders;
+        if(count==0){
+            for(int c = 0; c<20; c++){
+                //top across
+                if(board[0][c].getType() == x){
+                    borders[0][c] = true;
+                }
+                //left down
+                if(board[c][0].getType() == x)
+                borders[c][0] = true;
+    
+                //down accross
+                if(board[19][c].getType() == x)
+                borders[19][c] = true;
+    
+                //right down
+                if(board[c][19].getType() == x)
+                borders[c][19] = true;
+                }   
+            }
         return borders;
     }
   

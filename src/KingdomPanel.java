@@ -174,6 +174,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 						locpicked = 0;
 					}
 				}
+				
 				locclass.drawGray(locpicked, game.curPlayer(), g);
 			}
 		}
