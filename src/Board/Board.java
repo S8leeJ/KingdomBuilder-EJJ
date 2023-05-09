@@ -85,19 +85,19 @@ public class Board {
         if(count==0){
             for(int c = 0; c<20; c++){
                 //top across
-                if(board[0][c].getType() == x){
+                if(board[0][c].getType() == x && board[0][c].getColor().equals("")){
                     borders[0][c] = true;
                 }
                 //left down
-                if(board[c][0].getType() == x)
+                if(board[c][0].getType() == x && board[c][0].getColor().equals(""))
                 borders[c][0] = true;
     
                 //down accross
-                if(board[19][c].getType() == x)
+                if(board[19][c].getType() == x && board[19][c].getColor().equals(""))
                 borders[19][c] = true;
     
                 //right down
-                if(board[c][19].getType() == x)
+                if(board[c][19].getType() == x && board[c][19].getColor().equals(""))
                 borders[c][19] = true;
                 }   
             }

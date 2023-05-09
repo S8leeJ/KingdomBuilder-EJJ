@@ -189,6 +189,7 @@ public class KingdomPanel extends JPanel implements MouseListener, MouseMotionLi
 			
 			g.setColor(Color.white);
 			int []arr = new int[8];
+			System.out.println(copy);
 			arr = game.locTile.getNumbers(copy);
 			help.displayLocs(g, arr);
 		}
