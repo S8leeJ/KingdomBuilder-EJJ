@@ -1,3 +1,2 @@
-Java-based strategy board game recreated with full game logic and graphics
-
-Kingdom Builder is a complete digital adaptation of the strategic board game, developed from the ground up in Java. The custom interface uses Java AWT and Swing for interactive GUI elements, supporting card drawing, settlement placement, terrain highlighting, endgame scoring, and more. The game handles complete turn states, dynamic rendering, and user interaction across multiple rounds of gameplay.
+# Kingdom Builder – Java Strategy Board Game
+Kingdom Builder is a full-scale digital recreation of the award-winning strategic board game, developed entirely in Java. It features complete game logic and a custom graphical interface using Java AWT and Swing, delivering an engaging, interactive player experience.![Screenshot 2025-06-24 at 12 24 37 PM](https://github.com/user-attachments/assets/5ebbec19-2c57-4224-b999-05d824e8fd53)
